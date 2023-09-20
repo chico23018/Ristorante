@@ -5,6 +5,15 @@ public class Piatto {
 	private String nome_piatto;
 	private double costo;
 
+	public Piatto(int id, String n, double c) {
+		this.id_piatto = id;
+		this.nome_piatto = n;
+		this.costo = c;
+	}
+
+	public Piatto() {
+	}
+
 	public int getId_piatto() {
 		return id_piatto;
 	}

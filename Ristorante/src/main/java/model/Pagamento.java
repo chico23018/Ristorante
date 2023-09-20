@@ -6,6 +6,16 @@ public class Pagamento {
 	private String stato;
 	private String data;
 
+	public Pagamento(int id, double ct, String c, String s, String d) {
+		this.id_tavolo = id;
+		this.costo_totale = ct;
+		this.stato = s;
+		this.data = d;
+	}
+
+	public Pagamento() {
+	}
+
 	public int getId_tavolo() {
 		return id_tavolo;
 	}

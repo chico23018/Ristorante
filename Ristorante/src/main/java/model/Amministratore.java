@@ -7,6 +7,17 @@ public class Amministratore {
 	private String username;
 	private String password;
 
+	public Amministratore(int id, String n, String c, String u, String p) {
+		this.id_ammi = id;
+		this.nome = n;
+		this.cognome = c;
+		this.username = u;
+		this.password = p;
+	}
+
+	public Amministratore() {
+	}
+
 	public int getId_ammi() {
 		return id_ammi;
 	}
