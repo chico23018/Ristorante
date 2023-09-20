@@ -77,7 +77,7 @@ public void inserire (Pagamento pag) {
  				p.setId_pagamento(rst.getInt(1));
             	 p.setCosto_totale(rst.getDouble(2));
             	 p.setStato(rst.getString(3));
-            	 p.setData((rst.getDate(4).toString()));
+            	 p.setData((rst.getString(4)));
  				list.add(p);
 			}
         } catch (SQLException | ClassNotFoundException e) {
