@@ -94,7 +94,7 @@ public class AmministratoreDao {
             ResultSet rst=  pst.executeQuery();
              rst.next();
             	
-            Amministratore n= new Amministratore(
+             n= new Amministratore(
  					rst.getInt("id"),
  					rst.getString("nome"),
  					rst.getString("cognome"),
