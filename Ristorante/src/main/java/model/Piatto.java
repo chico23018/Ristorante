@@ -6,11 +6,11 @@ public class Piatto {
 	private double costo;
 	private String descrizione;
 
-	public Piatto(int id, String n, double c, String d) {
+	public Piatto(int id, String n, double c, String descrizione) {
 		this.id_piatto = id;
 		this.nome_piatto = n;
 		this.costo = c;
-		this.descrizione = d;
+		this.descrizione = descrizione;
 	}
 
 	public Piatto() {
@@ -27,10 +27,6 @@ public class Piatto {
 	public String getNome_piatto() {
 		return nome_piatto;
 	}
-	
-	public String getDescrizione_piatto() {
-		return descrizione;
-	}
 
 	public void setNome_piatto(String nome_piatto) {
 		this.nome_piatto = nome_piatto;
@@ -43,7 +39,11 @@ public class Piatto {
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
-	
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
