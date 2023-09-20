@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `ristorante` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `ristorante`;
--- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ristorante
 -- ------------------------------------------------------
--- Server version	8.0.26
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `amministratore` (
   `password` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `amministratore` (
 
 LOCK TABLES `amministratore` WRITE;
 /*!40000 ALTER TABLE `amministratore` DISABLE KEYS */;
+INSERT INTO `amministratore` VALUES (1,'Mario','Rossi','mario.rossi','mario.rossi'),(2,'Luca','Bianchi','luca.bianchi','luca.bianchi'),(3,'Giulia','Verdi','giulia.verdi','giulia.verdi'),(4,'Paolo','Neri','paolo.neri','paolo.neri'),(5,'Anna','Gialli','anna.gialli','anna.gialli');
 /*!40000 ALTER TABLE `amministratore` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +59,7 @@ CREATE TABLE `cameriere` (
   `username` varchar(15) NOT NULL,
   `password` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +68,7 @@ CREATE TABLE `cameriere` (
 
 LOCK TABLES `cameriere` WRITE;
 /*!40000 ALTER TABLE `cameriere` DISABLE KEYS */;
+INSERT INTO `cameriere` VALUES (1,'Mario','Rossi','mario.rossi','mario.rossi'),(2,'Luca','Bianchi','luca.bianchi','luca.bianchi'),(3,'Giulia','Verdi','giulia.verdi','giulia.verdi'),(4,'Paolo','Neri','paolo.neri','paolo.neri'),(5,'Anna','Gialli','anna.gialli','anna.gialli');
 /*!40000 ALTER TABLE `cameriere` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +87,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_tavolo_idx` (`id_tavolo`),
   CONSTRAINT `id_tavolo_cliente` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +96,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (31,'Cliente1','Rossi',1),(32,'Cliente2','Bianchi',2),(33,'Cliente3','Verdi',3),(34,'Cliente4','Neri',4),(35,'Cliente5','Gialli',5);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -166,7 +169,7 @@ CREATE TABLE `ordine` (
   KEY `id_piatto_idx` (`id_piatto`),
   CONSTRAINT `id_piatto` FOREIGN KEY (`id_piatto`) REFERENCES `piatto` (`id`),
   CONSTRAINT `id_tavolo` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,6 +178,7 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
+INSERT INTO `ordine` VALUES (1,1,1,'in attesa'),(2,2,3,'in preparazione'),(3,3,2,'consegnato'),(4,4,4,'in preparazione'),(5,5,5,'in attesa');
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -213,7 +217,7 @@ DROP TABLE IF EXISTS `pagamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pagamento` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `id_tavolo` int NOT NULL,
   `costo_totale` double unsigned NOT NULL,
   `stato` varchar(10) NOT NULL,
@@ -221,7 +225,7 @@ CREATE TABLE `pagamento` (
   PRIMARY KEY (`id`),
   KEY `id_ordine_idx` (`id_tavolo`),
   CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,6 +234,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
+INSERT INTO `pagamento` VALUES (31,1,10.99,'pagato','2023-09-20'),(32,2,8.99,'pagato','2023-09-20'),(33,3,12.99,'non pagato','2023-09-20'),(34,4,14.99,'non pagato','2023-09-20'),(35,5,9.99,'pagato','2023-09-20');
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -305,13 +310,13 @@ DROP TABLE IF EXISTS `piatto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `piatto` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(15) NOT NULL,
   `costo` double NOT NULL,
   `descrizione` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome_UNIQUE` (`nome`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,6 +325,7 @@ CREATE TABLE `piatto` (
 
 LOCK TABLES `piatto` WRITE;
 /*!40000 ALTER TABLE `piatto` DISABLE KEYS */;
+INSERT INTO `piatto` VALUES (1,'Piatto1',10.99,'Descrizione del Piatto 1'),(2,'Piatto2',12.99,'Descrizione del Piatto 2'),(3,'Piatto3',8.99,'Descrizione del Piatto 3'),(4,'Piatto4',14.99,'Descrizione del Piatto 4'),(5,'Piatto5',9.99,'Descrizione del Piatto 5');
 /*!40000 ALTER TABLE `piatto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,10 +340,11 @@ CREATE TABLE `tavolo` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_cameriere` int NOT NULL,
   `num_posti` int NOT NULL,
+  `stato` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cameriere_idx` (`id_cameriere`),
   CONSTRAINT `id_cameriere` FOREIGN KEY (`id_cameriere`) REFERENCES `cameriere` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,6 +353,7 @@ CREATE TABLE `tavolo` (
 
 LOCK TABLES `tavolo` WRITE;
 /*!40000 ALTER TABLE `tavolo` DISABLE KEYS */;
+INSERT INTO `tavolo` VALUES (1,1,4,'occupato'),(2,2,2,'occupato'),(3,3,6,'occupato'),(4,1,4,'occupato'),(5,4,3,'occupato');
 /*!40000 ALTER TABLE `tavolo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,4 +374,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-20 12:53:38
+-- Dump completed on 2023-09-20 16:31:54
