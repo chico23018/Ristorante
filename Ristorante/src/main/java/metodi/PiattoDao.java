@@ -1,23 +1,97 @@
 package metodi;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import model.Ordine;
+import connessione.Connessione;
 import model.Piatto;
 
 public class PiattoDao {
+	private Connection con = null;
 
-public void inserire (Piatto piatto) {
-		
+	public void inserire(Piatto piatto) {
+		String query = "INSERT INTO piatto( nome, costo, descrizione) values(?,?,?)";
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.setString(1, piatto.getNome_piatto());
+			pst.setDouble(2, piatto.getCosto());
+			pst.setString(3, piatto.getDescrizione());
+			
+			pst.executeUpdate();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
-	public void modifica(Ordine piatto) {
-		
+
+	public void modifica(Piatto piatto) {
+		String query = "UPDATE piatto SET nome = ?, costo = ?, descrizione = ? WHERE id ='"
+				+ piatto.getId_piatto() + "'";
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.setString(1, piatto.getNome_piatto());
+			pst.setDouble(2, piatto.getCosto());
+			pst.setString(3, piatto.getDescrizione());
+			
+			pst.executeUpdate();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
+
 	public void elimina(int id_piatto) {
-		
+		String query = "DELETE FROM piatto WHERE id ='" + id_piatto + "'";
+
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.executeUpdate();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
-	public List<Ordine> dl(){
-		return null;
+
+	public List<Piatto> dl() {
+		String query = "SELECT * FROM piatto";
+		List<Piatto> list = new ArrayList<Piatto>();
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			ResultSet rst = pst.executeQuery();
+			while (rst.next()) {
+				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getDouble(3),rst.getString(4));
+				
+				
+				list.add(piatto);
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
 	}
-	
+
+	public Piatto cerca(int id) {
+		String query = "SELECT * FROM Piatto where id ='" + id + "'";
+		Piatto piatto = null;
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			ResultSet rst = pst.executeQuery();
+			rst.next();
+			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getDouble(3),rst.getString(4));
+			
+
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return piatto;
+
+	}
+
 }
