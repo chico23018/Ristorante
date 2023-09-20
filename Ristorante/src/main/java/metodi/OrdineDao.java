@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package metodi;
 
 import java.sql.Connection;
@@ -108,27 +107,4 @@ public class OrdineDao {
 		return ord;
 	}
 }
-=======
-package metodi;
 
-import java.util.List;
-
-import model.Ordine;
-
-public class OrdineDao {
-
-public void inserire (Ordine ord) {
-		
-	}
-	public void modifica(Ordine ord) {
-		
-	}
-	public void elimina(int id_ord) {
-		
-	}
-	public List<Ordine> dl(){
-		return null;
-	}
-	
-}
->>>>>>> 4ced032e7f89ad5b987ce78f6089435b469fd7f5
