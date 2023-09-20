@@ -1,22 +1,89 @@
 package metodi;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import connessione.Connessione;
 import model.Tavolo;
 
 public class TavoloDao {
+	private Connection con = null;
 
-	
-public void inserire (Tavolo tavolo) {
-		
+	public void inserire(Tavolo tavolo) {
+		String query = "INSERT INTO tavalo( id_cameriere, num_posti) values(?,?)";
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.setInt(1, tavolo.getId_camerie());
+			pst.setInt(2, tavolo.getNum_posti());
+			pst.executeUpdate();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
+
 	public void modifica(Tavolo tavolo) {
-		
+		String query = "UPDATE tavalo SET id_cameriere = ?, num_posti = ? WHERE id ='" + tavolo.getId_tavolo() + "'";
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.setInt(1, tavolo.getId_camerie());
+			pst.setInt(2, tavolo.getNum_posti());
+
+			pst.executeUpdate();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
+
 	public void elimina(int id_tavolo) {
-		
+		String query = "DELETE FROM tavalo WHERE id ='" + id_tavolo + "'";
+
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			pst.executeUpdate();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
-	public List<Tavolo> dl(){
-		return null;
+
+	public List<Tavolo> dl() {
+		String query = "SELECT * FROM tavalo";
+		List<Tavolo> list = new ArrayList<Tavolo>();
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			ResultSet rst = pst.executeQuery();
+			while (rst.next()) {
+				Tavolo tavolo = new Tavolo(rst.getInt(1), rst.getInt(2), rst.getInt(3));
+
+				list.add(tavolo);
+			}
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+
+	public Tavolo cerca(int id) {
+		String query = "SELECT * FROM tavalo where id ='" + id + "'";
+		Tavolo tavolo = null;
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			ResultSet rst = pst.executeQuery();
+			rst.next();
+			tavolo = new Tavolo(rst.getInt(1), rst.getInt(2), rst.getInt(3));
+
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return tavolo;
+
 	}
 }
