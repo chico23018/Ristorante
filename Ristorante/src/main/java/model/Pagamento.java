@@ -1,16 +1,26 @@
 package model;
 
 public class Pagamento {
+	private int id_pagamento;
 	private int id_tavolo;
 	private double costo_totale;
 	private String stato;
 	private String data;
 
-	public Pagamento(int id, double ct, String c, String s, String d) {
-		this.id_tavolo = id;
+	public Pagamento(int id,int id_tavolo, double ct, String s, String d) {
+		this.id_pagamento=id;
+		this.id_tavolo = id_tavolo;
 		this.costo_totale = ct;
 		this.stato = s;
 		this.data = d;
+	}
+
+	public int getId_pagamento() {
+		return id_pagamento;
+	}
+
+	public void setId_pagamento(int id_pagamento) {
+		this.id_pagamento = id_pagamento;
 	}
 
 	public Pagamento() {
