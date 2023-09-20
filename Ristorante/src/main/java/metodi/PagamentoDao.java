@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connessione.Connessione;
-import model.Amministratore;
-import model.Ordine;
-import model.Pagamento;
 import model.Pagamento;
 
 public class PagamentoDao {
@@ -27,7 +24,7 @@ public void inserire (Pagamento pag) {
 		PreparedStatement pst = con.prepareStatement(query);
 		pst.setDouble(1, pag.getCosto_totale());
 		pst.setString(2,pag.getStato());
-		pst.setDate(3, Date.valueOf(pag.getData()));
+		pst.setString(3,pag.getData());
 		pst.executeUpdate();
 	} catch (SQLException | ClassNotFoundException e) {
 		System.out.println(e.getMessage());
@@ -75,9 +72,10 @@ public void inserire (Pagamento pag) {
              while (rst.next()) {
             	 Pagamento p = new Pagamento();
  				p.setId_pagamento(rst.getInt(1));
-            	 p.setCosto_totale(rst.getDouble(2));
-            	 p.setStato(rst.getString(3));
-            	 p.setData((rst.getString(4)));
+            	 p.setId_tavolo(rst.getInt(2));
+            	 p.setCosto_totale(rst.getDouble(3));
+            	 p.setStato(rst.getString(4));
+            	 p.setData(rst.getString(5));
  				list.add(p);
 			}
         } catch (SQLException | ClassNotFoundException e) {
