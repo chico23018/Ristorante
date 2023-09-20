@@ -57,7 +57,7 @@ public class PiattoDao {
 		}
 	}
 
-	public List<Piatto> dl() {
+	public List<Piatto> lista() {
 		String query = "SELECT * FROM piatto";
 		List<Piatto> list = new ArrayList<Piatto>();
 		try {

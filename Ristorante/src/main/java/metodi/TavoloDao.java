@@ -14,7 +14,7 @@ public class TavoloDao {
 	private Connection con = null;
 
 	public void inserire(Tavolo tavolo) {
-		String query = "INSERT INTO tavalo( id_cameriere, num_posti) values(?,?)";
+		String query = "INSERT INTO tavolo( id_cameriere, num_posti) values(?,?)";
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
@@ -41,7 +41,7 @@ public class TavoloDao {
 	}
 
 	public void elimina(int id_tavolo) {
-		String query = "DELETE FROM tavalo WHERE id ='" + id_tavolo + "'";
+		String query = "DELETE FROM tavolo WHERE id ='" + id_tavolo + "'";
 
 		try {
 			con = Connessione.getInstance().getConnection();
@@ -52,8 +52,8 @@ public class TavoloDao {
 		}
 	}
 
-	public List<Tavolo> dl() {
-		String query = "SELECT * FROM tavalo";
+	public List<Tavolo> lista() {
+		String query = "SELECT * FROM tavolo";
 		List<Tavolo> list = new ArrayList<Tavolo>();
 		try {
 			con = Connessione.getInstance().getConnection();
@@ -71,7 +71,7 @@ public class TavoloDao {
 	}
 
 	public Tavolo cerca(int id) {
-		String query = "SELECT * FROM tavalo where id ='" + id + "'";
+		String query = "SELECT * FROM tavolo where id ='" + id + "'";
 		Tavolo tavolo = null;
 		try {
 			con = Connessione.getInstance().getConnection();
