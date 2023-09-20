@@ -11,7 +11,10 @@ import connessione.Connessione;
 import model.Amministratore;
 
 public class AmministratoreDao {
+
+	
 	private Connection con = null;
+	
 
 	public void inserire(Amministratore amm) {
 		String query = "INSERT INTO amministratore( nome, cognome, username, password) values(?,?,?,?)";
@@ -26,6 +29,7 @@ public class AmministratoreDao {
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
+
 
 	}
 
