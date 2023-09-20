@@ -5,6 +5,15 @@ public class Tavolo {
 	private int id_camerie;
 	private int num_posti;
 
+	public Tavolo(int id, int n, int cp) {
+		this.id_tavolo = id;
+		this.id_camerie = n;
+		this.num_posti = cp;
+	}
+
+	public Tavolo() {
+	}
+
 	public int getId_tavolo() {
 		return id_tavolo;
 	}

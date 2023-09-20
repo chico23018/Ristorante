@@ -6,6 +6,16 @@ public class Ordine {
 	private int id_piatto;
 	private String stato;
 
+	public Ordine(int id, int t, int p, String u) {
+		this.id_ordini = id;
+		this.id_tavolo = t;
+		this.id_piatto = p;
+		this.stato = u;
+	}
+
+	public Ordine() {
+	}
+
 	public int getId_ordini() {
 		return id_ordini;
 	}

@@ -6,6 +6,16 @@ public class Cameriere {
 	private String cognome;
 	private String username;
 	private String password;
+	
+	public Cameriere(int id, String n, String c, String u, String p) {
+		this.id_cameriere = id;
+		this.nome = n;
+		this.cognome = c;
+		this.username = u;
+		this.password = p;
+	}
+	
+	public Cameriere() {}
 
 	public int getId_cameriere() {
 		return id_cameriere;

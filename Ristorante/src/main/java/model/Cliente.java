@@ -6,6 +6,16 @@ public class Cliente {
 	private String cognome_cliente;
 	private int id_tavolo;
 
+	public Cliente(int id, String n, String c, int id_tav) {
+		this.id_cliente = id;
+		this.nome_cliente = n;
+		this.cognome_cliente = c;
+		this.id_tavolo = id_tav;
+	}
+
+	public Cliente() {
+	}
+
 	public int getId_cliente() {
 		return id_cliente;
 	}
