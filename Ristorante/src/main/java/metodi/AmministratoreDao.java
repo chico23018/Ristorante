@@ -7,6 +7,8 @@ public class AmministratoreDao {
 	public void inserire (Amministratore amm) {
 		
 	}
-	
+	public void modifica(Amministratore amm) {
+		
+	}
 
 }
