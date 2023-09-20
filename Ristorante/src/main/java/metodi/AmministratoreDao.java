@@ -9,6 +9,7 @@ import java.util.List;
 
 import connessione.Connessione;
 import model.Amministratore;
+import model.Pagamento;
 
 public class AmministratoreDao {
 
@@ -86,18 +87,19 @@ public class AmministratoreDao {
 
 	public Amministratore cerca(int id) {
 		String query = "SELECT * FROM amministratore where id ='"+id+"'";
-		 Amministratore n = new Amministratore();
+		 Amministratore n = null;
         try {
             con = Connessione.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rst=  pst.executeQuery();
              rst.next();
             	
- 				n.setId_ammi(rst.getInt(1));
- 				n.setNome(rst.getString(2));
- 				n.setCognome(query);
- 				n.setUsername(query);
- 				n.setPassword(query);
+            Amministratore n= new Amministratore(
+ 					rst.getInt("id"),
+ 					rst.getString("nome"),
+ 					rst.getString("cognome"),
+ 					rst.getString("usename"),
+ 					rst.getString("password"));
  				
 			
         } catch (SQLException | ClassNotFoundException e) {
