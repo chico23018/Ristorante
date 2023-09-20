@@ -23,7 +23,7 @@ public class Connessione {
 		connectionProps.put("password", "root");
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ristorante", connectionProps);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
