@@ -33,29 +33,32 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		LoginDao dao = new LoginDao();
 		RequestDispatcher rd = null;
 		String username = request.getParameter("user");
 		String password = request.getParameter("password");
 
-		LoginDao dao = new LoginDao();
-
-		if (dao.amministratore(username, password) != null) {
+		if (dao.amministratore(username, password) != null) 
+		{
 			Amministratore m = dao.amministratore(username, password);
 			System.out.println("Hello Amministrator");
 			request.setAttribute("nome", m.getNome());
 			request.setAttribute("cognome", m.getCognome());
 			rd = request.getRequestDispatcher("Amministratore.jsp");
 			rd.forward(request, response);
-		} else if (dao.cameriere(username, password) != null) {
+		} 
+		else if (dao.cameriere(username, password) != null) 
+		{
 			Cameriere cam = dao.cameriere(username, password);
-
 			System.out.println("Hello waiter");
 			request.setAttribute("nome", cam.getNome());
 			request.setAttribute("cognome", cam.getCognome());
 			rd = request.getRequestDispatcher("Cameriere.jsp");
 			rd.forward(request, response);
-		}else {
-			
+		}
+		else
+		{	
 			System.out.println("null");
 			RequestDispatcher rd3 = request.getRequestDispatcher("index.jsp");
 			String messaggio = "username e password non sono presenti";
