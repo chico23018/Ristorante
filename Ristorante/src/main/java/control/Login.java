@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import metodi.AmministratoreDao;
 import metodi.CameriereDao;
 import metodi.LoginDao;
+import metodi.TavoloDao;
 import model.Amministratore;
 import model.Cameriere;
 
@@ -50,8 +51,11 @@ public class Login extends HttpServlet {
 			Cameriere cam = dao.cameriere(username, password);
 
 			System.out.println("Hello waiter");
+			TavoloDao daoT = new TavoloDao();
+			request.setAttribute("list", daoT.lista());
 			request.setAttribute("nome", cam.getNome());
 			request.setAttribute("cognome", cam.getCognome());
+			
 			rd = request.getRequestDispatcher("Cameriere.jsp");
 			rd.forward(request, response);
 		}else {
