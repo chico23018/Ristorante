@@ -17,61 +17,51 @@ import javax.servlet.http.HttpServletResponse;
 
 import metodi.AmministratoreDao;
 import metodi.CameriereDao;
+import metodi.LoginDao;
 import model.Amministratore;
 import model.Cameriere;
 
-
 @WebServlet("/login")
 public class Login extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
- 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher rd = null;
 		String username = request.getParameter("user");
-		String password =request.getParameter("password");
-		
-		System.out.println(username+ " "+ password);
-		RequestDispatcher rd= null;
-		
-		AmministratoreDao ad = new AmministratoreDao();
-		CameriereDao cd = new CameriereDao();
-		String u, p = "";
-					
-		List<Amministratore> amm_list = ad.lista();
-		List<Cameriere> cam_list = cd.lista();
-		
-		for(Amministratore a : amm_list)
-		{
-			u = a.getUsername();
-			p = a.getPassword();
-			if(u.equals(username) && p.equals(password))
-			{
-				System.out.println("Hello Amministrator");
-				request.setAttribute("nome", a.getNome());
-				request.setAttribute("cognome", a.getCognome());
-				rd= request.getRequestDispatcher("Amministratore.jsp");
-				rd.forward(request, response);			
-			}
+		String password = request.getParameter("password");
+
+		LoginDao dao = new LoginDao();
+
+		if (dao.amministratore(username, password) != null) {
+			Amministratore m = dao.amministratore(username, password);
+			System.out.println("Hello Amministrator");
+			request.setAttribute("nome", m.getNome());
+			request.setAttribute("cognome", m.getCognome());
+			rd = request.getRequestDispatcher("Amministratore.jsp");
+			rd.forward(request, response);
+		} else if (dao.cameriere(username, password) != null) {
+			Cameriere cam = dao.cameriere(username, password);
+
+			System.out.println("Hello waiter");
+			request.setAttribute("nome", cam.getNome());
+			request.setAttribute("cognome", cam.getCognome());
+			rd = request.getRequestDispatcher("Cameriere.jsp");
+			rd.forward(request, response);
+		}else {
+			
+			System.out.println("null");
+			RequestDispatcher rd3 = request.getRequestDispatcher("index.jsp");
+			String messaggio = "username e password non sono presenti";
+			request.setAttribute("messaggio", messaggio);
+			rd3.forward(request, response);
 		}
-		
-		for(Cameriere c : cam_list)
-		{
-			u = c.getUsername();
-			p = c.getPassword();
-			if(u.equals(username) && p.equals(password))
-			{
-				System.out.println("Hello waiter");
-				request.setAttribute("nome", c.getNome());
-				request.setAttribute("cognome", c.getCognome());
-				rd= request.getRequestDispatcher("Cameriere.jsp");
-				rd.forward(request, response);				
-			}
-		}		
 
 		doGet(request, response);
 	}
