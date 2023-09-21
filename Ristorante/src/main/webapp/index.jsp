@@ -28,17 +28,19 @@
 						</p>
 					</div>
 				</div>
+			<form action="login" method="POST">
 				<div class="right">
 					<h5 class="flex-text">Login</h5>
 					<div class="inputs">
-						<input type="text" placeholder="user name">
+						<input type="text" placeholder="user name" name="user">
 						<br>
-						<input type="password" placeholder="password">
+						<input type="password" placeholder="password" name="password">
 					</div>
 					<br><br>
 					<br>
-					<button>Login</button>
+					<button type="submit">Login</button>
 				</div>
+			</form>
 			</div>
 
 			<footer class="footer mt-3" id="Contatti">
