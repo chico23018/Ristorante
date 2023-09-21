@@ -26,6 +26,7 @@
 		</head>
 
 		<body>
+		<header>
       <span onclick="openMenu()" class="menu">&#9776;</span>
         <div id="myNav" class="overlay">
             <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
@@ -37,7 +38,7 @@
             <div id="blocco" class="blocco">
         	</div>
         </div>
-			
+			</header>
 
 			<footer class="footer mt-3" id="Contatti">
 				<div class="grid2">
