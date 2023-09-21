@@ -36,9 +36,7 @@ public class Login extends HttpServlet {
 		String password =request.getParameter("password");
 		
 		System.out.println(username+ " "+ password);
-		RequestDispatcher rd= request.getRequestDispatcher("home.jsp");
-		rd.forward(request, response);
-		doGet(request, response);
+		RequestDispatcher rd= null;
 		
 		AmministratoreDao ad = new AmministratoreDao();
 		CameriereDao cd = new CameriereDao();
@@ -54,7 +52,10 @@ public class Login extends HttpServlet {
 			if(u.equals(username) && p.equals(password))
 			{
 				System.out.println("Hello Amministrator");
-				// definire la logica
+				request.setAttribute("nome", a.getNome());
+				request.setAttribute("cognome", a.getCognome());
+				rd= request.getRequestDispatcher("Amministratore.jsp");
+				rd.forward(request, response);			
 			}
 		}
 		
@@ -65,10 +66,14 @@ public class Login extends HttpServlet {
 			if(u.equals(username) && p.equals(password))
 			{
 				System.out.println("Hello waiter");
-				// definire la logica
+				request.setAttribute("nome", c.getNome());
+				request.setAttribute("cognome", c.getCognome());
+				rd= request.getRequestDispatcher("Cameriere.jsp");
+				rd.forward(request, response);				
 			}
 		}		
 
+		doGet(request, response);
 	}
 
 }
