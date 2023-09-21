@@ -33,51 +33,7 @@
 		</div>
 	</header>
 
-	<footer class="footer mt-3" id="Contatti">
-		<div class="grid2">
-			<div class="col reveal">
-				<h4 class="flex-text2 tw">Contatti</h4>
-				<p class="normal-text tw">
-					<img src="sources/cornetta_telefonica.png" alt="icona"
-						style="vertical-align: middle;"> <a href="tel:+393487678837"
-						style="font-size: 15px">+39 </a>
-				</p>
-				<p class="normal-text tw">
-					<img src="sources/mail.png" alt="icona"
-						style="vertical-align: middle;"> <a
-						href="mailto:nome.cognome@mail.it" style="font-size: 14px">nome.cognome@mail.it</a>
-				</p>
-			</div>
 
-			<div class="col reveal">
-				<h4 class="flex-text2 tw">Social</h4>
-				<p class="normal-text tw">
-					<img src="sources/insta.png" alt="icona"
-						style="vertical-align: middle;"> <a href=""
-						style="font-size: 14px">@nome_instagram</a>
-				</p>
-				<p class="normal-text tw">
-					<img src="sources/facebook.png" alt="icona"
-						style="vertical-align: middle; margin-right: 20px;"> <a
-						href="" style="font-size: 14px">nome_facebook</a>
-				</p>
-			</div>
-
-			<div class="col reveal">
-				<h4 class="flex-text2 tw">Orari servizio</h4>
-				<p class="pw" style="color: white;">Aperti tutti i giorni dal
-					Martedi alla Domenica</p>
-				<p class="pw" style="color: white;">Pranzo: 12:00-15:00</p>
-				<p class="pw" style="color: white;">Cena: 20:00-00:00</p>
-			</div>
-
-			<div class="col reveal">
-				<h4 class="flex-text2 tw">Partita IVA</h4>
-				<p class="pw" style="color: white;">IVA</p>
-			</div>
-
-		</div>
-	</footer>
 
 	<script src="js/menu.js"></script>
 	<script src="js/obbligo_accesso.js"></script>
