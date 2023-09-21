@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
 		String password =request.getParameter("password");
 		
 		System.out.println( nome+ " "+ password);
-		RequestDispatcher rd= request.getRequestDispatcher("view/home.jsp");
+		RequestDispatcher rd= request.getRequestDispatcher("./view/home.jsp");
 		rd.forward(request, response);
 		doGet(request, response);
 	}

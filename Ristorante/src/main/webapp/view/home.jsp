@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
-	<%@page import="java.sql.*" %>
-		<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    	<!DOCTYPE html>
 		<html>
 
 		<head>
 			<meta charset="ISO-8859-1">
 			<link href="../css/index.css" rel="stylesheet">
 			<link href="../css/style.css" rel="stylesheet">
+			<script src="../js/menu.js"></script>
 			<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 			<title>Benvenuto al pomo d'oro!</title>
 
@@ -21,7 +22,7 @@
       <span onclick="openMenu()" class="menu">&#9776;</span>
         <div id="myNav" class="overlay">
             <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
-            <div class="ContenutoMenu">
+             <div class="ContenutoMenu">
                 <a href="#">Home</a>
                 <a href="#">Segreteria</a>
                 <a href="logout.jsp"> logout</a>
@@ -76,5 +77,6 @@
 
 		</body>
 		<script src="../js/obbligo_accesso.js"></script>
+		
 
 		</html>
