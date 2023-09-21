@@ -29,6 +29,7 @@ public class Login extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Output: "+request.getParameter("id"));
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
