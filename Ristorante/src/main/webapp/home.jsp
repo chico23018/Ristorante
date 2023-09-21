@@ -5,9 +5,9 @@
 
 		<head>
 			<meta charset="ISO-8859-1">
-			<link href="../css/index.css" rel="stylesheet">
-			<link href="../css/style.css" rel="stylesheet">
-			<link href="../css/menu.css" rel="stylesheet" >
+			<link href="css/index.css" rel="stylesheet">
+			<link href="css/style.css" rel="stylesheet">
+			<link href="css/menu.css" rel="stylesheet" >
 			<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 			<title>Benvenuto al pomo d'oro!</title>
 
@@ -15,6 +15,14 @@
 			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
 				integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 				crossorigin="anonymous">
+				<style type="text/css">
+				header{
+	text-align:center;
+	padding:10px;
+	margin:-10px; 
+	width:101%; 
+	height:100%; 
+}</style>
 		</head>
 
 		<body>
@@ -36,11 +44,11 @@
 					<div class="col reveal">
 						<h4 class="flex-text2 tw">Contatti</h4>
 						<p class="normal-text tw">
-							<img src="../sources/cornetta_telefonica.png" alt="icona" style="vertical-align: middle;">
+							<img src="sources/cornetta_telefonica.png" alt="icona" style="vertical-align: middle;">
 							<a href="tel:+393487678837"style="font-size: 15px">+39 </a>
 						</p>
 						<p class="normal-text tw">
-							<img src="../sources/mail.png" alt="icona" style="vertical-align: middle;">
+							<img src="sources/mail.png" alt="icona" style="vertical-align: middle;">
 							<a href="mailto:nome.cognome@mail.it" style="font-size: 14px">nome.cognome@mail.it</a>
 						</p>
 					</div>
@@ -48,11 +56,11 @@
 					<div class="col reveal">
 						<h4 class="flex-text2 tw">Social</h4>
 						<p class="normal-text tw">
-							<img src="../sources/insta.png" alt="icona" style="vertical-align: middle;">
+							<img src="sources/insta.png" alt="icona" style="vertical-align: middle;">
 							<a href="" style="font-size: 14px">@nome_instagram</a>
 						</p>
 						<p class="normal-text tw">
-							<img src="../sources/facebook.png" alt="icona"
+							<img src="sources/facebook.png" alt="icona"
 								style="vertical-align: middle; margin-right: 20px;">
 							<a href="" style="font-size: 14px">nome_facebook</a>
 						</p>
@@ -73,8 +81,8 @@
 				</div>
 			</footer>
 
-			<script src="../js/menu.js"></script>
-			<script src="../js/obbligo_accesso.js"></script>
+			<script src="/js/menu.js"></script>
+			<script src="js/obbligo_accesso.js"></script>
 		</body>
 
 		</html>
