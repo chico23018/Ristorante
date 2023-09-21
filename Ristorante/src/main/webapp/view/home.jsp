@@ -7,7 +7,7 @@
 			<meta charset="ISO-8859-1">
 			<link href="../css/index.css" rel="stylesheet">
 			<link href="../css/style.css" rel="stylesheet">
-			<script src="../js/menu.js"></script>
+			<link href="../css/menu.css" rel="stylesheet" >
 			<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 			<title>Benvenuto al pomo d'oro!</title>
 
@@ -15,7 +15,6 @@
 			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
 				integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 				crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/menu.css">
 		</head>
 
 		<body>
@@ -74,9 +73,8 @@
 				</div>
 			</footer>
 
-
+			<script src="../js/menu.js"></script>
+			<script src="../js/obbligo_accesso.js"></script>
 		</body>
-		<script src="../js/obbligo_accesso.js"></script>
-		
 
 		</html>
