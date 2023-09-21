@@ -21,16 +21,17 @@
 </head>
 
 <body>
-	<span onclick="openMenu()" class="menu">&#9776;</span>
-	<div id="myNav" class="overlay">
-		<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
-		<div class="ContenutoMenu">
-			<a href="#">Home</a> <a href="#">Segreteria</a> <a href="logout.jsp">
-				logout</a>
+	<header>
+		<span onclick="openMenu()" class="menu">&#9776;</span>
+		<div id="myNav" class="overlay">
+			<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
+			<div class="ContenutoMenu">
+				<a href="#">Home</a> <a href="#">Segreteria</a> <a href="logout.jsp">
+					logout</a>
+			</div>
+			<div id="blocco" class="blocco"></div>
 		</div>
-		<div id="blocco" class="blocco"></div>
-	</div>
-
+	</header>
 
 	<footer class="footer mt-3" id="Contatti">
 		<div class="grid2">
@@ -78,7 +79,7 @@
 		</div>
 	</footer>
 
-	<script src="/js/menu.js"></script>
+	<script src="js/menu.js"></script>
 	<script src="js/obbligo_accesso.js"></script>
 </body>
 
