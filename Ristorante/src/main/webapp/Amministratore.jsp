@@ -10,4 +10,14 @@
 <%String nome = (String)request.getAttribute("nome");
   String cognome = (String)request.getAttribute("cognome");%>
 <h1>Benvenuto <%=nome+" "+cognome%></h1></body>
+
+<!-- 
+Aggiungere un ordine 
+Visualizzare lo stato di tutti i tavoli
+Vedere lo stato di un pagamento
+Modificare lo stato di un pagamento o aggiungerne uno
+Aggiungere un piatto
+Modificare il prezzo di un piatto
+ -->
+ 
 </html>

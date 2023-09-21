@@ -12,4 +12,11 @@
   String cognome = (String)request.getAttribute("cognome");%>
 <h1>Benvenuto <%=nome+" "+cognome%></h1></body>
 </body>
+
+<!-- 
+Aggiungere un ordine 
+Vedere lo stato di un tavolo
+Vedere lo stato di un pagamento
+ -->
+
 </html>

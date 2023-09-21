@@ -68,7 +68,7 @@ CREATE TABLE `cameriere` (
 
 LOCK TABLES `cameriere` WRITE;
 /*!40000 ALTER TABLE `cameriere` DISABLE KEYS */;
-INSERT INTO `cameriere` VALUES (1,'Mario','Rossi','mario.rossi','mario.rossi'),(2,'Luca','Bianchi','luca.bianchi','luca.bianchi'),(3,'Giulia','Verdi','giulia.verdi','giulia.verdi'),(4,'Paolo','Neri','paolo.neri','paolo.neri'),(5,'Anna','Gialli','anna.gialli','anna.gialli');
+INSERT INTO `cameriere` VALUES (1,'Mario','Rossi','m.rossi','m.rossi'),(2,'Luca','Bianchi','l.bianchi','l.bianchi'),(3,'Giulia','Verdi','g.verdi','g.verdi'),(4,'Paolo','Neri','p.neri','p.neri'),(5,'Anna','Gialli','a.gialli','a.gialli');
 /*!40000 ALTER TABLE `cameriere` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,4 +374,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-20 16:31:54
+-- Dump completed on 2023-09-21 16:42:59
