@@ -10,7 +10,6 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/menu.css" rel="stylesheet">
 <link href="css/tavolo.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -29,7 +28,8 @@
 			<div id="myNav" class="overlay">
 				<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 				<div class="ContenutoMenu">
-					<a href="#">Aggiungi Tavolo</a> <a href="logout.jsp">Logout</a>
+					<a href="#">Aggiungi Tavolo</a> 
+					<a href="logout.jsp">Logout</a>
 				</div>
 				<div id="blocco" class="blocco"></div>
 			</div>
@@ -50,20 +50,8 @@
 				<tr>
 					<td><%=n_tavolo%></td>
 					<td><%=cliente.getCognome_cliente()%></td>
-					<td>30</td>
-					<td>30</td>
-				</tr>
-				<tr>
-					<td>John</td>
-					<td>Doe</td>
-					<td>30</td>
-					<td>30</td>
-				</tr>
-				<tr>
-					<td>John</td>
-					<td>Doe</td>
-					<td>30</td>
-					<td>30</td>
+					<td><a href="index.jsp" style="text-decoration: none;">Visualizza ordine</a></td>
+					<td> &euro; 35.90</td>
 				</tr>
 			</table>
 		</div>
