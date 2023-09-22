@@ -18,24 +18,29 @@ import model.Cameriere;
 @WebServlet("/login")
 public class Login extends HttpServlet {
 
-	RequestDispatcher rd = null;
+	
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		RequestDispatcher rd = null;
+		String id =request.getParameter("id");
+		if(id!=null) {
+			Integer n_tavolo = Integer.parseInt(id);
+			ClienteDao cli = new ClienteDao();
+			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
+			request.setAttribute("n_tavolo", n_tavolo);
+			
+			rd = request.getRequestDispatcher("tavolo.jsp");
+			rd.forward(request, response);
+		}
 		
-		Integer n_tavolo = Integer.parseInt(request.getParameter("id_tavolo"));
-		ClienteDao cli = new ClienteDao();
-		request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
-		request.setAttribute("n_tavolo", n_tavolo);
-		
-		rd = request.getRequestDispatcher("tavolo.jsp");
-		rd.forward(request, response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		RequestDispatcher rd = null;
 
 		LoginDao dao = new LoginDao();
 		String username = request.getParameter("user");
@@ -57,7 +62,7 @@ public class Login extends HttpServlet {
 			request.setAttribute("nome", cam.getNome());
 			request.setAttribute("cognome", cam.getCognome());
 
-			rd = request.getRequestDispatcher("cameriere.jsp");
+			rd = request.getRequestDispatcher("/cameriere.jsp");
 			rd.forward(request, response);
 		}
 		else
