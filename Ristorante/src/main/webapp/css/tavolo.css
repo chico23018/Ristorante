@@ -55,6 +55,19 @@
     overflow: hidden;
   }
   
+  .table #chiudi-ordine{
+
+    font-size: 30px;
+    color: #818181;
+    text-decoration: none;
+  }
+  
+  .table #visualizza-ordine {
+  	text-decoration: none;
+  	font-weight: bold;
+  	color: red;
+  }
+  
   .table th,
   .table td {
     padding: 8px;

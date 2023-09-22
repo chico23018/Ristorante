@@ -28,8 +28,7 @@
 			<div id="myNav" class="overlay">
 				<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 				<div class="ContenutoMenu">
-					<a href="#">Aggiungi Tavolo</a> 
-					<a href="logout.jsp">Logout</a>
+					<a href="#">Aggiungi Tavolo</a> <a href="logout.jsp">Logout</a>
 				</div>
 				<div id="blocco" class="blocco"></div>
 			</div>
@@ -50,42 +49,46 @@
 				<tr>
 					<td><%=n_tavolo%></td>
 					<td><%=cliente.getCognome_cliente()%></td>
-					<td><a href="index.jsp" style="text-decoration: none;">Visualizza ordine</a></td>
-					<td> &euro; 35.90</td>
+					<td>
+						<a href="#" id="visualizza-ordine">Visualizza ordine</a></td>
+					<td>&euro; 35.90</td>
 				</tr>
 			</table>
 		</div>
 		<a href="" class="button">Paga ora</a>
 	</form>
 
-	<table border="1">
+	<table class="table" id="tabella-ordine" style="display: none;">
 		<tr>
-			<th>Piatto</th>
+			<td colspan="4" style="text-align: right;">
+				<a href="#" id="chiudi-ordine">&times;</a>
+			</td>
+		</tr>
+		<tr>
+			<th>Nome piatto</th>
 			<th>Descrizione</th>
 			<th>Quantita'</th>
 			<th>Prezzo</th>
 		</tr>
 		<tr>
-			<td>John</td>
-			<td>Doe</td>
-			<td>30</td>
+			<td>Margherita</td>
+			<td>Pomodoro mozzarella basilico e origano</td>
+			<td>3</td>
+			<td>&euro; 7.50</td>
 		</tr>
 		<tr>
-			<td>Jane</td>
-			<td>Smith</td>
-			<td>25</td>
-		</tr>
-		<tr>
-			<td>Bob</td>
-			<td>Johnson</td>
-			<td>35</td>
+			<td>Patatine</td>
+			<td>Deliziose patatine fritte</td>
+			<td>5</td>
+			<td>&euro; 1.50</td>
 		</tr>
 	</table>
-
 
 	<script src="js/menu.js"></script>
 	<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 	<script src="js/obbligo_accesso.js"></script>
+	<script src="js/visualizza_ordine.js"></script>
+
 </body>
 
 </html>
