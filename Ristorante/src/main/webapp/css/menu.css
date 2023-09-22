@@ -8,13 +8,6 @@ header {
 	height: 100%;
 }
 
-.back-link {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-
 span, .menu{
     margin-top: 1% !important;
     margin-right: 2% !important;
@@ -100,4 +93,19 @@ span, .menu:hover{
         top: 15px;
         right: 50px;
     }
+}
+
+.navbar {
+    overflow: hidden;
+    padding-bottom: 80px;
+    padding-top: 10px
+}
+
+.logo {
+    margin-left: 10px;
+    float: left;
+}
+
+.menu {
+    float: right;
 }
