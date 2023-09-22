@@ -10,26 +10,42 @@
 <title>Area Cameriere</title>
 <link href="css/tavolo.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+<link href="css/menu.css" rel="stylesheet">
 </head>
 
 <body>
 	<%
-String nome = (String) request.getAttribute("nome");
-String cognome = (String) request.getAttribute("cognome");
-List<Tavolo> list = (List<Tavolo>) request.getAttribute("list");
-%>
+	String nome = (String) request.getAttribute("nome");
+	String cognome = (String) request.getAttribute("cognome");
+	List<Tavolo> list = (List<Tavolo>) request.getAttribute("list");
+	%>
+	<header>
+		<span onclick="openMenu()" class="menu">&#9776;</span>
+		<div id="myNav" class="overlay">
+			<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
+			<div class="ContenutoMenu">
+				<a href="#">Home</a> <a href="#">Segreteria</a> <a href="logout.jsp">
+					logout</a>
+			</div>
+			<div id="blocco" class="blocco"></div>
+		</div>
+	</header>
 	<h1>
 		Benvenuto
 		<%=nome + " " + cognome%></h1>
 
-	<%for (Tavolo ta : list) {%>
+	<%
+	for (Tavolo ta : list) {
+	%>
 	<div class="tavolo">
-		<a href="login?id=<%=ta.getId_tavolo()%>"> 
-			Tavolo <%=ta.getId_tavolo()%>
+		<a href="login?id=<%=ta.getId_tavolo()%>"> Tavolo <%=ta.getId_tavolo()%>
 		</a>
 	</div>
-	<%}%>
+	<%
+	}
+	%>
 
+	<script src="js/menu.js"></script>
 </body>
 <!-- 
 Aggiungere un ordine 

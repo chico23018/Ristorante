@@ -1,12 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import metodi.AmministratoreDao;
-import metodi.CameriereDao;
 import metodi.LoginDao;
 import metodi.TavoloDao;
 import model.Amministratore;
@@ -29,7 +21,7 @@ public class Login extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Output: "+request.getParameter("id"));
+		   System.out.println("Output: "+request.getParameter("id"));
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -44,7 +36,6 @@ public class Login extends HttpServlet {
 		if (dao.amministratore(username, password) != null) 
 		{
 			Amministratore m = dao.amministratore(username, password);
-			System.out.println("Hello Amministrator");
 			request.setAttribute("nome", m.getNome());
 			request.setAttribute("cognome", m.getCognome());
 			rd = request.getRequestDispatcher("Amministratore.jsp");
@@ -53,7 +44,6 @@ public class Login extends HttpServlet {
 		else if (dao.cameriere(username, password) != null) 
 		{
 			Cameriere cam = dao.cameriere(username, password);
-			System.out.println("Hello waiter");
 			TavoloDao daoT = new TavoloDao();
 			request.setAttribute("list", daoT.lista());
 			request.setAttribute("nome", cam.getNome());
@@ -64,7 +54,7 @@ public class Login extends HttpServlet {
 		}
 		else
 		{	
-			System.out.println("null");
+			
 			RequestDispatcher rd3 = request.getRequestDispatcher("index.jsp");
 			String messaggio = "username e password non sono presenti";
 			request.setAttribute("messaggio", messaggio);
