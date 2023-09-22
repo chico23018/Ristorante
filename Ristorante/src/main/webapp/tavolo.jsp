@@ -34,6 +34,7 @@
 	</header>
 
 	<form>
+	<div class="divisore">
 		<table class="table">
 			<tr>
 				<th>Tavolo no.</th>
@@ -64,6 +65,7 @@
 		</table>
 		<br />
 		<th><a href="" class="button">Paga ora</a></th>
+		 </div>
 	</form>
 
 	<table border="1">
