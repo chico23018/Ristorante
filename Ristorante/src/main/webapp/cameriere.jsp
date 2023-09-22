@@ -24,23 +24,8 @@
 		<div id="myNav" class="overlay">
 			<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 			<div class="ContenutoMenu">
-				<a href="javascript: window.history.go(-2)">
-				<!-- 
-				<lord-icon
-				    src="sources/frecciasinitra.json"
-				    trigger="hover"
-				    colors="primary:#121331"
-				    style="width:50px;height:50px;transform: scaleX(-1);margin-top:10%;"
-				    type="regular">
-				</lord-icon>
-				 -->
-				<a href="">
-				    <img src="sources/frecciasinistra.png" alt="Icona" width="50" height="50">
-				</a>
-				
-
-	   		</a><a href="#">Aggiungi Tavolo</a> <a href="logout.jsp">
-					logout</a>
+				</a><a href="#">Aggiungi Tavolo</a> 
+	   		        <a href="logout.jsp">logout</a>
 			</div>
 			<div id="blocco" class="blocco"></div>
 		</div>
