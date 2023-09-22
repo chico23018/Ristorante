@@ -14,21 +14,20 @@
 </head>
 
 <body>
-	<%Cliente cliente = (Cliente) request.getAttribute("cliente");
-	  int n_tavolo = (int) request.getAttribute("n_tavolo");%>
+	<%
+	Cliente cliente = (Cliente) request.getAttribute("cliente");
+	int n_tavolo = (int) request.getAttribute("n_tavolo");
+	%>
 
 	<header>
+		<a href="javascript: window.history.go(-1)" class="back-link"> <img
+			src="sources/frecciasinistra.png" alt="Icona" width="50" height="50">
+		</a> 
 		<span onclick="openMenu()" class="menu">&#9776;</span>
 		<div id="myNav" class="overlay">
 			<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 			<div class="ContenutoMenu">
-				<a href="javascript: window.history.go(-1)"> 
-				<img src="sources/frecciasinistra.png"
-						alt="Icona" width="50" height="50">
-				
-
-
-				</a><a href="#">Aggiungi Tavolo</a> <a href="logout.jsp"> logout</a>
+				<a href="#">Aggiungi Tavolo</a> <a href="logout.jsp"> Logout</a>
 			</div>
 			<div id="blocco" class="blocco"></div>
 		</div>
@@ -38,8 +37,10 @@
 		<table class="table">
 			<tr>
 				<th>Tavolo no.</th>
-				<th>Prenotazione</th> <!-- es. Prenotazione = Martinez -->
-				<th>Ordine</th> <!-- Deve essere la lista dei piatti nell'ordine -->
+				<th>Prenotazione</th>
+				<!-- es. Prenotazione = Martinez -->
+				<th>Ordine</th>
+				<!-- Deve essere la lista dei piatti nell'ordine -->
 				<th>Totale</th>
 			</tr>
 			<tr>
@@ -61,7 +62,7 @@
 				<td>30</td>
 			</tr>
 		</table>
-		<br/>
+		<br />
 		<th><a href="" class="button">Paga ora</a></th>
 	</form>
 
