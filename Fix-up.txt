@@ -1,0 +1,2 @@
+1) Trigger in pagamento (sommare i tavoli uguali)
+2) Aggiornare la vista front-end sul totale

@@ -1,4 +1,6 @@
+<%@page import="java.util.List"%>
 <%@page import="model.Cliente"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,8 +18,10 @@
 	<%
 	Cliente cliente = (Cliente) request.getAttribute("cliente");
 	int n_tavolo = (int) request.getAttribute("n_tavolo");
+	List<Map<String, String>> resultList = (List<Map<String, String>>) request.getAttribute("resultList");
 	%>
 
+	<!--  navbar  -->
 	<nav class="navbar">
 		<a href="javascript: window.history.go(-1)"> <img
 			src="sources/frecciasinistra.png" alt="Icona" width="30" height="30"
@@ -35,6 +39,8 @@
 		</div>
 	</nav>
 
+	<!--  form  -->
+
 	<form>
 		<div class="divisore">
 			<table class="table">
@@ -50,15 +56,30 @@
 					<td><%=n_tavolo%></td>
 					<td><%=cliente.getCognome_cliente()%></td>
 					<td>
-						<a href="#" id="visualizza-ordine">Visualizza ordine</a></td>
-					<td>&euro; 35.90</td>
+						<a href="#" id="visualizza-ordine">Visualizza ordine</a>
+					</td>
+					
+						<%
+				for (Map<String, String> row : resultList){
+				%>
+				<tr>
+					<td><%=row.get("nome")%></td>
+					<td><%=row.get("descrizione")%></td>
+					<td><%=row.get("stato")%></td>
+					<td><%=row.get("quantita")%></td>
+					<td>&euro;<%=row.get("costo")%></td>
 				</tr>
+				<%
+				}
+				%>
 			</table>
 		</div>
 		<br>
 		<a href="" class="button">Paga ora</a>
 	</form>
-
+	
+	<!--  tabella ordini  -->
+	
 	<table class="table" id="tabella-ordine" style="display: none;">
 		<tr>
 			<td colspan="4" style="text-align: right;">
@@ -68,21 +89,24 @@
 		<tr>
 			<th>Nome piatto</th>
 			<th>Descrizione</th>
-			<th>Quantita'</th>
+			<th>Stato ordine</th>
+			<th>Quantit&agrave;</th>
 			<th>Prezzo</th>
 		</tr>
+		<%
+		for (Map<String, String> row : resultList){
+		%>
 		<tr>
-			<td>Margherita</td>
-			<td>Pomodoro mozzarella basilico e origano</td>
-			<td>3</td>
-			<td>&euro; 7.50</td>
+			<td><%=row.get("nome")%></td>
+			<td><%=row.get("descrizione")%></td>
+			<td><%=row.get("stato")%></td>
+			<td><%=row.get("quantita")%></td>
+			<td>&euro;<%=row.get("costo")%></td>
 		</tr>
-		<tr>
-			<td>Patatine</td>
-			<td>Deliziose patatine fritte</td>
-			<td>5</td>
-			<td>&euro; 1.50</td>
-		</tr>
+		<%
+		}
+		%>
+		
 	</table>
 
 	<script src="js/menu.js"></script>
