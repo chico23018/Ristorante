@@ -1,6 +1,12 @@
 package control;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import metodi.ClienteDao;
 import metodi.LoginDao;
+import metodi.Query;
 import metodi.TavoloDao;
 import model.Amministratore;
 import model.Cameriere;
@@ -23,13 +30,51 @@ public class Login extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		Query query = new Query();
 		RequestDispatcher rd = null;
-		String id =request.getParameter("id");
-		if(id!=null) {
-			Integer n_tavolo = Integer.parseInt(id);
-			ClienteDao cli = new ClienteDao();
+		String id_tavolo = request.getParameter("id");
+		ClienteDao cli = new ClienteDao();
+		List<Map<String, String>> resultList = new ArrayList<>();
+		
+		if(id_tavolo!=null) {
+			
+			// Execute query
+			ResultSet rs = query.getResult("SELECT p.nome, p.descrizione, p.costo, COUNT(*) as quantita\n"
+					+ "FROM tavolo\n"
+					+ "INNER JOIN ordine ON tavolo.id ='"+id_tavolo+"'\n"
+					+ "INNER JOIN piatto p ON ordine.id_piatto = p.id\n"
+					+ "GROUP BY p.nome, p.descrizione, p.costo;");
+			
+			try {
+
+				while (rs.next()) {
+				    Map<String, String> map = new HashMap<>();
+				    map.put("nome", rs.getString(1));
+				    map.put("descrizione", rs.getString(2));
+				    map.put("costo", rs.getString(3));
+				    map.put("quantita", rs.getString(4));
+				    resultList.add(map);
+				}
+
+				/*
+				 * for (Map<String, String> row : resultList) {
+				    System.out.println("Nome: " + row.get("nome"));
+				    System.out.println("Descrizione: " + row.get("descrizione"));
+				    System.out.println("Costo: " + row.get("costo"));
+				    System.out.println("Quantità: " + row.get("quantita"));
+				    System.out.println("-----------------------------");
+				}
+				*/
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			Integer n_tavolo = Integer.parseInt(id_tavolo);
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.setAttribute("n_tavolo", n_tavolo);
+			request.setAttribute("resultList", resultList);
 			
 			rd = request.getRequestDispatcher("tavolo.jsp");
 			rd.forward(request, response);
@@ -78,3 +123,4 @@ public class Login extends HttpServlet {
 	}
 
 }
+
