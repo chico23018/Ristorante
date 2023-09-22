@@ -312,3 +312,8 @@ label input[type="checkbox"] {
   font-weight: bolder;
   font-family: Verdana;
 }
+
+form{
+	margin-bottom: 70px;
+	
+}

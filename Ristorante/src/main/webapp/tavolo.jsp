@@ -55,6 +55,7 @@
 				</tr>
 			</table>
 		</div>
+		<br>
 		<a href="" class="button">Paga ora</a>
 	</form>
 

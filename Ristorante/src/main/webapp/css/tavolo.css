@@ -39,6 +39,8 @@
     font-size: 14px; /* Dimensione del testo */
     border: none; 
     cursor: pointer; 
+    position: absolute;
+  right: 195px;
   }
 
 .button:hover {
