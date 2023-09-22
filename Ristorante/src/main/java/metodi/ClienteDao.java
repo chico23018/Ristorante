@@ -100,5 +100,26 @@ public class ClienteDao {
 		return n;
 
 	}
+	
+	public Cliente cerca_tavolo(int id_tavolo) {
+		String query = "SELECT * FROM cliente where id_tavolo ='" + id_tavolo + "'";
+		Cliente n = new Cliente();
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			ResultSet rst = pst.executeQuery();
+			rst.next();
+
+			n.setId_cliente(rst.getInt(1));
+			n.setNome_cliente(rst.getString(2));
+			n.setCognome_cliente(rst.getString(3));
+			n.setId_tavolo(rst.getInt(4));
+
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return n;
+
+	}
 
 }

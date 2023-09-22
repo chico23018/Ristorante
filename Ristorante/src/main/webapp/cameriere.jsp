@@ -34,7 +34,7 @@
 				    type="regular">
 				</lord-icon>
 				 -->
-				<a href="#">
+				<a href="">
 				    <img src="sources/frecciasinistra.png" alt="Icona" width="50" height="50">
 				</a>
 				

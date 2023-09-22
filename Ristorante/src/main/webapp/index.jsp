@@ -31,7 +31,10 @@ String messaggio = (String) request.getAttribute("messaggio");
 				<p>Benvenuti nel cuore della nostra cucina, dove ogni piatto e'
 					creato con passione e dedizione. Al Pomo d'oro, crediamo che il
 					cibo non sia solo una necessita', ma un'esperienza da gustare con
-					tutti i sensi.</p>
+					tutti i sensi.
+				</p>
+				<br/>
+				<a href="tel:+39" class="button">Prenota ora</a>
 			</div>
 		</div>
 		<form action="login" method="POST">
