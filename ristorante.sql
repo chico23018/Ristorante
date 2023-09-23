@@ -190,26 +190,27 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `ordine_BEFORE_INSERT` BEFORE INSERT ON `ordine` FOR EACH ROW BEGIN
-
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `inserisci_pagamento` AFTER INSERT ON `ordine` FOR EACH ROW BEGIN
-    INSERT INTO pagamento (id_tavolo, costo_totale, stato, data)
-    VALUES (NEW.id_tavolo, (SELECT SUM(p.costo) FROM piatto p WHERE p.id = NEW.id_piatto), 'non pagato', NOW());
+    DECLARE total_cost DECIMAL(10, 2);
+
+    -- Calcola il totale dei costi dei piatti nell'ordine
+    SET total_cost = (
+        SELECT SUM(p.costo)
+        FROM piatto p
+        WHERE p.id = NEW.id_piatto
+    );
+
+    -- Verifica se esiste già un pagamento per lo stesso tavolo
+    IF EXISTS (SELECT 1 FROM pagamento WHERE id_tavolo = NEW.id_tavolo AND stato = 'non pagato') THEN
+        -- Aggiorna il pagamento esistente
+        UPDATE pagamento
+        SET costo_totale = costo_totale + total_cost
+        WHERE id_tavolo = NEW.id_tavolo AND stato = 'non pagato';
+    ELSE
+        -- Inserisci un nuovo record di pagamento
+        INSERT INTO pagamento (id_tavolo, costo_totale, stato, data)
+        VALUES (NEW.id_tavolo, total_cost, 'non pagato', NOW());
+    END IF;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -260,7 +261,7 @@ CREATE TABLE `pagamento` (
   PRIMARY KEY (`id`),
   KEY `id_ordine_idx` (`id_tavolo`),
   CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,7 +270,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (37,1,7.5,'non pagato','2023-09-22'),(38,2,2.5,'non pagato','2023-09-22'),(39,3,12,'non pagato','2023-09-22'),(40,4,8.5,'non pagato','2023-09-22'),(41,5,10,'non pagato','2023-09-22'),(42,1,7.5,'non pagato','2023-09-22'),(43,4,2.5,'non pagato','2023-09-22'),(44,4,2.5,'non pagato','2023-09-22'),(45,5,2.5,'non pagato','2023-09-22'),(46,5,2.5,'non pagato','2023-09-22'),(47,5,2.5,'non pagato','2023-09-22');
+INSERT INTO `pagamento` VALUES (1,1,15,'non pagato','2023-09-23'),(2,2,2.5,'non pagato','2023-09-23'),(3,3,12,'non pagato','2023-09-23'),(4,4,13.5,'non pagato','2023-09-23'),(5,5,17.5,'non pagato','2023-09-23');
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -366,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-22 18:09:04
+-- Dump completed on 2023-09-23 19:38:05
