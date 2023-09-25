@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.coyote.http11.upgrade.UpgradeServletOutputStream;
+
 import metodi.ClienteDao;
 import metodi.LoginDao;
 import metodi.Query;
@@ -33,10 +35,11 @@ public class Login extends HttpServlet {
 		
 		Query query = new Query();
 		RequestDispatcher rd = null;
-		String id_tavolo = request.getParameter("id");
 		ClienteDao cli = new ClienteDao();
 		List<Map<String, String>> resultList = new ArrayList<>();
-				
+		String totale = "";
+		String id_tavolo = request.getParameter("id");
+		
 		if(id_tavolo!=null) {
 			
 			// Execute query
@@ -47,16 +50,23 @@ public class Login extends HttpServlet {
 					+ "WHERE tavolo.id ='"+id_tavolo+"'\n"
 					+ "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato;");
 			
+			ResultSet rs_2 = query.getResult("SELECT costo_totale\n"
+					+ "FROM pagamento\n"
+					+ "WHERE id_tavolo ='"+id_tavolo+"'\n");
+			
 			try {
-
+				
+				if (rs_2.next()) 
+					totale = rs_2.getString("costo_totale");
+				
 				while (rs.next()) {
-				    Map<String, String> map = new HashMap<>();
-				    map.put("nome", rs.getString(1));
-				    map.put("descrizione", rs.getString(2));
-				    map.put("stato", rs.getString(3));
-				    map.put("quantita", rs.getString(4));
-				    map.put("costo", rs.getString(5));
-				    resultList.add(map);
+					Map<String, String> map = new HashMap<>();
+					map.put("nome", rs.getString(1));
+					map.put("descrizione", rs.getString(2));
+					map.put("stato", rs.getString(3));
+					map.put("quantita", rs.getString(4));
+					map.put("costo", rs.getString(5));
+					resultList.add(map);
 				}
 				
 			} catch (SQLException e) {
@@ -64,9 +74,11 @@ public class Login extends HttpServlet {
 			}
 			
 			Integer n_tavolo = Integer.parseInt(id_tavolo);
+			Double costo_totale = Double.parseDouble(totale);
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.setAttribute("n_tavolo", n_tavolo);
 			request.setAttribute("resultList", resultList);
+			request.setAttribute("totale", costo_totale);
 			
 			rd = request.getRequestDispatcher("tavolo.jsp");
 			rd.forward(request, response);
@@ -77,8 +89,8 @@ public class Login extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		RequestDispatcher rd = null;
-
 		LoginDao dao = new LoginDao();
 		String username = request.getParameter("user");
 		String password = request.getParameter("password");

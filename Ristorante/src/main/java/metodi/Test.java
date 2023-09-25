@@ -7,46 +7,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 
 public class Test {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		
-		List<Map<String, String>> resultList = new ArrayList<>();
 		Query query = new Query();
-		String id_tavolo= "5";
+		String totale = "";
+		String id_tavolo = "1";
 		
-		ResultSet rs = query.getResult("SELECT p.nome, p.descrizione, ordine.stato, COUNT(*) as amount, p.costo*COUNT(*) as totale\n"
-				+ "FROM tavolo\n"
-				+ "INNER JOIN ordine ON tavolo.id = ordine.id_tavolo\n"
-				+ "INNER JOIN piatto p ON ordine.id_piatto = p.id\n"
-				+ "WHERE tavolo.id ='"+id_tavolo+"'\n"
-				+ "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato;");
-		
-		try {
-
-			while (rs.next()) {
-			    Map<String, String> map = new HashMap<>();			    
-			    map.put("nome", rs.getString(1));
-			    map.put("descrizione", rs.getString(2));
-			    map.put("costo", rs.getString(3));
-			    map.put("quantita", rs.getString(4));
-			    resultList.add(map);
-			}
-
+		if(id_tavolo!=null) {
 			
-			  for (Map<String, String> row : resultList) {
-			    System.out.println("Nome: " + row.get("nome"));
-			    System.out.println("Descrizione: " + row.get("descrizione"));
-			    System.out.println("Costo: " + row.get("costo"));
-			    System.out.println("Quantità: " + row.get("quantita"));
-			    System.out.println("-----------------------------");
+			ResultSet rs_2 = query.getResult("SELECT costo_totale\n"
+					+ "FROM pagamento\n"
+					+ "WHERE id_tavolo ='"+id_tavolo+"'\n");
+			
+			try {
+				
+				if (rs_2.next()) 
+					totale = rs_2.getString("costo_totale");
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			Double costo_totale = Double.parseDouble(totale);
+			System.out.println("Value: " + costo_totale);
+	   }
+
 	}
 
 }

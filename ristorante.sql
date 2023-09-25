@@ -169,7 +169,7 @@ CREATE TABLE `ordine` (
   KEY `id_piatto_idx` (`id_piatto`),
   CONSTRAINT `id_piatto` FOREIGN KEY (`id_piatto`) REFERENCES `piatto` (`id`),
   CONSTRAINT `id_tavolo` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +178,7 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
-INSERT INTO `ordine` VALUES (1,1,1,'in attesa'),(2,2,3,'in preparazione'),(3,3,2,'consegnato'),(4,4,4,'in preparazione'),(5,5,5,'in attesa'),(6,1,1,'in attesa'),(7,4,3,'consegnato'),(8,4,3,'consegnato'),(9,5,3,'consegnato'),(10,5,3,'consegnato'),(11,5,3,'consegnato');
+INSERT INTO `ordine` VALUES (1,1,1,'in attesa'),(2,2,3,'in preparazione'),(3,3,2,'consegnato'),(4,4,4,'in preparazione'),(5,5,5,'in attesa'),(6,1,1,'in attesa'),(7,4,3,'consegnato'),(8,4,3,'consegnato'),(9,5,3,'consegnato'),(10,5,3,'consegnato'),(11,5,3,'consegnato'),(12,2,1,'in attesa'),(13,3,4,'in preparazione'),(14,1,2,'consegnato'),(15,4,5,'in attesa'),(16,2,3,'consegnato'),(17,3,1,'in preparazione'),(18,1,4,'in attesa'),(19,5,2,'in attesa'),(20,4,1,'consegnato'),(21,5,4,'consegnato');
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -261,7 +261,7 @@ CREATE TABLE `pagamento` (
   PRIMARY KEY (`id`),
   KEY `id_ordine_idx` (`id_tavolo`),
   CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,9 +270,43 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (1,1,15,'non pagato','2023-09-23'),(2,2,2.5,'non pagato','2023-09-23'),(3,3,12,'non pagato','2023-09-23'),(4,4,13.5,'non pagato','2023-09-23'),(5,5,17.5,'non pagato','2023-09-23');
+INSERT INTO `pagamento` VALUES (1,1,35.5,'non pagato','2023-09-23'),(2,2,12.5,'non pagato','2023-09-23'),(3,3,28,'non pagato','2023-09-23'),(4,4,31,'non pagato','2023-09-23'),(5,5,38,'non pagato','2023-09-23');
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `EliminaPagamentoDuplicato` BEFORE INSERT ON `pagamento` FOR EACH ROW BEGIN
+    DECLARE tavolo_pagato INT;
+    
+    -- Verifica se l'operazione coinvolge la tabella "ordine"
+    IF (SELECT COUNT(*) FROM information_schema.triggers WHERE event_object_table = 'ordine') = 0 THEN
+        -- Trova l'ID del tavolo associato al nuovo pagamento
+        SET tavolo_pagato = NEW.id_tavolo;
+
+        -- Verifica se esiste già un pagamento 'pagato' per lo stesso tavolo
+        IF EXISTS (
+            SELECT 1
+            FROM pagamento
+            WHERE id_tavolo = tavolo_pagato AND stato = 'pagato'
+        ) THEN
+            -- Elimina il pagamento 'pagato' precedente
+            DELETE FROM pagamento
+            WHERE id_tavolo = tavolo_pagato AND stato = 'pagato';
+        END IF;
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -346,7 +380,7 @@ CREATE TABLE `tavolo` (
 
 LOCK TABLES `tavolo` WRITE;
 /*!40000 ALTER TABLE `tavolo` DISABLE KEYS */;
-INSERT INTO `tavolo` VALUES (1,1,4,'occupato'),(2,2,2,'occupato'),(3,3,6,'libero'),(4,1,4,'libero'),(5,4,3,'occupato');
+INSERT INTO `tavolo` VALUES (1,1,4,'occupato'),(2,2,2,'occupato'),(3,3,6,'occupato'),(4,1,4,'occupato'),(5,4,3,'occupato');
 /*!40000 ALTER TABLE `tavolo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,4 +401,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-23 19:38:05
+-- Dump completed on 2023-09-24 12:41:45

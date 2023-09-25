@@ -19,6 +19,7 @@
 	Cliente cliente = (Cliente) request.getAttribute("cliente");
 	int n_tavolo = (int) request.getAttribute("n_tavolo");
 	List<Map<String, String>> resultList = (List<Map<String, String>>) request.getAttribute("resultList");
+	double costo_totale = (double) request.getAttribute("totale");
 	%>
 
 	<!--  navbar  -->
@@ -47,9 +48,7 @@
 				<tr>
 					<th>Tavolo no.</th>
 					<th>Prenotazione</th>
-					<!-- es. Prenotazione = Martinez -->
 					<th>Ordine</th>
-					<!-- Deve essere la lista dei piatti nell'ordine -->
 					<th>Totale</th>
 				</tr>
 				<tr>
@@ -58,20 +57,8 @@
 					<td>
 						<a href="#" id="visualizza-ordine">Visualizza ordine</a>
 					</td>
-					
-						<%
-				for (Map<String, String> row : resultList){
-				%>
-				<tr>
-					<td><%=row.get("nome")%></td>
-					<td><%=row.get("descrizione")%></td>
-					<td><%=row.get("stato")%></td>
-					<td><%=row.get("quantita")%></td>
-					<td>&euro;<%=row.get("costo")%></td>
+					<td><%=costo_totale%></td>
 				</tr>
-				<%
-				}
-				%>
 			</table>
 		</div>
 		<br>
