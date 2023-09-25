@@ -34,7 +34,7 @@ String messaggio = (String) request.getAttribute("messaggio");
 					tutti i sensi.
 				</p>
 				<br/>
-				<a href="tel:+39" class="button">Prenota ora</a>
+				<a href="Prenota" class="button">Prenota ora</a> 
 			</div>
 		</div>
 		<form action="login" method="POST">

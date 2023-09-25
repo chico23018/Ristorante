@@ -60,7 +60,7 @@ public class TavoloDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			while (rst.next()) {
-				Tavolo tavolo = new Tavolo(rst.getInt(1), rst.getInt(2), rst.getInt(3));
+				Tavolo tavolo = new Tavolo(rst.getInt(1), rst.getInt(2), rst.getInt(3), rst.getString(4));
 
 				list.add(tavolo);
 			}
@@ -78,7 +78,7 @@ public class TavoloDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			rst.next();
-			tavolo = new Tavolo(rst.getInt(1), rst.getInt(2), rst.getInt(3));
+			tavolo = new Tavolo(rst.getInt(1), rst.getInt(2), rst.getInt(3), rst.getString(4));
 
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
