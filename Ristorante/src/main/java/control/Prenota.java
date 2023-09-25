@@ -51,7 +51,7 @@ public class Prenota extends HttpServlet {
 		String esito = cl.inserire(new Cliente(0, nome, cognome, id_tavolo));
 		if(esito.equals("SUCCESS"))
 			
-		{			//	rd = request.getRequestDispatcher("index.jsp");
+		{	//	rd = request.getRequestDispatcher("index.jsp");
 			request.setAttribute("esito", esito);
 			//rd.forward(request, response);
 		}else
@@ -60,6 +60,9 @@ public class Prenota extends HttpServlet {
 			request.setAttribute("esito", esito);
 			rd.forward(request, response);
 		}
+		cognome="";
+		nome="";
+		id_tavolo=null;
 		doGet(request, response);
 	}
 

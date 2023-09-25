@@ -6,16 +6,20 @@ $(document).ready(function () {
 	var idtavolo = document.getElementById("table").value;
 	var url = "Prenota";
 	console.log(nome, cognome,idtavolo);
+	
 	$.ajax({
 		type: 'POST',
 		url: url,
 		data: "nome=" + nome + "&cognome=" + cognome+ "&id_tavolo=" +idtavolo,
 		success: function(data, textStatus, jqXHR) {
-			window.location.href = "http://localhost:8080/Ristorante/";
-			//parent.location.href ="http://localhost:8080/Ristorante/";
+			//console.log("okay");
+			window.location.href = "../index.jsp";
+			//parent.location.href ="Ristorante";
 			
 		}
+		
 	});
+	
 });   
 
 });
