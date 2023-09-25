@@ -22,7 +22,7 @@
 </head>
 <%
 String messaggio = (String) request.getAttribute("messaggio");
-String esito = (String) session.getAttribute("esito");
+String esito = (String) request.getAttribute("esito");
 %>
 <body>
 	<%

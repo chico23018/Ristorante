@@ -15,7 +15,7 @@
 <body>
 	<%
 	List<Tavolo> tavoli_liberi = (List<Tavolo>) request.getAttribute("tavoli_liberi");
-	String esito = (String) session.getAttribute("esito");
+	String esito = (String) request.getAttribute("esito");
 	%>
 	
 	<%

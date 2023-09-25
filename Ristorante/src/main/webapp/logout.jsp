@@ -2,14 +2,19 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="ISO-8859-1">
-<title>logout</title>
+<title>Logout</title>
 </head>
-<body>
-<% session.invalidate(); 
-	response.sendRedirect("index.jsp");
-	%>
 
+<body>
+<h1>LOGOUT</h1>
+<% 
+	session.invalidate(); 
+	response.sendRedirect("index.jsp");
+%>
 </body>
+
 </html>
+
