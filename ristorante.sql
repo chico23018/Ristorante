@@ -169,7 +169,7 @@ CREATE TABLE `ordine` (
   KEY `id_piatto_idx` (`id_piatto`),
   CONSTRAINT `id_piatto` FOREIGN KEY (`id_piatto`) REFERENCES `piatto` (`id`),
   CONSTRAINT `id_tavolo` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +178,7 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
-INSERT INTO `ordine` VALUES (1,1,1,'in preparazione'),(2,2,3,'in preparazione'),(3,3,2,'consegnato'),(4,4,4,'in preparazione'),(5,5,5,'in preparazione'),(6,1,1,'in preparazione'),(7,4,3,'consegnato'),(8,4,3,'consegnato'),(9,5,3,'consegnato'),(10,5,3,'consegnato'),(11,5,3,'consegnato'),(12,2,1,'in preparazione'),(13,3,4,'in preparazione'),(14,1,2,'consegnato'),(15,4,5,'in preparazione'),(16,2,3,'consegnato'),(17,3,1,'in preparazione'),(18,1,4,'in preparazione'),(19,5,2,'in preparazione'),(20,4,1,'consegnato'),(21,5,4,'consegnato'),(22,2,1,'in preparazione'),(23,2,1,'consegnato'),(24,2,1,'consegnato');
+INSERT INTO `ordine` VALUES (1,1,1,'in preparazione'),(3,3,2,'consegnato'),(4,4,4,'in preparazione'),(5,5,5,'in preparazione'),(6,1,1,'in preparazione'),(7,4,3,'consegnato'),(8,4,3,'consegnato'),(9,5,3,'consegnato'),(10,5,3,'consegnato'),(11,5,3,'consegnato'),(13,3,4,'in preparazione'),(14,1,2,'consegnato'),(15,4,5,'in preparazione'),(17,3,1,'in preparazione'),(18,1,4,'in preparazione'),(19,5,2,'in preparazione'),(20,4,1,'consegnato'),(21,5,4,'consegnato'),(22,2,1,'in preparazione');
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -195,11 +195,11 @@ DELIMITER ;;
     IF EXISTS (
         SELECT 1
         FROM pagamento
-        WHERE pagamento.id_tavolo = NEW.id_tavolo AND stato = 'pagato'
+        WHERE id_tavolo = NEW.id_tavolo AND stato = 'pagato'
     ) THEN
         -- Elimina il pagamento 'pagato' precedente
         DELETE FROM pagamento
-        WHERE pagamento.id_tavolo = NEW.id_tavolo AND stato = 'pagato';
+        WHERE id_tavolo = NEW.id_tavolo AND stato = 'pagato';
     END IF;
 END */;;
 DELIMITER ;
@@ -287,7 +287,7 @@ CREATE TABLE `pagamento` (
   PRIMARY KEY (`id`),
   KEY `id_ordine_idx` (`id_tavolo`),
   CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +296,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (1,1,35.5,'non pagato','2023-09-23'),(3,3,28,'non pagato','2023-09-23'),(4,4,31,'non pagato','2023-09-23'),(5,5,38,'non pagato','2023-09-23'),(15,2,7.5,'non pagato','2023-09-25');
+INSERT INTO `pagamento` VALUES (1,1,35.5,'non pagato','2023-09-23'),(3,3,28,'non pagato','2023-09-23'),(4,4,31,'non pagato','2023-09-23'),(5,5,38,'non pagato','2023-09-23'),(19,2,7.5,'non pagato','2023-09-25');
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -321,6 +321,9 @@ DELIMITER ;;
 	UPDATE tavolo
     SET tavolo.id_cameriere = null
     WHERE tavolo.id = NEW.id_tavolo;
+    
+	DELETE FROM ordine
+    WHERE ordine.id_tavolo = NEW.id_tavolo;
   END IF;
 END */;;
 DELIMITER ;
@@ -392,7 +395,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tavolo_AFTER_UPDATE` AFTER UPDATE ON `tavolo` FOR EACH ROW BEGIN
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tavolo_BEFORE_INSERT` BEFORE INSERT ON `tavolo` FOR EACH ROW BEGIN
 
 END */;;
 DELIMITER ;
@@ -418,4 +421,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-25  9:56:15
+-- Dump completed on 2023-09-25 10:49:39
