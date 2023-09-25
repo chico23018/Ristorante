@@ -13,6 +13,12 @@
 </head>
 
 <body>
+<div class="freccia">
+<a href="javascript: window.history.go(-1)"> <img
+			src="sources/frecciasinistra.png" alt="Icona" width="30" height="30"
+			class="logo">
+		</a>
+		</div>
 	<%
 	List<Tavolo> tavoli_liberi = (List<Tavolo>) request.getAttribute("tavoli_liberi");
 	String esito = (String) request.getAttribute("esito");

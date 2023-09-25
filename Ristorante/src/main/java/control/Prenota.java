@@ -48,10 +48,18 @@ public class Prenota extends HttpServlet {
 		ClienteDao cl = new ClienteDao();
 
 		String esito = cl.inserire(new Cliente(0, nome, cognome, id_tavolo));
-		request.setAttribute("esito", esito);
-		rd = request.getRequestDispatcher("index.jsp");
-		rd.forward(request, response);
-		
+		if (esito.equals("SUCCESS")) {
+			// Memorizza temporaneamente i dati in sessione
+			request.getSession().setAttribute("esito", esito);
+
+			// Esegue il reindirizzamento a una pagina di conferma
+			response.sendRedirect("index.jsp");
+			} else {
+			// In caso di errore, reindirizza a una pagina di errore
+			
+			response.sendRedirect("prenotazione.jsp");
+			
+		}
 	}
 
 }

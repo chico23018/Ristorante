@@ -22,15 +22,19 @@
 </head>
 <%
 String messaggio = (String) request.getAttribute("messaggio");
-String esito = (String) request.getAttribute("esito");
+String esito = (String) session.getAttribute("esito");
 %>
 <body>
 	<%
 	if(esito != null)
 	{
+	
 	%>
 	<p class="message_succ"> <%=esito%> </p>
+
 	<%
+	Thread.sleep(1000);
+        session.invalidate(); 
 	}
 	%>
 	<div class="box-form">
