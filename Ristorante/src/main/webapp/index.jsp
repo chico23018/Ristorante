@@ -8,6 +8,7 @@
 <meta charset="ISO-8859-1">
 <link href="css/index.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+<link href="css/prenotazione.css" rel="stylesheet">
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <title>Benvenuto al pomo d'oro!</title>
 
@@ -21,9 +22,17 @@
 </head>
 <%
 String messaggio = (String) request.getAttribute("messaggio");
+String esito = (String) request.getAttribute("esito");
 %>
 <body>
-
+	<%
+	if(esito != null)
+	{
+	%>
+	<p class="message_succ"> <%=esito%> </p>
+	<%
+	}
+	%>
 	<div class="box-form">
 		<div class="left">
 			<div class="overlay">

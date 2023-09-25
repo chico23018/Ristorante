@@ -85,7 +85,7 @@ button:hover {
   background-color: #0056b3;
 }
 
-.message {
+.message_err {
   background-color: #ff6666; /* Colore di sfondo rosso */
   color: #fff; /* Colore del testo bianco */
   padding: 10px; /* Spazio interno al messaggio */
@@ -95,5 +95,17 @@ button:hover {
   margin: 10px 0; /* Margine sopra e sotto il messaggio */
   border: 1px solid #ff3333; /* Bordo rosso sottile */
 }
+
+.message_succ {
+  background-color: #66ff66; /* Colore di sfondo verde */
+  color: #333; /* Colore del testo scuro */
+  padding: 10px; /* Spazio interno al messaggio */
+  border-radius: 5px; /* Bordo arrotondato */
+  text-align: center; /* Allineamento del testo al centro */
+  font-size: 16px; /* Dimensione del carattere */
+  margin: 10px 0; /* Margine sopra e sotto il messaggio */
+  border: 1px solid #33cc33; /* Bordo verde sottile */
+}
+
 
 

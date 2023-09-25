@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import metodi.ClienteDao;
 import metodi.TavoloDao;
+import model.Cliente;
 import model.Tavolo;
 
 
@@ -39,6 +41,24 @@ public class Prenota extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		RequestDispatcher rd = null;
+		String nome = request.getParameter("nome");
+		String cognome = request.getParameter("cognome");
+		Integer id_tavolo = Integer.parseInt(request.getParameter("id_tavolo"));
+		ClienteDao cl = new ClienteDao();
+	
+		String esito = cl.inserire(new Cliente(0, nome, cognome, id_tavolo));
+		if(esito.equals("SUCCESS"))
+		{			
+			request.setAttribute("esito", esito);
+			rd.forward(request, response);
+		}else
+		{
+			rd = request.getRequestDispatcher("prenotazione.jsp");
+			request.setAttribute("esito", esito);
+			rd.forward(request, response);
+		}
 		doGet(request, response);
 	}
 

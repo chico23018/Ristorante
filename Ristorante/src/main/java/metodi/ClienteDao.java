@@ -13,7 +13,7 @@ import model.Cliente;
 public class ClienteDao {
 	private Connection con = null;
 
-	public void inserire(Cliente cliente) {
+	public String inserire(Cliente cliente) {
 		String query = "INSERT INTO cliente( nome, cognome, id_tavolo) values(?,?,?)";
 		try {
 			con = Connessione.getInstance().getConnection();
@@ -21,10 +21,11 @@ public class ClienteDao {
 			pst.setString(1, cliente.getNome_cliente());
 			pst.setString(2, cliente.getCognome_cliente());
 			pst.setInt(3, cliente.getId_tavolo());
-			
 			pst.executeUpdate();
+			return "SUCCESS";
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
+			return "FAILURE";
 		}
 
 	}

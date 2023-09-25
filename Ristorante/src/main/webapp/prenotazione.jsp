@@ -15,6 +15,7 @@
 <body>
 	<%
 	List<Tavolo> tavoli_liberi = (List<Tavolo>) request.getAttribute("tavoli_liberi");
+	String esito = (String) request.getAttribute("esito");
 	%>
 	
 	<%
@@ -22,14 +23,14 @@
 	{
 	%>
 	<div class="form">
-		<form action="login" method="post">
+		<form action="Prenota" method="post" class="Prenota">
 			<h1>Prenotazione</h1>
 			<h3>Nome</h3>
 			<input type="text" name="nome" id="nome" class="nome">
 			<h3>Cognome</h3>
 			<input type="text" name="cognome" id="cognome" class="nome">
 			<h3 for="table">Scegli un tavolo per </h3>
-			<select id="table" name="table">
+			<select id="table" name="id_tavolo">
 			<%
 			for (Tavolo t : tavoli_liberi){
 			%>
@@ -38,18 +39,19 @@
 			}
 			%>
 			</select>
-			
 			<button type="submit" value="prenota" id="submit" class="button">Prenota</button>
 		</form>
 	</div>
+	
 	<%
 	}else{
 	%>
-	<p class="message">Siamo spiacenti, al momento non ci sono tavoli liberi</p>
+	<p class="message_err">Siamo spiacenti, al momento non ci sono tavoli liberi</p>
 	<%
 	}
 	%>
 	
+	<script src="js/prenotazione.js"></script>
 </body>
 
 </html>
