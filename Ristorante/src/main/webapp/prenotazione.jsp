@@ -15,7 +15,7 @@
 <body>
 	<%
 	List<Tavolo> tavoli_liberi = (List<Tavolo>) request.getAttribute("tavoli_liberi");
-	String esito = (String) request.getAttribute("esito");
+	String esito = (String) session.getAttribute("esito");
 	%>
 	
 	<%
@@ -42,7 +42,14 @@
 			<button type="submit" value="prenota" id="submit" class="button">Prenota</button>
 		</form>
 	</div>
-	
+	<%
+	if(esito != null)
+	{
+	%>
+	<p class="message_succ"> <%=esito%> </p>
+	<%
+	}
+	%>
 	<%
 	}else{
 	%>
