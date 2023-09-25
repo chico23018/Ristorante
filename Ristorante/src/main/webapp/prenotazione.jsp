@@ -51,7 +51,7 @@
 	}
 	%>
 	
-	<script src="js/prenotazione.js"></script>
+	
 </body>
 
 </html>
