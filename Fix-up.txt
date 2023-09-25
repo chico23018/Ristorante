@@ -1,3 +1,0 @@
-1) Trigger in pagamento (sommare i tavoli uguali) --> Fatto
-2) Aggiornare la vista front-end sul totale --> Fatto
-3) Allineare la X a destra in visualizza ordine

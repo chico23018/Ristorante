@@ -27,7 +27,6 @@ import model.Cameriere;
 @WebServlet("/login")
 public class Login extends HttpServlet {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -72,9 +71,9 @@ public class Login extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+					
 			Integer n_tavolo = Integer.parseInt(id_tavolo);
-			Double costo_totale = Double.parseDouble(totale);
+			Double costo_totale = (totale.equals("")) ? 0.0 : Double.parseDouble(totale);
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.setAttribute("n_tavolo", n_tavolo);
 			request.setAttribute("resultList", resultList);

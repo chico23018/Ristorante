@@ -7,9 +7,6 @@ body {
   color: #333333;
 }
 
-
-
-
 .box-form {
   margin: 0 auto;
   width: 80%;
@@ -315,5 +312,4 @@ label input[type="checkbox"] {
 
 form{
 	margin-bottom: 70px;
-	
 }

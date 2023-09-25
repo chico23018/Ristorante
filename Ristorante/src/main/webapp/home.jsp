@@ -33,8 +33,6 @@
 		</div>
 	</header>
 
-
-
 	<script src="js/menu.js"></script>
 	<script src="js/obbligo_accesso.js"></script>
 </body>
