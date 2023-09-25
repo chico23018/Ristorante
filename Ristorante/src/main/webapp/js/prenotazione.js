@@ -1,11 +1,21 @@
-const formulario_ajax = document.querySelectorAll(".Prenota");
+$(document).ready(function () {
 
-function enviar_formulario_ajax(e){
-e.preventDefault();
-window.location.href='./index.jsp'
-}
+	$("tr #Cant").click(function (e) {
+	var nome = document.getElementById("nome").value;
+	var cognome = document.getElementById("cognome").value;
+	var idtavolo = document.getElementById("table").value;
+	var url = "Prenota";
+	console.log(nome, cognome,idtavolo);
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: "nome=" + nome + "&cognome=" + cognome+ "&id_tavolo=" +idtavolo,
+		success: function(data, textStatus, jqXHR) {
+			window.location.href = "http://localhost:8080/Ristorante/";
+			//parent.location.href ="http://localhost:8080/Ristorante/";
+			
+		}
+	});
+});   
 
-formulario_ajax.forEach(formulario =>{
-	formulario.addEventListener("submit",enviar_formulario_ajax);
 });
-
