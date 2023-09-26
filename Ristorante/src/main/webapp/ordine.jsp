@@ -31,7 +31,7 @@
 			<th>Nome</th>
 			<th>Prezzo</th>
 			<th>Descrizione</th>
-			<th>aggiungi</th>
+			<th>Aggiungi</th>
 		</tr>
 		<%
 		for (Piatto p : lista_piatti) {
@@ -41,19 +41,21 @@
 			<td><%=p.getNome_piatto()%></td>
 			<td>&euro;<%=p.getCosto()%></td>
 			<td><%=p.getDescrizione()%></td>
-			<td><input type="button" value="Aggiungi" class="button" onclick="aggiungiPiatto('<%=p.getNome_piatto()%>', <%=p.getCosto()%>)" /></td>
+			<td><input type="button" value="Aggiungi" class="button"
+				onclick="aggiungiPiatto('<%=p.getId_piatto()%>', '<%=p.getNome_piatto()%>', <%=p.getCosto()%>, '<%=p.getDescrizione()%>')" /></td>
 		</tr>
 		<%
 		}
 		%>
-	</table >
+	</table>
 
 	<h2>Ordini Aggiunti</h2>
-	<table id="ordiniAggiunti" class="table" >
+	<table id="ordiniAggiunti" class="table">
 		<!-- Qui verranno visualizzati i dati aggiunti tramite JavaScript -->
 	</table>
-	<button id="inviaOrdiniButton" class="button" onclick="inviaOrdini()">Invia Ordini</button>
- <script src="js/aggiungiordine.js"></script>
+	<button id="inviaOrdiniButton" class="button" onclick="inviaOrdini()">Invia
+		Ordini</button>
+	<script src="js/aggiungiordine.js"></script>
 </body>
 
 </html>

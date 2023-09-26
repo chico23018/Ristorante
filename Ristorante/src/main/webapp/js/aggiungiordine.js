@@ -2,8 +2,8 @@
 const ordiniAggiunti = [];
 
 // Funzione per aggiungere un piatto all'array
-function aggiungiPiatto(nome, prezzo) {
-    const nuovoPiatto = { nome, prezzo };
+function aggiungiPiatto(id_piatto, nome_piatto, costo, descrizione) {
+    const nuovoPiatto = { id_piatto, nome_piatto, costo, descrizione };
     ordiniAggiunti.push(nuovoPiatto);
     aggiornaTabellaOrdini();
 }
@@ -16,11 +16,17 @@ function aggiornaTabellaOrdini() {
     // Aggiunge gli ordini alla tabella
     ordiniAggiunti.forEach((ordine, index) => {
         const row = tabella.insertRow(index);
-        const cellNome = row.insertCell(0);
-        const cellPrezzo = row.insertCell(1);
+       
+        const cellIdPiatto = row.insertCell(0);
+        const cellNome = row.insertCell(1);
+        const cellCosto = row.insertCell(2);
+        const cellDescrizione = row.insertCell(3);
+        
 
-        cellNome.innerHTML = ordine.nome;
-        cellPrezzo.innerHTML = '&euro;' + ordine.prezzo.toFixed(2);
+        cellIdPiatto.innerHTML = ordine.id_piatto;
+        cellNome.innerHTML = ordine.nome_piatto;
+        cellCosto.innerHTML = '&euro;' + ordine.costo.toFixed(2);
+        cellDescrizione.innerHTML = ordine.descrizione;
     });
 }
 // ... Il codice JavaScript precedente ...
@@ -37,7 +43,7 @@ function inviaOrdini() {
     const datiDaInviare = JSON.stringify(ordiniAggiunti);
 
     // Effettua la richiesta HTTP POST
-    fetch('/tua_servlet_url', {
+    fetch('Ordina', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -66,18 +72,24 @@ function aggiornaTabellaOrdini() {
     // Aggiunge gli ordini alla tabella
     ordiniAggiunti.forEach((ordine, index) => {
         const row = tabella.insertRow(index);
-        const cellNome = row.insertCell(0);
-        const cellPrezzo = row.insertCell(1);
-        const cellRimuovi = row.insertCell(2);
+        const cellIdPiatto = row.insertCell(0);
+        const cellNome = row.insertCell(1);
+        const cellCosto = row.insertCell(2);
+        const cellDescrizione = row.insertCell(3);
+        const cellRimuovi = row.insertCell(4);
 
-        cellNome.innerHTML = ordine.nome;
-        cellPrezzo.innerHTML = '&euro;' + ordine.prezzo.toFixed(2);
+        cellIdPiatto.innerHTML = ordine.id_piatto;
+        cellNome.innerHTML = ordine.nome_piatto;
+        cellCosto.innerHTML = '&euro;' + ordine.costo.toFixed(2);
+        cellDescrizione.innerHTML = ordine.descrizione;
+
         const rimuoviButton = document.createElement('button');
         rimuoviButton.textContent = 'Rimuovi';
         rimuoviButton.addEventListener('click', () => rimuoviPiatto(index));
         cellRimuovi.appendChild(rimuoviButton);
     });
 }
+
 // Funzione per rimuovere un piatto dall'array
 function rimuoviPiatto(index) {
     if (index >= 0 && index < ordiniAggiunti.length) {

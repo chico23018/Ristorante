@@ -48,4 +48,11 @@ public class Piatto {
 		this.descrizione = descrizione;
 	}
 
+	@Override
+	public String toString() {
+		return "Piatto [id_piatto=" + id_piatto + ", nome_piatto=" + nome_piatto + ", costo=" + costo + ", descrizione="
+				+ descrizione + "]";
+	}
+	
+
 }
