@@ -1,2 +1,2 @@
 1) Aggiungere un ordine
-2) Assegnare un cameriere
+2) sistemare il invio del id_tavolo

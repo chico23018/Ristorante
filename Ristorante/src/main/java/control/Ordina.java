@@ -26,9 +26,12 @@ public class Ordina extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id =request.getParameter("id_tavolo");
 		PiattoDao pd = new PiattoDao();
 		RequestDispatcher rd = null;
-		
+		if(id!=null) {
+		request.setAttribute("id_tavolo", id);	
+		}
 		request.getSession().setAttribute("lista_piatti", pd.lista());
 		
 		rd = request.getRequestDispatcher("ordine.jsp");
@@ -38,6 +41,7 @@ public class Ordina extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
+		String id =request.getParameter("id_tavolo");
 		 // Leggi i dati JSON dalla richiesta
         BufferedReader reader = request.getReader();
         StringBuilder requestBody = new StringBuilder();
@@ -55,6 +59,7 @@ public class Ordina extends HttpServlet {
         for (Piatto ordine : ordini) {
 			System.out.println(ordine);
 		}
+        System.out.println("id: "+id);
         // Ora hai accesso agli ordini nella variabile "ordini"
         
         // Esegui le operazioni necessarie con gli ordini (ad esempio, salva nel database)

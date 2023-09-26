@@ -16,6 +16,7 @@
 <body>
 	<%
 	List<Piatto> lista_piatti = (List<Piatto>) session.getAttribute("lista_piatti");
+	String id_tavolo = (String)request.getAttribute("id_tavolo");
 	%>
 	<div class="freccia">
 		<a href="javascript: window.history.go(-1)"> <img
@@ -53,8 +54,11 @@
 	<table id="ordiniAggiunti" class="table">
 		<!-- Qui verranno visualizzati i dati aggiunti tramite JavaScript -->
 	</table>
-	<button id="inviaOrdiniButton" class="button" onclick="inviaOrdini()">Invia
+	<form action="Ordina" method="Post">
+	<input type="hidden" name="id_tavolo"  value="<%=id_tavolo%>">
+	<button  id="inviaOrdiniButton" class="button" onclick="inviaOrdini()">Invia
 		Ordini</button>
+		</form>
 	<script src="js/aggiungiordine.js"></script>
 </body>
 
