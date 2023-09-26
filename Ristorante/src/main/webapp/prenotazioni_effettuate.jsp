@@ -16,7 +16,7 @@
 		<img src="sources/frecciasinistra.png" alt="Icona" width="30" height="30" class="logo">
 	</a>
 </div>
-<h1>HEADER</h1>
+
 </body>
 
 </html>

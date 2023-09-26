@@ -24,7 +24,7 @@ public class Tavolo {
 		this.id_tavolo = id_tavolo;
 	}
 
-	public int getId_camerie() {
+	public Integer getId_camerie() {
 		return id_camerie;
 	}
 

@@ -58,7 +58,6 @@
   }
   
   
-  
   .table #chiudi-ordine{
     font-size: 30px;
     color: #818181;
@@ -66,7 +65,13 @@
     
   }
   
-  .table #visualizza-ordine {
+  .table #visualizza-ordine{
+  	text-decoration: none;
+  	font-weight: bold;
+  	color: red;
+  }
+  
+  .table #prendi-in-carico{
   	text-decoration: none;
   	font-weight: bold;
   	color: red;

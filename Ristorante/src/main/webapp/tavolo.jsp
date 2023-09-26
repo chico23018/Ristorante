@@ -21,6 +21,7 @@
 	List<Map<String, String>> resultList = (List<Map<String, String>>) request.getAttribute("resultList");
 	double costo_totale = (double) request.getAttribute("totale");
 	String id_pagamento = (String) request.getAttribute("id_pagamento");
+	String id_cameriere = (String) request.getAttribute("id_cameriere");
 	%>
 
 	<!--  navbar  -->
@@ -50,6 +51,7 @@
 				<tr>
 					<th>Tavolo no.</th>
 					<th>Prenotazione</th>
+					<th>Gestito</th>
 					<th>Ordine</th>
 					<th>Totale</th>
 				</tr>
@@ -58,9 +60,12 @@
 					<%if(cliente.getCognome_cliente() == null)
 						cliente.setCognome_cliente("Non riservato");%>
 					<td><%=cliente.getCognome_cliente()%></td>
-					<td>
-						<a href="#" id="visualizza-ordine">Visualizza ordine</a>
-					</td>
+					<%if(id_cameriere.equals("Prendi in carico")){%>
+					<td><a href="#" id="prendi-in-carico">Prendi in carico</a></td>
+					<%}else{%>
+					<td><%=id_cameriere%></td>
+					<%}%>
+					<td><a href="#" id="visualizza-ordine">Visualizza ordine</a></td>
 					<td><%=costo_totale%></td>
 				</tr>
 			</table>

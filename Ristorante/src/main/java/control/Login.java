@@ -15,14 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.coyote.http11.upgrade.UpgradeServletOutputStream;
-
+import metodi.CameriereDao;
 import metodi.ClienteDao;
 import metodi.LoginDao;
 import metodi.Query;
 import metodi.TavoloDao;
-import model.Amministratore;
 import model.Cameriere;
+import model.Tavolo;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
@@ -36,12 +35,14 @@ public class Login extends HttpServlet {
 		RequestDispatcher rd = null;
 		ClienteDao cli = new ClienteDao();
 		List<Map<String, String>> resultList = new ArrayList<>();
-		String totale = "", id_pagamento ="";
+		String totale = "", id_pagamento ="", id_cameriere ="";
 		String id_tavolo = request.getParameter("id");
+		TavoloDao table = new TavoloDao();
+		CameriereDao waiter = new CameriereDao();
 		
 		if(id_tavolo!=null) {
 			
-			// Execute query
+			// Lista ordine
 			ResultSet rs = query.getResult("SELECT p.nome, p.descrizione, ordine.stato, COUNT(*) as amount, p.costo*COUNT(*) as totale\n"
 					+ "FROM tavolo\n"
 					+ "INNER JOIN ordine ON tavolo.id = ordine.id_tavolo\n"
@@ -49,6 +50,7 @@ public class Login extends HttpServlet {
 					+ "WHERE tavolo.id ='"+id_tavolo+"'\n"
 					+ "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato;");
 			
+			// Costo totale e id pagamento
 			ResultSet rs_2 = query.getResult("SELECT costo_totale, id\n"
 					+ "FROM pagamento\n"
 					+ "WHERE id_tavolo ='"+id_tavolo+"'\n");
@@ -76,12 +78,19 @@ public class Login extends HttpServlet {
 			}
 					
 			Integer n_tavolo = Integer.parseInt(id_tavolo);
+			Integer cam = table.cerca(n_tavolo).getId_camerie();
+			if(cam == 0)
+				id_cameriere = "Prendi in carico";
+			else
+				id_cameriere = waiter.cerca(cam).getCognome();
+		
 			Double costo_totale = (totale.equals("")) ? 0.0 : Double.parseDouble(totale);
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.setAttribute("n_tavolo", n_tavolo);
 			request.setAttribute("resultList", resultList);
 			request.setAttribute("id_pagamento", id_pagamento);
 			request.setAttribute("totale", costo_totale);
+			request.setAttribute("id_cameriere", id_cameriere);
 			
 			rd = request.getRequestDispatcher("tavolo.jsp");
 			rd.forward(request, response);
@@ -98,15 +107,7 @@ public class Login extends HttpServlet {
 		String username = request.getParameter("user");
 		String password = request.getParameter("password");
 
-		if (dao.amministratore(username, password) != null) 
-		{
-			Amministratore m = dao.amministratore(username, password);
-			request.setAttribute("nome", m.getNome());
-			request.setAttribute("cognome", m.getCognome());
-			rd = request.getRequestDispatcher("amministratore.jsp");
-			rd.forward(request, response);
-		} 
-		else if (dao.cameriere(username, password) != null) 
+		if (dao.cameriere(username, password) != null) 
 		{
 			Cameriere cam = dao.cameriere(username, password);
 			TavoloDao daoT = new TavoloDao();
