@@ -25,30 +25,35 @@
 	</div>
 
 
-		<table class="table" id="ordine">
-			<tr>
-				<th>Numero</th>
-				<th>Nome</th>
-				<th>Prezzo</th>
-				<th>Descrizione</th>
-				<th>aggiungi</th>
-			</tr>
-			<%
-			for (Piatto p : lista_piatti) {
-			%>
-			<tr>
-				<td><%=p.getId_piatto()%></td>
-				<td><%=p.getNome_piatto()%></td>
-				<td>&euro;<%=p.getCosto()%></td>
-				<td><%=p.getDescrizione()%></td>
-				<td><input type="submit" value="aggiungi"/> </td>
-			</tr>
-			<%
-			}
-			%>
-		</table>
-	
+	<table class="table" id="ordine">
+		<tr>
+			<th>Numero</th>
+			<th>Nome</th>
+			<th>Prezzo</th>
+			<th>Descrizione</th>
+			<th>aggiungi</th>
+		</tr>
+		<%
+		for (Piatto p : lista_piatti) {
+		%>
+		<tr>
+			<td><%=p.getId_piatto()%></td>
+			<td><%=p.getNome_piatto()%></td>
+			<td>&euro;<%=p.getCosto()%></td>
+			<td><%=p.getDescrizione()%></td>
+			<td><input type="button" value="Aggiungi" class="button" onclick="aggiungiPiatto('<%=p.getNome_piatto()%>', <%=p.getCosto()%>)" /></td>
+		</tr>
+		<%
+		}
+		%>
+	</table >
 
+	<h2>Ordini Aggiunti</h2>
+	<table id="ordiniAggiunti" class="table" >
+		<!-- Qui verranno visualizzati i dati aggiunti tramite JavaScript -->
+	</table>
+	<button id="inviaOrdiniButton" class="button" onclick="inviaOrdini()">Invia Ordini</button>
+ <script src="js/aggiungiordine.js"></script>
 </body>
 
 </html>
