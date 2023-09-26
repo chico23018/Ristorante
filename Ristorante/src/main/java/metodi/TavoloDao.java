@@ -27,7 +27,7 @@ public class TavoloDao {
 	}
 
 	public void modifica(Tavolo tavolo) {
-		String query = "UPDATE tavalo SET id_cameriere = ?, num_posti = ? WHERE id ='" + tavolo.getId_tavolo() + "'";
+		String query = "UPDATE tavolo SET id_cameriere = ?, num_posti = ? WHERE id ='" + tavolo.getId_tavolo() + "'";
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);

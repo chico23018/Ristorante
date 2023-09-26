@@ -81,11 +81,11 @@ public class Login extends HttpServlet {
 			Integer n_tavolo = Integer.parseInt(id_tavolo);
 			Integer cam = table.cerca(n_tavolo).getId_camerie();
 			
-			if(cam == 0)
-				cognome = "Prendi in carico";
-			else
+			if(cam == 0) {
+				cognome = "Prendi in carico";}
+			else {
 				cognome = waiter.cerca(cam).getCognome();
-		
+			}
 			Double costo_totale = (totale.equals("")) ? 0.0 : Double.parseDouble(totale);
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.setAttribute("n_tavolo", n_tavolo);
@@ -93,7 +93,7 @@ public class Login extends HttpServlet {
 			request.setAttribute("id_pagamento", id_pagamento);
 			request.setAttribute("totale", costo_totale);
 			request.setAttribute("cognome", cognome);
-			request.setAttribute("id_cameriere", id_cameriere);
+			request.setAttribute("idCameriere", id_cameriere);
 			
 			rd = request.getRequestDispatcher("tavolo.jsp");
 			rd.forward(request, response);
@@ -117,8 +117,7 @@ public class Login extends HttpServlet {
 			request.getSession().setAttribute("list", daoT.lista());
 			request.getSession().setAttribute("nome", cam.getNome());
 			request.getSession().setAttribute("cognome", cam.getCognome());
-			request.setAttribute("id_cameriere", cam.getId_cameriere());
-			System.out.println(cam.getId_cameriere());
+			request.getSession().setAttribute("id_cameriere", cam.getId_cameriere());
 			rd = request.getRequestDispatcher("cameriere.jsp");
 			
 			rd.forward(request, response);

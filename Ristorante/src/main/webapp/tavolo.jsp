@@ -22,7 +22,7 @@
 	double costo_totale = (double) request.getAttribute("totale");
 	String id_pagamento = (String) request.getAttribute("id_pagamento");
 	String cognome = (String) request.getAttribute("cognome");
-	String id_cameriere = (String) request.getAttribute("id_cameriere");
+	String id_cameriere = (String) request.getAttribute("idCameriere");
 	%>
 
 	<!--  navbar  -->
@@ -36,7 +36,7 @@
 			<div id="myNav" class="overlay">
 				<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 				<div class="ContenutoMenu">
-					<a href="#">Aggiungi Tavolo</a> 
+				    <a href="prenotazioni_effettuate.jsp">Prenotazioni effettuate</a> 
 					<a href="logout.jsp">Logout</a>
 				</div>
 				<div id="blocco" class="blocco"></div>
@@ -59,9 +59,11 @@
 				<tr>
 					<td><%=n_tavolo%></td>
 					<%if(cliente.getCognome_cliente() == null)
-						cliente.setCognome_cliente("Non riservato");%>
+						cliente.setCognome_cliente("Non riservato");
+						%>
 					<td><%=cliente.getCognome_cliente()%></td>
-					<%if(cognome.equals("Prendi in carico")){%>
+					
+					<%if(cognome.equals("Prendi in carico")&&cliente.getCognome_cliente()!= null){%>
 					<td><a href="assegna?id_cameriere=<%=id_cameriere%>&id_tavolo=<%=n_tavolo%>" id="prendi-in-carico">Prendi in carico</a></td>
 					<%}else{%>
 					<td><%=cognome%></td>
