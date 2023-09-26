@@ -49,16 +49,10 @@ public class Prenota extends HttpServlet {
 
 		String esito = cl.inserire(new Cliente(0, nome, cognome, id_tavolo));
 		if (esito.equals("SUCCESS")) {
-			// Memorizza temporaneamente i dati in sessione
 			request.getSession().setAttribute("esito", esito);
-
-			// Esegue il reindirizzamento a una pagina di conferma
 			response.sendRedirect("index.jsp");
-			} else {
-			// In caso di errore, reindirizza a una pagina di errore
-			
+		} else {
 			response.sendRedirect("prenotazione.jsp");
-			
 		}
 	}
 

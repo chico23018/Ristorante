@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
 		RequestDispatcher rd = null;
 		ClienteDao cli = new ClienteDao();
 		List<Map<String, String>> resultList = new ArrayList<>();
-		String totale = "";
+		String totale = "", id_pagamento ="";
 		String id_tavolo = request.getParameter("id");
 		
 		if(id_tavolo!=null) {
@@ -49,14 +49,17 @@ public class Login extends HttpServlet {
 					+ "WHERE tavolo.id ='"+id_tavolo+"'\n"
 					+ "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato;");
 			
-			ResultSet rs_2 = query.getResult("SELECT costo_totale\n"
+			ResultSet rs_2 = query.getResult("SELECT costo_totale, id\n"
 					+ "FROM pagamento\n"
 					+ "WHERE id_tavolo ='"+id_tavolo+"'\n");
 			
 			try {
 				
 				if (rs_2.next()) 
+				{
+					id_pagamento = rs_2.getString("id");
 					totale = rs_2.getString("costo_totale");
+				}
 				
 				while (rs.next()) {
 					Map<String, String> map = new HashMap<>();
@@ -77,6 +80,7 @@ public class Login extends HttpServlet {
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.setAttribute("n_tavolo", n_tavolo);
 			request.setAttribute("resultList", resultList);
+			request.setAttribute("id_pagamento", id_pagamento);
 			request.setAttribute("totale", costo_totale);
 			
 			rd = request.getRequestDispatcher("tavolo.jsp");
@@ -106,11 +110,10 @@ public class Login extends HttpServlet {
 		{
 			Cameriere cam = dao.cameriere(username, password);
 			TavoloDao daoT = new TavoloDao();
-			request.setAttribute("list", daoT.lista());
-			request.setAttribute("nome", cam.getNome());
-			request.setAttribute("cognome", cam.getCognome());
-
-			rd = request.getRequestDispatcher("/cameriere.jsp");
+			request.getSession().setAttribute("list", daoT.lista());
+			request.getSession().setAttribute("nome", cam.getNome());
+			request.getSession().setAttribute("cognome", cam.getCognome());
+			rd = request.getRequestDispatcher("cameriere.jsp");
 			rd.forward(request, response);
 		}
 		else

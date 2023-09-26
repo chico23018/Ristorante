@@ -20,6 +20,7 @@
 	int n_tavolo = (int) request.getAttribute("n_tavolo");
 	List<Map<String, String>> resultList = (List<Map<String, String>>) request.getAttribute("resultList");
 	double costo_totale = (double) request.getAttribute("totale");
+	String id_pagamento = (String) request.getAttribute("id_pagamento");
 	%>
 
 	<!--  navbar  -->
@@ -42,8 +43,8 @@
 
 	<!--  form  -->
 
-	<form>
-		
+	<form action="Pagamento" method="post">
+		<div class="divisore">
 			<table class="table">
 				<tr>
 					<th>Tavolo no.</th>
@@ -53,6 +54,8 @@
 				</tr>
 				<tr>
 					<td><%=n_tavolo%></td>
+					<%if(cliente.getCognome_cliente() == null)
+						cliente.setCognome_cliente("Non riservato");%>
 					<td><%=cliente.getCognome_cliente()%></td>
 					<td>
 						<a href="#" id="visualizza-ordine">Visualizza ordine</a>
@@ -60,9 +63,10 @@
 					<td><%=costo_totale%></td>
 				</tr>
 			</table>
-		
+		</div>
 		<br>
-		<a href="" class="button">Paga ora</a>
+		<input type="hidden" name="id" value="<%=id_pagamento%>"> 
+		<button type="submit" class="button">Paga ora</button>
 	</form>
 	
 	<!--  tabella ordini  -->

@@ -32,7 +32,7 @@ public class PagamentoDao {
 
 	public void modifica(Pagamento pag) {
 
-		String query = "UPDATE pagamento SET  costo_totale = ?, stato = ?, data = ? WHERE id_pagamento ='"
+		String query = "UPDATE pagamento SET  costo_totale = ?, stato = ?, data = ? WHERE id ='"
 				+ pag.getId_pagamento() + "'";
 		try {
 			con = Connessione.getInstance().getConnection();

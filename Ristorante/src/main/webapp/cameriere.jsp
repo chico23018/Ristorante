@@ -15,9 +15,9 @@
 
 <body>
 	<%
-	String nome = (String) request.getAttribute("nome");
-	String cognome = (String) request.getAttribute("cognome");
-	List<Tavolo> list = (List<Tavolo>) request.getAttribute("list");
+	String nome = (String) session.getAttribute("nome");
+	String cognome = (String) session.getAttribute("cognome");
+	List<Tavolo> list = (List<Tavolo>) session.getAttribute("list");
 	%>
 	<header>
 		<span onclick="openMenu()" class="menu">&#9776;</span>
