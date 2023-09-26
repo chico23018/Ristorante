@@ -16,6 +16,7 @@
 <body>
 	<%
 	String nome = (String) session.getAttribute("nome");
+	String id_cameriere = (String) request.getAttribute("id_cameriere");
 	String cognome = (String) session.getAttribute("cognome");
 	List<Tavolo> list = (List<Tavolo>) session.getAttribute("list");
 	%>
@@ -38,7 +39,7 @@
 	for (Tavolo ta : list) {
 	%>
 	<div class="tavolo">
-		<a href="login?id=<%=ta.getId_tavolo()%>"> Tavolo <%=ta.getId_tavolo()%>
+		<a href="login?id=<%=ta.getId_tavolo()%>&id_cameriere=<%=id_cameriere%>"> Tavolo <%=ta.getId_tavolo()%>
 		</a>
 	</div>
 	<%

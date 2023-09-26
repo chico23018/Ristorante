@@ -35,8 +35,9 @@ public class Login extends HttpServlet {
 		RequestDispatcher rd = null;
 		ClienteDao cli = new ClienteDao();
 		List<Map<String, String>> resultList = new ArrayList<>();
-		String totale = "", id_pagamento ="", id_cameriere ="";
+		String totale = "", id_pagamento ="", cognome ="";
 		String id_tavolo = request.getParameter("id");
+		String id_cameriere = request.getParameter("id_cameriere");
 		TavoloDao table = new TavoloDao();
 		CameriereDao waiter = new CameriereDao();
 		
@@ -79,10 +80,11 @@ public class Login extends HttpServlet {
 					
 			Integer n_tavolo = Integer.parseInt(id_tavolo);
 			Integer cam = table.cerca(n_tavolo).getId_camerie();
+			
 			if(cam == 0)
-				id_cameriere = "Prendi in carico";
+				cognome = "Prendi in carico";
 			else
-				id_cameriere = waiter.cerca(cam).getCognome();
+				cognome = waiter.cerca(cam).getCognome();
 		
 			Double costo_totale = (totale.equals("")) ? 0.0 : Double.parseDouble(totale);
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
@@ -90,6 +92,7 @@ public class Login extends HttpServlet {
 			request.setAttribute("resultList", resultList);
 			request.setAttribute("id_pagamento", id_pagamento);
 			request.setAttribute("totale", costo_totale);
+			request.setAttribute("cognome", cognome);
 			request.setAttribute("id_cameriere", id_cameriere);
 			
 			rd = request.getRequestDispatcher("tavolo.jsp");
@@ -114,7 +117,10 @@ public class Login extends HttpServlet {
 			request.getSession().setAttribute("list", daoT.lista());
 			request.getSession().setAttribute("nome", cam.getNome());
 			request.getSession().setAttribute("cognome", cam.getCognome());
+			request.setAttribute("id_cameriere", cam.getId_cameriere());
+			System.out.println(cam.getId_cameriere());
 			rd = request.getRequestDispatcher("cameriere.jsp");
+			
 			rd.forward(request, response);
 		}
 		else
