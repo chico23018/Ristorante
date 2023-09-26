@@ -1,1 +1,2 @@
 1) Aggiungere un ordine
+2) Assegnare un cameriere
