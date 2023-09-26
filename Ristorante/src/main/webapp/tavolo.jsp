@@ -34,7 +34,8 @@
 			<div id="myNav" class="overlay">
 				<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 				<div class="ContenutoMenu">
-					<a href="#">Aggiungi Tavolo</a> <a href="logout.jsp">Logout</a>
+					<a href="#">Aggiungi Tavolo</a> 
+					<a href="logout.jsp">Logout</a>
 				</div>
 				<div id="blocco" class="blocco"></div>
 			</div>

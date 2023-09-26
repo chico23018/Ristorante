@@ -24,7 +24,7 @@
 		<div id="myNav" class="overlay">
 			<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 			<div class="ContenutoMenu">
-				</a><a href="#">Aggiungi Tavolo</a> 
+					<a href="prenotazioni_effettuate.jsp">Prenotazioni effettuate</a> 
 	   		        <a href="logout.jsp">logout</a>
 			</div>
 			<div id="blocco" class="blocco"></div>
@@ -47,11 +47,5 @@
 
 	<script src="js/menu.js"></script>
 </body>
-<!-- 
-Aggiungere un ordine 
-Vedere lo stato di un tavolo
-Vedere lo stato di un pagamento
-
- -->
 
 </html>
