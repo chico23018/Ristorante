@@ -24,7 +24,7 @@ public class Connessione {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ristorante", connectionProps);
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/ristorante", connectionProps);
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

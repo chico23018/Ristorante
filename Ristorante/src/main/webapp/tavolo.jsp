@@ -43,7 +43,7 @@
 	<!--  form  -->
 
 	<form>
-		<div class="divisore">
+		
 			<table class="table">
 				<tr>
 					<th>Tavolo no.</th>
@@ -60,17 +60,21 @@
 					<td><%=costo_totale%></td>
 				</tr>
 			</table>
-		</div>
+		
 		<br>
 		<a href="" class="button">Paga ora</a>
 	</form>
 	
 	<!--  tabella ordini  -->
 	
+	
+	
 	<table class="table" id="tabella-ordine" style="display: none;">
-		<tr>
-			<td colspan="4" style="text-align: right;">
+		<tr >
+			<td colspan="5" style="text-align: right;">
+				
 				<a href="#" id="chiudi-ordine">&times;</a>
+				
 			</td>
 		</tr>
 		<tr>
@@ -95,6 +99,7 @@
 		%>
 		
 	</table>
+
 
 	<script src="js/menu.js"></script>
 	<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>

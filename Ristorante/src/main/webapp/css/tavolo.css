@@ -32,15 +32,15 @@
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff; /* Colore di sfondo */
-    color: #fff; /* Colore del testo */
-    text-decoration: none; 
-    border-radius: 15px; 
-    font-size: 14px; /* Dimensione del testo */
-    border: none; 
-    cursor: pointer; 
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
     position: absolute;
-  right: 195px;
+    right: 15%;
   }
 
 .button:hover {
@@ -57,10 +57,13 @@
     overflow: hidden;
   }
   
+  
+  
   .table #chiudi-ordine{
     font-size: 30px;
     color: #818181;
     text-decoration: none;
+    
   }
   
   .table #visualizza-ordine {
@@ -119,4 +122,6 @@
       display: none;
     }
   }
+
+
 
