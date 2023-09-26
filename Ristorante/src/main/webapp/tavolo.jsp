@@ -36,7 +36,7 @@
 			<div id="myNav" class="overlay">
 				<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 				<div class="ContenutoMenu">
-				    <a href="prenotazioni_effettuate.jsp">Prenotazioni effettuate</a> 
+				    <a href="Ordina">Aggiungi un ordine</a> 
 					<a href="logout.jsp">Logout</a>
 				</div>
 				<div id="blocco" class="blocco"></div>
