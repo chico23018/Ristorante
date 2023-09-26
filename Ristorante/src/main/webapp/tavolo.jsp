@@ -65,20 +65,24 @@
 					<%}else{%>
 					<td><%=id_cameriere%></td>
 					<%}%>
+					<%if(!resultList.isEmpty()){%>
 					<td><a href="#" id="visualizza-ordine">Visualizza ordine</a></td>
+					<%}else{%>
+					<td>Nessun ordine</td>
+					<%}%>
 					<td><%=costo_totale%></td>
 				</tr>
 			</table>
 		</div>
 		<br>
 		<input type="hidden" name="id" value="<%=id_pagamento%>"> 
+		<%if(!resultList.isEmpty()){%>
 		<button type="submit" class="button">Paga ora</button>
+		<%}%>
 	</form>
 	
 	<!--  tabella ordini  -->
-	
-	
-	
+		
 	<table class="table" id="tabella-ordine" style="display: none;">
 		<tr >
 			<td colspan="5" style="text-align: right;">
