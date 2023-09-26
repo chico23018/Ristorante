@@ -18,34 +18,6 @@ USE `ristorante`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `amministratore`
---
-
-DROP TABLE IF EXISTS `amministratore`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `amministratore` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(10) NOT NULL,
-  `cognome` varchar(10) NOT NULL,
-  `username` varchar(15) NOT NULL,
-  `password` varchar(15) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `amministratore`
---
-
-LOCK TABLES `amministratore` WRITE;
-/*!40000 ALTER TABLE `amministratore` DISABLE KEYS */;
-INSERT INTO `amministratore` VALUES (1,'Mario','Rossi','mario.rossi','mario.rossi'),(2,'Luca','Bianchi','luca.bianchi','luca.bianchi'),(3,'Giulia','Verdi','giulia.verdi','giulia.verdi'),(4,'Paolo','Neri','paolo.neri','paolo.neri'),(5,'Anna','Gialli','anna.gialli','anna.gialli');
-/*!40000 ALTER TABLE `amministratore` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `cameriere`
 --
 
@@ -87,7 +59,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_tavolo_idx` (`id_tavolo`),
   CONSTRAINT `id_tavolo_cliente` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +68,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (31,'Cliente1','Rossi',1),(32,'Cliente2','Bianchi',NULL),(33,'Cliente3','Verdi',3),(34,'Cliente4','Neri',4),(35,'Cliente5','Gialli',5);
+INSERT INTO `cliente` VALUES (31,'Mario','Brizzini',1),(33,'Giuseppe','Trovato',3),(34,'Carlo','Boldi',4),(70,'Mario','Lopez',5);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -178,7 +150,7 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
-INSERT INTO `ordine` VALUES (1,1,1,'in preparazione'),(3,3,2,'consegnato'),(4,4,4,'in preparazione'),(5,5,5,'in preparazione'),(6,1,1,'in preparazione'),(7,4,3,'consegnato'),(8,4,3,'consegnato'),(9,5,3,'consegnato'),(10,5,3,'consegnato'),(11,5,3,'consegnato'),(13,3,4,'in preparazione'),(14,1,2,'consegnato'),(15,4,5,'in preparazione'),(17,3,1,'in preparazione'),(18,1,4,'in preparazione'),(19,5,2,'in preparazione'),(20,4,1,'consegnato'),(21,5,4,'consegnato'),(22,2,1,'in preparazione');
+INSERT INTO `ordine` VALUES (1,1,1,'in preparazione'),(3,3,2,'consegnato'),(4,4,4,'in preparazione'),(6,1,1,'in preparazione'),(7,4,3,'consegnato'),(8,4,3,'consegnato'),(13,3,4,'in preparazione'),(14,1,2,'consegnato'),(15,4,5,'in preparazione'),(17,3,1,'in preparazione'),(18,1,4,'in preparazione'),(20,4,1,'consegnato');
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -286,7 +258,7 @@ CREATE TABLE `pagamento` (
   `data` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_ordine_idx` (`id_tavolo`),
-  CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
+  CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -296,7 +268,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (1,1,35.5,'non pagato','2023-09-23'),(3,3,28,'non pagato','2023-09-23'),(4,4,31,'non pagato','2023-09-23'),(5,5,38,'non pagato','2023-09-23'),(19,2,7.5,'non pagato','2023-09-25');
+INSERT INTO `pagamento` VALUES (1,1,35.5,'non pagato','2023-09-23'),(3,3,28,'non pagato','2023-09-23'),(4,4,31,'non pagato','2023-09-23'),(5,5,0,'pagato','2023-09-23');
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -314,8 +286,7 @@ DELIMITER ;;
     SET tavolo.stato = 'libero'
     WHERE tavolo.id = NEW.id_tavolo;
     
-    UPDATE cliente
-    SET cliente.id_tavolo = null
+    DELETE FROM cliente
     WHERE cliente.id_tavolo = NEW.id_tavolo;
     
 	UPDATE tavolo
@@ -373,8 +344,8 @@ CREATE TABLE `tavolo` (
   `stato` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cameriere_idx` (`id_cameriere`),
-  CONSTRAINT `id_cameriere` FOREIGN KEY (`id_cameriere`) REFERENCES `cameriere` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `id_cameriere` FOREIGN KEY (`id_cameriere`) REFERENCES `cameriere` (`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,26 +354,9 @@ CREATE TABLE `tavolo` (
 
 LOCK TABLES `tavolo` WRITE;
 /*!40000 ALTER TABLE `tavolo` DISABLE KEYS */;
-INSERT INTO `tavolo` VALUES (1,1,4,'occupato'),(2,NULL,2,'libero'),(3,3,6,'occupato'),(4,1,4,'occupato'),(5,4,3,'occupato');
+INSERT INTO `tavolo` VALUES (1,1,4,'occupato'),(2,NULL,2,'libero'),(3,3,6,'occupato'),(4,1,4,'occupato'),(5,NULL,3,'occupato'),(6,NULL,5,'libero');
 /*!40000 ALTER TABLE `tavolo` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tavolo_BEFORE_INSERT` BEFORE INSERT ON `tavolo` FOR EACH ROW BEGIN
-
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Dumping events for database 'ristorante'
@@ -421,4 +375,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-25 10:49:39
+-- Dump completed on 2023-09-26 11:40:14
