@@ -36,7 +36,9 @@
 			<div id="myNav" class="overlay">
 				<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 				<div class="ContenutoMenu">
+					<%if(!cognome.equals("Prendi in carico")){%>
 				    <a href="Ordina">Aggiungi un ordine</a> 
+				    <%}%>
 					<a href="logout.jsp">Logout</a>
 				</div>
 				<div id="blocco" class="blocco"></div>
@@ -63,8 +65,10 @@
 					%>
 					<td><%=cliente.getCognome_cliente()%></td>
 					
-					<%if(cognome.equals("Prendi in carico")&& !cliente.getCognome_cliente().equals("Non riservato")){%>
-					<td><a href="assegna?id_cameriere=<%=id_cameriere%>&id_tavolo=<%=n_tavolo%>" id="prendi-in-carico">Prendi in carico</a></td>
+					<%if(cognome.equals("Prendi in carico")&& 
+						!cliente.getCognome_cliente().equals("Non riservato")){%>
+					<td><a href="assegna?id_cameriere=<%=id_cameriere%>&id_tavolo=<%=n_tavolo%>" 
+					id="prendi-in-carico">Prendi in carico</a></td>
 					<%}else if(cognome.equals("Prendi in carico")){%>
 					<td>Non gestito</td>
 					<%}else{%>
