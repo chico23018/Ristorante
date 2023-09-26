@@ -60,11 +60,13 @@
 					<td><%=n_tavolo%></td>
 					<%if(cliente.getCognome_cliente() == null)
 						cliente.setCognome_cliente("Non riservato");
-						%>
+					%>
 					<td><%=cliente.getCognome_cliente()%></td>
 					
-					<%if(cognome.equals("Prendi in carico")&&cliente.getCognome_cliente()!= null){%>
+					<%if(cognome.equals("Prendi in carico")&& !cliente.getCognome_cliente().equals("Non riservato")){%>
 					<td><a href="assegna?id_cameriere=<%=id_cameriere%>&id_tavolo=<%=n_tavolo%>" id="prendi-in-carico">Prendi in carico</a></td>
+					<%}else if(cognome.equals("Prendi in carico")){%>
+					<td>Non gestito</td>
 					<%}else{%>
 					<td><%=cognome%></td>
 					<%}%>
