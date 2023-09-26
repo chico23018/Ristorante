@@ -31,6 +31,7 @@
 				<th>Nome</th>
 				<th>Prezzo</th>
 				<th>Descrizione</th>
+				<th>aggiungi</th>
 			</tr>
 			<%
 			for (Piatto p : lista_piatti) {
@@ -40,6 +41,7 @@
 				<td><%=p.getNome_piatto()%></td>
 				<td>&euro;<%=p.getCosto()%></td>
 				<td><%=p.getDescrizione()%></td>
+				<td><input type="submit" value="aggiungi"/> </td>
 			</tr>
 			<%
 			}
