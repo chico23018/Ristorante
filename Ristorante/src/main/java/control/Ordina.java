@@ -29,15 +29,22 @@ public class Ordina extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id =request.getParameter("id_tavolo");
+		String tipo =request.getParameter("tipo");
 		PiattoDao pd = new PiattoDao();
 		RequestDispatcher rd = null;
 		if(id!=null) {
 		request.setAttribute("id_tavolo", id);	
 		}
 		request.getSession().setAttribute("lista_piatti", pd.lista());
-		
-		rd = request.getRequestDispatcher("ordine.jsp");
-		rd.forward(request, response);
+		if(tipo!=null) {
+		if(tipo.equals("cibo")) {
+			rd = request.getRequestDispatcher("cibo.jsp");
+			rd.forward(request, response);
+		}else {
+			rd = request.getRequestDispatcher("bevanda.jsp");
+			rd.forward(request, response);
+		}
+		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

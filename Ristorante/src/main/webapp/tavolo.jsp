@@ -37,7 +37,8 @@
 				<a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 				<div class="ContenutoMenu">
 					<%if(!cognome.equals("Prendi in carico")){%>
-				    <a href="Ordina?id_tavolo=<%=n_tavolo%>">Aggiungi un ordine</a> 
+				    <a href="Ordina?tipo=cibo&id_tavolo=<%=n_tavolo%>">Aggiungi Cibo</a> 
+				     <a href="Ordina?tipo=bevanda&id_tavolo=<%=n_tavolo%>">Aggiungi Bevanda</a> 
 				    <%}%>
 					<a href="logout.jsp">Logout</a>
 				</div>
