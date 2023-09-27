@@ -39,10 +39,9 @@
 	for (Tavolo ta : list) {
 	%>
 	<div class="tavolo">
-		<a href="login?id=<%=ta.getId_tavolo()%>&id_cameriere=<%=id_cameriere%>">
-		 Tavolo <%=ta.getId_tavolo()%> <br>  
-		<%=ta.getStato()%>
-		</a>
+		<a href="login?id=<%=ta.getId_tavolo()%>&id_cameriere=<%=id_cameriere%>"> Tavolo <%=ta.getId_tavolo()%>
+        	<div class="stato"><%=ta.getStato()%></div>
+        </a>
 	
 	</div>
 	<%
