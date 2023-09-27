@@ -6,13 +6,15 @@ public class Piatto {
 	private float costo;
 	private String descrizione;
 	private String tipo;
+	private String immagine;
 
-	public Piatto(int id, String n, float c, String descrizione, String tipo) {
+	public Piatto(int id, String n, float c, String descrizione, String tipo,String im) {
 		this.id_piatto = id;
 		this.nome_piatto = n;
 		this.costo = c;
 		this.descrizione = descrizione;
 		this.tipo = tipo;
+		this.immagine = im;
 	}
 
 	public Piatto() {
@@ -62,6 +64,14 @@ public class Piatto {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
 	}
 	
 

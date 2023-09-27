@@ -14,7 +14,7 @@ public class PiattoDao {
 	private Connection con = null;
 
 	public void inserire(Piatto piatto) {
-		String query = "INSERT INTO piatto( nome, costo, descrizione, tipo) values(?,?,?,?)";
+		String query = "INSERT INTO piatto( nome, costo, descrizione, tipo,immagine) values(?,?,?,?,?)";
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
@@ -22,6 +22,7 @@ public class PiattoDao {
 			pst.setDouble(2, piatto.getCosto());
 			pst.setString(3, piatto.getDescrizione());
 			pst.setString(4, piatto.getTipo());
+			pst.setString(5, piatto.getImmagine());
 			
 			pst.executeUpdate();
 		} catch (SQLException | ClassNotFoundException e) {
@@ -31,7 +32,7 @@ public class PiattoDao {
 	}
 
 	public void modifica(Piatto piatto) {
-		String query = "UPDATE piatto SET nome = ?, costo = ?, descrizione = ?, tipo = ? WHERE id ='"
+		String query = "UPDATE piatto SET nome = ?, costo = ?, descrizione = ?, tipo = ?, immagine = ? WHERE id ='"
 				+ piatto.getId_piatto() + "'";
 		try {
 			con = Connessione.getInstance().getConnection();
@@ -40,6 +41,7 @@ public class PiattoDao {
 			pst.setDouble(2, piatto.getCosto());
 			pst.setString(3, piatto.getDescrizione());
 			pst.setString(4, piatto.getTipo());
+			pst.setString(5, piatto.getImmagine());
 			
 			pst.executeUpdate();
 		} catch (SQLException | ClassNotFoundException e) {
@@ -67,7 +69,7 @@ public class PiattoDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			while (rst.next()) {
-				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getFloat(3),rst.getString(4), rst.getString(5));
+				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getFloat(3),rst.getString(4), rst.getString(5),rst.getString(6));
 				
 				
 				list.add(piatto);
@@ -86,7 +88,7 @@ public class PiattoDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			rst.next();
-			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getFloat(3),rst.getString(4), rst.getString(5));
+			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getFloat(3),rst.getString(4), rst.getString(5),rst.getString(6));
 			
 
 		} catch (SQLException | ClassNotFoundException e) {

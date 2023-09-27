@@ -41,7 +41,7 @@
 			%>
 			<!-- Item -->
 			<div class="menu-item">
-				<img src="source/margherita.png" alt="Black Placeholder Image"
+				<img src="sources/<%=p.getImmagine()%>.png" alt="Black Placeholder Image"
 					class="menu-item-img" />
 				<div class="menu-item-text">
 					<h3 class="menu-item-heading">
