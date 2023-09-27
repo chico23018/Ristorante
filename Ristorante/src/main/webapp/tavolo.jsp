@@ -50,7 +50,7 @@
 
 	<form action="Pagamento" method="post">
 		<div class="divisore">
-			<table class="table">
+			<table class="table" id="menu">
 				<tr>
 					<th>Tavolo no.</th>
 					<th>Prenotazione</th>
