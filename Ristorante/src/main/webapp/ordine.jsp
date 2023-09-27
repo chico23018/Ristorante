@@ -19,7 +19,7 @@
 	String id_tavolo = (String) request.getAttribute("id_tavolo");
 	%>
 	<div class="freccia">
-		<a href="javascript: window.history.go(-1)"> <img
+		<a href="javascript: window.history.go(-2)"> <img
 			src="sources/frecciasinistra.png" alt="Icona" width="30" height="30"
 			class="logo">
 		</a>
