@@ -14,13 +14,14 @@ public class PiattoDao {
 	private Connection con = null;
 
 	public void inserire(Piatto piatto) {
-		String query = "INSERT INTO piatto( nome, costo, descrizione) values(?,?,?)";
+		String query = "INSERT INTO piatto( nome, costo, descrizione, tipo) values(?,?,?,?)";
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
 			pst.setString(1, piatto.getNome_piatto());
 			pst.setDouble(2, piatto.getCosto());
 			pst.setString(3, piatto.getDescrizione());
+			pst.setString(4, piatto.getTipo());
 			
 			pst.executeUpdate();
 		} catch (SQLException | ClassNotFoundException e) {
@@ -30,7 +31,7 @@ public class PiattoDao {
 	}
 
 	public void modifica(Piatto piatto) {
-		String query = "UPDATE piatto SET nome = ?, costo = ?, descrizione = ? WHERE id ='"
+		String query = "UPDATE piatto SET nome = ?, costo = ?, descrizione = ?, tipo = ? WHERE id ='"
 				+ piatto.getId_piatto() + "'";
 		try {
 			con = Connessione.getInstance().getConnection();
@@ -38,6 +39,7 @@ public class PiattoDao {
 			pst.setString(1, piatto.getNome_piatto());
 			pst.setDouble(2, piatto.getCosto());
 			pst.setString(3, piatto.getDescrizione());
+			pst.setString(4, piatto.getTipo());
 			
 			pst.executeUpdate();
 		} catch (SQLException | ClassNotFoundException e) {
@@ -65,7 +67,7 @@ public class PiattoDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			while (rst.next()) {
-				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getDouble(3),rst.getString(4));
+				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getDouble(3),rst.getString(4), rst.getString(5));
 				
 				
 				list.add(piatto);
@@ -84,7 +86,7 @@ public class PiattoDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			rst.next();
-			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getDouble(3),rst.getString(4));
+			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getDouble(3),rst.getString(4), rst.getString(5));
 			
 
 		} catch (SQLException | ClassNotFoundException e) {

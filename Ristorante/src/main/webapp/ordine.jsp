@@ -27,9 +27,11 @@
 	
 	<div id="notifica" class="message_succ" style="display: none;"></div>
 	<div id="notifica_err" class="message_err" style="display: none;"></div>
-
+	
 	<div class="grid2">
-		<table class="table" id="ordine">
+	  <div class="col">
+	    <h2 class="titolo-menu">Menù Cibo</h2>
+	   <table class="table" id="ordine">
 			<tr>
 				<th>Numero</th>
 				<th>Nome</th>
@@ -39,6 +41,8 @@
 			</tr>
 			<%
 			for (Piatto p : lista_piatti) {
+				if(p.getTipo().equals("cibo"))
+				{
 			%>
 			<tr>
 				<td><%=p.getId_piatto()%></td>
@@ -50,10 +54,14 @@
 				</td>
 			</tr>
 			<%
+				}
 			}
 			%>
 		</table>
-
+	  </div>
+	
+	  <div class="col">
+	    <h2 class="titolo-menu">Menù Bevande</h2>
 		<table class="table" id="ordine">
 			<tr>
 				<th>Numero</th>
@@ -64,6 +72,8 @@
 			</tr>
 			<%
 			for (Piatto p : lista_piatti) {
+				if(p.getTipo().equals("bevanda"))
+				{
 			%>
 			<tr>
 				<td><%=p.getId_piatto()%></td>
@@ -75,9 +85,11 @@
 				</td>
 			</tr>
 			<%
+				}
 			}
 			%>
 		</table>
+	  </div>
 	</div>
 
 	<h2 class="titolo-tabella">Ordini Aggiunti</h2>

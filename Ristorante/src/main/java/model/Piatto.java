@@ -5,12 +5,14 @@ public class Piatto {
 	private String nome_piatto;
 	private double costo;
 	private String descrizione;
+	private String tipo;
 
-	public Piatto(int id, String n, double c, String descrizione) {
+	public Piatto(int id, String n, double c, String descrizione, String tipo) {
 		this.id_piatto = id;
 		this.nome_piatto = n;
 		this.costo = c;
 		this.descrizione = descrizione;
+		this.tipo = tipo;
 	}
 
 	public Piatto() {
@@ -52,6 +54,14 @@ public class Piatto {
 	public String toString() {
 		return "Piatto [id_piatto=" + id_piatto + ", nome_piatto=" + nome_piatto + ", costo=" + costo + ", descrizione="
 				+ descrizione + "]";
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 
