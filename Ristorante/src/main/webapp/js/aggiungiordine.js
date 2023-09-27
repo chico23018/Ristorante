@@ -2,33 +2,28 @@
 const ordiniAggiunti = [];
 
 // Funzione per aggiungere un piatto all'array
-function aggiungiPiatto(id_piatto, nome_piatto, costo, descrizione) {
-    const nuovoPiatto = { id_piatto, nome_piatto, costo, descrizione };
+function aggiungiPiatto(id_piatto,nome_piatto, id_tavolo,costo) {
+    const nuovoPiatto = { id_piatto,nome_piatto, id_tavolo,costo};
     ordiniAggiunti.push(nuovoPiatto);
     aggiornaTabellaOrdini();
 }
 
 // Funzione per aggiornare la tabella degli ordini
-function aggiornaTabellaOrdini() {
+/*function aggiornaTabellaOrdini() {
     const tabella = document.getElementById('ordiniAggiunti');
     tabella.innerHTML = ''; // Pulisce la tabella
 
     // Aggiunge gli ordini alla tabella
     ordiniAggiunti.forEach((ordine, index) => {
         const row = tabella.insertRow(index);
-       
-        const cellIdPiatto = row.insertCell(0);
-        const cellNome = row.insertCell(1);
-        const cellCosto = row.insertCell(2);
-        const cellDescrizione = row.insertCell(3);
-        
+        const cellNome = row.insertCell(0);
+        const cellPrezzo = row.insertCell(1);
 
-        cellIdPiatto.innerHTML = ordine.id_piatto;
-        cellNome.innerHTML = ordine.nome_piatto;
-        cellCosto.innerHTML = '&euro;' + ordine.costo.toFixed(2);
-        cellDescrizione.innerHTML = ordine.descrizione;
+        cellNome.innerHTML = ordine.nome;
+        cellPrezzo.innerHTML = '&euro;' + ordine.prezzo.toFixed(2);
     });
-}
+}*/
+
 // ... Il codice JavaScript precedente ...
 
 // Funzione per inviare gli ordini alla servlet
@@ -52,7 +47,12 @@ function inviaOrdini() {
     })
     .then(response => {
         if (response.ok) {
-            alert('Ordini inviati con successo.');
+			const div = document.getElementById('notifica');
+			div.style.display= 'flex';
+		
+			div.innerHTML ='Ordini inviati con successo.';
+			
+           /* alert('Ordini inviati con successo.');*/
             // Puoi fare qualcosa in caso di successo, ad esempio cancellare gli ordini locali
             ordiniAggiunti.length = 0;
             aggiornaTabellaOrdini(); // Aggiorna la tabella degli ordini locali
@@ -74,22 +74,24 @@ function aggiornaTabellaOrdini() {
         const row = tabella.insertRow(index);
         const cellIdPiatto = row.insertCell(0);
         const cellNome = row.insertCell(1);
+      //  const cellDescrizione = row.insertCell(2);
         const cellCosto = row.insertCell(2);
-        const cellDescrizione = row.insertCell(3);
-        const cellRimuovi = row.insertCell(4);
+        
+        const cellRimuovi = row.insertCell(3);
 
         cellIdPiatto.innerHTML = ordine.id_piatto;
         cellNome.innerHTML = ordine.nome_piatto;
+        // cellDescrizione.innerHTML = ordine.descrizione;
         cellCosto.innerHTML = '&euro;' + ordine.costo.toFixed(2);
-        cellDescrizione.innerHTML = ordine.descrizione;
+       
 
         const rimuoviButton = document.createElement('button');
         rimuoviButton.textContent = 'Rimuovi';
         rimuoviButton.addEventListener('click', () => rimuoviPiatto(index));
+        rimuoviButton.style.borderRadius='20px';
         cellRimuovi.appendChild(rimuoviButton);
     });
 }
-
 // Funzione per rimuovere un piatto dall'array
 function rimuoviPiatto(index) {
     if (index >= 0 && index < ordiniAggiunti.length) {

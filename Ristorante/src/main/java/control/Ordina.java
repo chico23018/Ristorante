@@ -3,6 +3,7 @@ package control;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -54,19 +55,23 @@ public class Ordina extends HttpServlet {
 
         // Converti i dati JSON in un array Java
         Gson gson = new Gson();
-        Type tipoLista = new TypeToken<List<Piatto>>() {}.getType();
-        List<Piatto> ordini = gson.fromJson(requestBody.toString(), tipoLista);
-        for (Piatto ordine : ordini) {
-			System.out.println(ordine);
+       /* Type tipoLista = new TypeToken<List<Piatto>>() {}.getType();
+        List<Piatto> ordini = gson.fromJson(requestBody.toString(), tipoLista);*/
+        Type tipoLista = new TypeToken<List<Map<String, String>>>() {}.getType();
+        List<Map<String, String>> ordini = gson.fromJson(requestBody.toString(), tipoLista);
+        if(ordini!=null) {
+        for (Map<String, String> ordine : ordini) {
+			System.out.println(ordine.get("nome_piatto")+" "+ ordine.get("id_piatto"));
 		}
-        System.out.println("id: "+id);
+   
         // Ora hai accesso agli ordini nella variabile "ordini"
         
         // Esegui le operazioni necessarie con gli ordini (ad esempio, salva nel database)
 
         // Invia una risposta di successo
         response.setStatus(HttpServletResponse.SC_OK);
-	}
+	}}
+	
 	
 	       
 	    
