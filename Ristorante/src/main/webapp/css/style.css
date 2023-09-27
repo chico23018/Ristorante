@@ -310,3 +310,60 @@ label input[type="checkbox"] {
 form{
 	margin-bottom: 70px;
 }
+
+/* Aggiornamento per il Footer */
+
+.footer {
+  background-color: #333333; /* Cambia il colore di sfondo */
+  color: #ffffff; /* Cambia il colore del testo */
+  padding: 20px 0; /* Aggiunge spaziatura interna sopra e sotto */
+  text-align: center; /* Allinea il testo al centro */
+  border-radius: 25px; /* Aggiunge bordi arrotondati */
+  position: relative; /* Imposta la posizione relativa */
+}
+
+.footer a {
+  color: #70F570; /* Cambia il colore dei link */
+  text-decoration: none; /* Rimuove la sottolineatura dei link */
+  margin: 0 10px; /* Aggiunge spaziatura ai lati dei link */
+}
+
+.footer a:hover {
+  text-decoration: underline; /* Aggiunge una sottolineatura quando si passa sopra i link */
+}
+
+/* Aggiornamento per Grid2 */
+
+.grid2 .col {
+  width: 100%;
+  text-align: center; /* Allinea il testo al centro */
+}
+
+.normal-text {
+  font-size: 20px;
+}
+
+
+
+.tw {
+  color: #fff;
+}
+
+.tw a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px; /* Aggiunge spaziatura ai lati dei link */
+}
+
+.tw i {
+  margin-right: 10px;
+}
+
+/* Aggiornamento per Flex-Text */
+
+.flex-text,
+.flex-text2 {
+  font-family: 'Verdana', sans-serif; /* Cambia il tipo di font */
+  color: #333333; /* Cambia il colore del testo */
+  text-align: center; /* Allinea il testo al centro */
+}
