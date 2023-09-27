@@ -8,3 +8,4 @@ Ristorante/.settings
 Ristorante/.class
 *.class
 Ristorante/.classpath
+Ristorante/src/main/java/connessione/Connessione.java
