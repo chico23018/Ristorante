@@ -19,7 +19,7 @@ public class PiattoDao {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
 			pst.setString(1, piatto.getNome_piatto());
-			pst.setDouble(2, piatto.getCosto());
+			pst.setBigDecimal(2, piatto.getCosto());
 			pst.setString(3, piatto.getDescrizione());
 			pst.setString(4, piatto.getTipo());
 			pst.setString(5, piatto.getImmagine());
@@ -38,7 +38,7 @@ public class PiattoDao {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
 			pst.setString(1, piatto.getNome_piatto());
-			pst.setDouble(2, piatto.getCosto());
+			pst.setBigDecimal(2, piatto.getCosto());
 			pst.setString(3, piatto.getDescrizione());
 			pst.setString(4, piatto.getTipo());
 			pst.setString(5, piatto.getImmagine());
@@ -69,7 +69,7 @@ public class PiattoDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			while (rst.next()) {
-				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getFloat(3),rst.getString(4), rst.getString(5),rst.getString(6));
+				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getBigDecimal(3),rst.getString(4), rst.getString(5),rst.getString(6));
 				
 				
 				list.add(piatto);
@@ -88,7 +88,7 @@ public class PiattoDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			rst.next();
-			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getFloat(3),rst.getString(4), rst.getString(5),rst.getString(6));
+			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getBigDecimal(3),rst.getString(4), rst.getString(5),rst.getString(6));
 			
 
 		} catch (SQLException | ClassNotFoundException e) {
