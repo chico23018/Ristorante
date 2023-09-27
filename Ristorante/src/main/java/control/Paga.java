@@ -32,7 +32,8 @@ public class Paga extends HttpServlet {
 			Integer id_pagamento = Integer.parseInt(id);
 			Pagamento toSubstitute = payment.cerca(id_pagamento);
 			toSubstitute.setStato("pagato");
-			toSubstitute.setCosto_totale(0.0);
+			float n=(float) 0.00;
+			toSubstitute.setCosto_totale(n);
 			payment.modifica(toSubstitute);
 		}
 		TavoloDao daoT = new TavoloDao();

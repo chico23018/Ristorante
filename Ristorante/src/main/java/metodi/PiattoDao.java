@@ -67,7 +67,7 @@ public class PiattoDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			while (rst.next()) {
-				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getDouble(3),rst.getString(4), rst.getString(5));
+				Piatto piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getFloat(3),rst.getString(4), rst.getString(5));
 				
 				
 				list.add(piatto);
@@ -86,7 +86,7 @@ public class PiattoDao {
 			PreparedStatement pst = con.prepareStatement(query);
 			ResultSet rst = pst.executeQuery();
 			rst.next();
-			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getDouble(3),rst.getString(4), rst.getString(5));
+			piatto = new Piatto(rst.getInt(1),rst.getString(2),rst.getFloat(3),rst.getString(4), rst.getString(5));
 			
 
 		} catch (SQLException | ClassNotFoundException e) {

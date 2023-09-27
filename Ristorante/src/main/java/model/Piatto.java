@@ -3,11 +3,11 @@ package model;
 public class Piatto {
 	private int id_piatto;
 	private String nome_piatto;
-	private double costo;
+	private float costo;
 	private String descrizione;
 	private String tipo;
 
-	public Piatto(int id, String n, double c, String descrizione, String tipo) {
+	public Piatto(int id, String n, float c, String descrizione, String tipo) {
 		this.id_piatto = id;
 		this.nome_piatto = n;
 		this.costo = c;
@@ -34,11 +34,11 @@ public class Piatto {
 		this.nome_piatto = nome_piatto;
 	}
 
-	public double getCosto() {
+	public float getCosto() {
 		return costo;
 	}
 
-	public void setCosto(double costo) {
+	public void setCosto(float costo) {
 		this.costo = costo;
 	}
 

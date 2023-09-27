@@ -70,7 +70,7 @@ public class Login extends HttpServlet {
 					map.put("descrizione", rs.getString(2));
 					map.put("stato", rs.getString(3));
 					map.put("quantita", rs.getString(4));
-					map.put("costo", rs.getString(5));
+					map.put("costo", String.valueOf(rs.getFloat(5)));
 					resultList.add(map);
 				}
 				
@@ -86,7 +86,8 @@ public class Login extends HttpServlet {
 			else {
 				cognome = waiter.cerca(cam).getCognome();
 			}
-			Double costo_totale = (totale.equals("")) ? 0.0 : Double.parseDouble(totale);
+			float n = (float) 0.0;
+			float costo_totale =  ((totale.equals("")) ? n : Float.parseFloat(totale));
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.setAttribute("n_tavolo", n_tavolo);
 			request.setAttribute("resultList", resultList);

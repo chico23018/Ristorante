@@ -19,7 +19,7 @@
 	Cliente cliente = (Cliente) request.getAttribute("cliente");
 	int n_tavolo = (int) request.getAttribute("n_tavolo");
 	List<Map<String, String>> resultList = (List<Map<String, String>>) request.getAttribute("resultList");
-	double costo_totale = (double) request.getAttribute("totale");
+	float costo_totale = (float) request.getAttribute("totale");
 	String id_pagamento = (String) request.getAttribute("id_pagamento");
 	String cognome = (String) request.getAttribute("cognome");
 	String id_cameriere = (String) request.getAttribute("idCameriere");
