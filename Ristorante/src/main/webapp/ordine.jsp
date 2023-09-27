@@ -24,8 +24,9 @@
 			class="logo">
 		</a>
 	</div>
-
-<div id="notifica" class="message_succ" style="display: none;"></div>
+	
+	<div id="notifica" class="message_succ" style="display: none;"></div>
+	<div id="notifica_err" class="message_err" style="display: none;"></div>
 
 	<table class="table" id="ordine">
 		<tr>
@@ -51,9 +52,8 @@
 		}
 		%>
 	</table>
-	
 
-	<h2>Ordini Aggiunti</h2>
+	<h2 class="titolo-tabella">Ordini Aggiunti</h2>
 	<table id="ordiniAggiunti" class="table">
 		<!-- Qui verranno visualizzati i dati aggiunti tramite JavaScript -->
 	</table>

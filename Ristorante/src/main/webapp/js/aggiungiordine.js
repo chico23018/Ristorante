@@ -49,15 +49,13 @@ function inviaOrdini() {
         if (response.ok) {
 			const div = document.getElementById('notifica');
 			div.style.display= 'flex';
-		
-			div.innerHTML ='Ordini inviati con successo.';
-			
-           /* alert('Ordini inviati con successo.');*/
-            // Puoi fare qualcosa in caso di successo, ad esempio cancellare gli ordini locali
+			div.style.textAlign ='center';
+			div.innerHTML ='Ordini inviati con successo';
             ordiniAggiunti.length = 0;
             aggiornaTabellaOrdini(); // Aggiorna la tabella degli ordini locali
         } else {
-            alert('Errore durante l\'invio degli ordini.');
+			const div = document.getElementById('notifica_err');
+            div.innerHTML ='Errore durante l\'invio degli ordini.';
         }
     })
     .catch(error => {

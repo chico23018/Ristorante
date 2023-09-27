@@ -64,11 +64,6 @@ public class Ordina extends HttpServlet {
 			System.out.println(ordine.get("nome_piatto")+" "+ ordine.get("id_piatto"));
 		}
    
-        // Ora hai accesso agli ordini nella variabile "ordini"
-        
-        // Esegui le operazioni necessarie con gli ordini (ad esempio, salva nel database)
-
-        // Invia una risposta di successo
         response.setStatus(HttpServletResponse.SC_OK);
 	}}
 	

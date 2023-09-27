@@ -30,6 +30,7 @@
 			<div id="blocco" class="blocco"></div>
 		</div>
 	</header>
+		
 	<h1>
 		Benvenuto
 		<%=nome + " " + cognome%></h1>
