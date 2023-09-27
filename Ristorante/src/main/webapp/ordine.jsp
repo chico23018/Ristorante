@@ -28,30 +28,57 @@
 	<div id="notifica" class="message_succ" style="display: none;"></div>
 	<div id="notifica_err" class="message_err" style="display: none;"></div>
 
-	<table class="table" id="ordine">
-		<tr>
-			<th>Numero</th>
-			<th>Nome</th>
-			<th>Prezzo</th>
-			<th>Descrizione</th>
-			<th>Aggiungi</th>
-		</tr>
-		<%
-		for (Piatto p : lista_piatti) {
-		%>
-		<tr>
-			<td><%=p.getId_piatto()%></td>
-			<td><%=p.getNome_piatto()%></td>
-			<td>&euro;<%=p.getCosto()%></td>
-			<td><%=p.getDescrizione()%></td>
-			<td><input type="button" value="Aggiungi" class="button"
-				onclick="aggiungiPiatto('<%=p.getId_piatto()%>', '<%=p.getNome_piatto()%>','<%=id_tavolo%>', <%=p.getCosto()%>)" />
-			</td>
-		</tr>
-		<%
-		}
-		%>
-	</table>
+	<div class="grid2">
+		<table class="table" id="ordine">
+			<tr>
+				<th>Numero</th>
+				<th>Nome</th>
+				<th>Prezzo</th>
+				<th>Descrizione</th>
+				<th>Aggiungi</th>
+			</tr>
+			<%
+			for (Piatto p : lista_piatti) {
+			%>
+			<tr>
+				<td><%=p.getId_piatto()%></td>
+				<td><%=p.getNome_piatto()%></td>
+				<td>&euro;<%=p.getCosto()%></td>
+				<td><%=p.getDescrizione()%></td>
+				<td><input type="button" value="Aggiungi" class="button"
+					onclick="aggiungiPiatto('<%=p.getId_piatto()%>', '<%=p.getNome_piatto()%>','<%=id_tavolo%>', <%=p.getCosto()%>)" />
+				</td>
+			</tr>
+			<%
+			}
+			%>
+		</table>
+
+		<table class="table" id="ordine">
+			<tr>
+				<th>Numero</th>
+				<th>Nome</th>
+				<th>Prezzo</th>
+				<th>Descrizione</th>
+				<th>Aggiungi</th>
+			</tr>
+			<%
+			for (Piatto p : lista_piatti) {
+			%>
+			<tr>
+				<td><%=p.getId_piatto()%></td>
+				<td><%=p.getNome_piatto()%></td>
+				<td>&euro;<%=p.getCosto()%></td>
+				<td><%=p.getDescrizione()%></td>
+				<td><input type="button" value="Aggiungi" class="button"
+					onclick="aggiungiPiatto('<%=p.getId_piatto()%>', '<%=p.getNome_piatto()%>','<%=id_tavolo%>', <%=p.getCosto()%>)" />
+				</td>
+			</tr>
+			<%
+			}
+			%>
+		</table>
+	</div>
 
 	<h2 class="titolo-tabella">Ordini Aggiunti</h2>
 	<table id="ordiniAggiunti" class="table">

@@ -59,7 +59,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_tavolo_idx` (`id_tavolo`),
   CONSTRAINT `id_tavolo_cliente` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (31,'Mario','Brizzini',1),(33,'Giuseppe','Trovato',3),(34,'Carlo','Boldi',4),(70,'Mario','Lopez',5);
+INSERT INTO `cliente` VALUES (1,'Alfio','Spoto',2);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -141,7 +141,7 @@ CREATE TABLE `ordine` (
   KEY `id_piatto_idx` (`id_piatto`),
   CONSTRAINT `id_piatto` FOREIGN KEY (`id_piatto`) REFERENCES `piatto` (`id`),
   CONSTRAINT `id_tavolo` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +150,6 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
-INSERT INTO `ordine` VALUES (1,1,1,'in preparazione'),(3,3,2,'consegnato'),(4,4,4,'in preparazione'),(6,1,1,'in preparazione'),(7,4,3,'consegnato'),(8,4,3,'consegnato'),(13,3,4,'in preparazione'),(14,1,2,'consegnato'),(15,4,5,'in preparazione'),(17,3,1,'in preparazione'),(18,1,4,'in preparazione'),(20,4,1,'consegnato');
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -259,7 +258,7 @@ CREATE TABLE `pagamento` (
   PRIMARY KEY (`id`),
   KEY `id_ordine_idx` (`id_tavolo`),
   CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +267,6 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (1,1,35.5,'non pagato','2023-09-23'),(3,3,28,'non pagato','2023-09-23'),(4,4,31,'non pagato','2023-09-23'),(5,5,0,'pagato','2023-09-23');
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -312,12 +310,13 @@ DROP TABLE IF EXISTS `piatto`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `piatto` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(15) NOT NULL,
+  `nome` varchar(25) NOT NULL,
   `costo` double NOT NULL,
-  `descrizione` varchar(45) NOT NULL,
+  `descrizione` varchar(125) NOT NULL,
+  `tipo` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome_UNIQUE` (`nome`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +325,7 @@ CREATE TABLE `piatto` (
 
 LOCK TABLES `piatto` WRITE;
 /*!40000 ALTER TABLE `piatto` DISABLE KEYS */;
-INSERT INTO `piatto` VALUES (1,'Margherita',7.5,'Descrizione della margherita'),(2,'Amatriciana',12,'Descrizione della amatriciana'),(3,'Patatine',2.5,'Descrizione delle patatine'),(4,'Involtini',8.5,'Descrizione degli involtini'),(5,'Insalata',10,'Descrizione dell\'insalata');
+INSERT INTO `piatto` VALUES (1,'Margherita',7.5,'Descrizione della margherita','cibo'),(2,'Amatriciana',12,'Descrizione della amatriciana','cibo'),(3,'Patatine',2.5,'Descrizione delle patatine','cibo'),(4,'Involtini',8.5,'Descrizione degli involtini','cibo'),(5,'Insalata',10,'Descrizione dell\'insalata','cibo'),(6,'Pokè',15,'Descrizione del pokè','cibo'),(7,'Polpette al sugo',13.7,'Descrizione delle polpette al sugo','cibo'),(8,'Lasagne',14,'Descrizione delle lasagne','cibo'),(9,'Pasta con la salsa',8,'Descrizione della pasta con la salsa','cibo'),(10,'Carbonara',12.5,'Descrizione della carbonara','cibo'),(11,'Pizza Margherita',9.99,'Descrizione della Pizza Margherita','cibo'),(12,'Insalata Caesar',7.99,'Descrizione dell\' Insalata Caesar','cibo'),(13,'Penne all\'Arrabbiata',8.49,'Descrizione delle Penne all\'Arrabbiata','cibo'),(14,'Acqua',1.5,'Descrizione dell\'acqua','bevanda'),(15,'Birra Lager',4.5,'Descrizione della Birra Lager','bevanda'),(16,'Torta al Cioccolato',6.75,'Descrizione della Torta al Cioccolato','cibo'),(17,'Risotto al Limone',11.99,'Descrizione del Risotto al Limone','cibo'),(18,'Coca-Cola',2.25,'Descrizione della Coca-Cola','bevanda'),(19,'Tortellini alla Panna',10.5,'Descrizione dei Tortellini alla Panna','cibo'),(20,'Caffè Americano',2.99,'Descrizione del Caffè Americano','bevanda');
 /*!40000 ALTER TABLE `piatto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,11 +340,11 @@ CREATE TABLE `tavolo` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_cameriere` int DEFAULT NULL,
   `num_posti` int NOT NULL,
-  `stato` varchar(15) NOT NULL,
+  `stato` varchar(25) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cameriere_idx` (`id_cameriere`),
   CONSTRAINT `id_cameriere` FOREIGN KEY (`id_cameriere`) REFERENCES `cameriere` (`id`) ON DELETE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -354,7 +353,7 @@ CREATE TABLE `tavolo` (
 
 LOCK TABLES `tavolo` WRITE;
 /*!40000 ALTER TABLE `tavolo` DISABLE KEYS */;
-INSERT INTO `tavolo` VALUES (1,1,4,'occupato'),(2,NULL,2,'libero'),(3,3,6,'occupato'),(4,1,4,'occupato'),(5,NULL,3,'occupato'),(6,NULL,5,'libero');
+INSERT INTO `tavolo` VALUES (1,NULL,4,'libero'),(2,1,2,'occupato'),(3,NULL,6,'libero'),(4,NULL,4,'libero'),(5,NULL,3,'libero'),(6,NULL,5,'libero'),(7,NULL,7,'libero'),(8,NULL,8,'libero'),(9,NULL,2,'libero'),(10,NULL,4,'libero');
 /*!40000 ALTER TABLE `tavolo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -375,4 +374,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-26 11:40:14
+-- Dump completed on 2023-09-27 12:59:29
