@@ -30,7 +30,7 @@
 	<div id="notifica" class="message_succ" style="display: none;"></div>
 	<div id="notifica_err" class="message_err" style="display: none;"></div>
 	<div class="menu">
-		<h2 class="menu-group-heading">Menù ristorante</h2>
+		<h2 class="menu-group-heading">Menù bevande</h2>
 
 		<div class="menu-group">
 			<%

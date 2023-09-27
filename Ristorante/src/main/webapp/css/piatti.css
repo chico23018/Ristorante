@@ -32,6 +32,10 @@ body {
   margin: 0;
   padding-bottom: 1em;
   border-bottom: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 45px;
 }
 
 .menu-group {
@@ -67,12 +71,23 @@ body {
 }
 
 .menu-item-name {
+  font-weight: bold;
   margin-right: 1.5em;
+  font-size: 30px;
 }
 
 .menu-item-desc {
   margin-top: 10px;
   line-height: 1.6;
+  font-weight: lighter;
+  font-size: 18px;
+}
+
+.menu-item-price {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (min-width: 992px) {

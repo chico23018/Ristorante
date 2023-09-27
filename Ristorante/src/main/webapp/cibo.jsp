@@ -32,7 +32,7 @@
 
 
 	<div class="menu">
-		<h2 class="menu-group-heading">Menù ristorante</h2>
+		<h2 class="menu-group-heading">Menù cibo</h2>
 
 		<div class="menu-group">
 			<%
