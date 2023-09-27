@@ -11,6 +11,7 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/menu.css" rel="stylesheet">
 <link href="css/ordine.css" rel="stylesheet">
+<link href="css/piatti.css" rel="stylesheet">
 </head>
 
 <body>
@@ -28,42 +29,39 @@
 	
 	<div id="notifica" class="message_succ" style="display: none;"></div>
 	<div id="notifica_err" class="message_err" style="display: none;"></div>
-	
-	<div class="grid2">
-	 <div class="col col-bevande">
-	    <h2 class="titolo-menu">Menù Bevande</h2>
-		<table class="table" id="ordine">
-			<tr>
-				<th>Numero</th>
-				<th>Nome</th>
-				<th>Prezzo</th>
-				<th>Descrizione</th>
-				<th>Aggiungi</th>
-			</tr>
+	<div class="menu">
+		<h2 class="menu-group-heading">Menù ristorante</h2>
+
+		<div class="menu-group">
 			<%
 			for (Piatto p : lista_piatti) {
-				if(p.getTipo().equals("bevanda"))
-				{
+				if (p.getTipo().equals("bevanda")) {
 			%>
-			<tr>
-				<td><%=p.getId_piatto()%></td>
-				<td><%=p.getNome_piatto()%></td>
-				<td>&euro;<%=p.getCosto()%></td>
-				<td><%=p.getDescrizione()%></td>
-				
-				<td><input type="button" value="Aggiungi" class="button"
+			<!-- Item -->
+			<div class="menu-item">
+				<img src="source/margherita.png" alt="Black Placeholder Image"
+					class="menu-item-img" />
+				<div class="menu-item-text">
+					<h3 class="menu-item-heading">
+						<span class="menu-item-name"><%=p.getNome_piatto()%></span> <span
+							class="menu-item-price">&euro;<%=p.getCosto()%></span>
+					</h3>
+					<p class="menu-item-desc">
+						<%=p.getDescrizione()%>
+					</p>
+				</div>
+				<input type="button" value="Aggiungi" class="button"
 					onclick="aggiungiPiatto('<%=p.getId_piatto()%>', '<%=p.getNome_piatto()%>','<%=id_tavolo%>', <%=p.getCosto()%>)" />
-				</td>
-			</tr>
+
+			</div>
 			<%
-				}
+			}
 			}
 			%>
-		</table>
-	  </div>
-	 
+		</div>
 	</div>
-
+	
+	
 	<h2 class="titolo-tabella">Ordini Aggiunti</h2>
 	<div class="table-container">
 	<table id="ordiniAggiunti" >
