@@ -71,7 +71,7 @@ public class Login extends HttpServlet {
 					map.put("descrizione", rs.getString(2));
 					map.put("stato", rs.getString(3));
 					map.put("quantita", rs.getString(4));
-					map.put("costo", String.valueOf(rs.getFloat(5)));
+					map.put("costo", String.valueOf(rs.getBigDecimal(5)));
 					resultList.add(map);
 				}
 				
