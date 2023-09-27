@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 
+import metodi.OrdineDao;
 import metodi.PiattoDao;
 import model.Ordine;
 import model.Piatto;
@@ -42,35 +43,31 @@ public class Ordina extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-		String id =request.getParameter("id_tavolo");
+		
+		OrdineDao order = new OrdineDao();
+		
 		 // Leggi i dati JSON dalla richiesta
         BufferedReader reader = request.getReader();
         StringBuilder requestBody = new StringBuilder();
         String line;
         while ((line = reader.readLine()) != null) {
-            requestBody.append(line);
-            System.out.println(line);
-            
+            requestBody.append(line);     
         }
 
         // Converti i dati JSON in un array Java
         Gson gson = new Gson();
-       /* Type tipoLista = new TypeToken<List<Piatto>>() {}.getType();
-        List<Piatto> ordini = gson.fromJson(requestBody.toString(), tipoLista);*/
         Type tipoLista = new TypeToken<List<Map<String, String>>>() {}.getType();
         List<Map<String, String>> ordini = gson.fromJson(requestBody.toString(), tipoLista);
         if(ordini!=null) {
-        for (Map<String, String> ordine : ordini) {
-			System.out.println(ordine.get("nome_piatto")+" "+ ordine.get("id_piatto"));
-		}
-   
+	        for (Map<String, String> ordine : ordini) {
+	        	int id_tavolo = Integer.parseInt(ordine.get("id_tavolo"));
+	        	int id_piatto = Integer.parseInt(ordine.get("id_piatto"));
+	        	Ordine o = new Ordine(0, id_tavolo, id_piatto, "in preparazione");
+	        	order.inserire(o);
+			}
+        }
         response.setStatus(HttpServletResponse.SC_OK);
-	}}
-	
-	
-	       
-	    
-	
-
+        
+    }
 
 }

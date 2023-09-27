@@ -57,8 +57,10 @@
 	<table id="ordiniAggiunti" class="table">
 		<!-- Qui verranno visualizzati i dati aggiunti tramite JavaScript -->
 	</table>
-	<button id="inviaOrdiniButton" class="button" onclick="inviaOrdini()">Invia
-		Ordini</button>
+	
+	<button id="inviaOrdiniButton" class="button" onclick="inviaOrdini()">
+		Invia Ordini
+	</button>
 
 	<script src="js/aggiungiordine.js"></script>
 </body>

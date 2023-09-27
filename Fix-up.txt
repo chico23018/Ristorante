@@ -1,2 +1,0 @@
-1) Aggiungere un ordine
-2) sistemare il invio del id_tavolo
