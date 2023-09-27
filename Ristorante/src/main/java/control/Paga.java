@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import metodi.PagamentoDao;
+import metodi.TavoloDao;
 import model.Pagamento;
 
 @WebServlet("/Pagamento")
@@ -28,14 +29,14 @@ public class Paga extends HttpServlet {
 		
 		if(!id.equals("") || id != null)
 		{
-			System.out.println("id: " + id);
 			Integer id_pagamento = Integer.parseInt(id);
 			Pagamento toSubstitute = payment.cerca(id_pagamento);
 			toSubstitute.setStato("pagato");
 			toSubstitute.setCosto_totale(0.0);
 			payment.modifica(toSubstitute);
 		}
-		
+		TavoloDao daoT = new TavoloDao();
+		request.getSession().setAttribute("list", daoT.lista());
 		rd = request.getRequestDispatcher("cameriere.jsp");
 		rd.forward(request, response);
 		
