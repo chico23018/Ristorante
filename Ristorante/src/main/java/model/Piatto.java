@@ -1,16 +1,14 @@
 package model;
 
-import java.math.BigDecimal;
-
 public class Piatto {
 	private int id_piatto;
 	private String nome_piatto;
-	private BigDecimal costo;
+	private float costo;
 	private String descrizione;
 	private String tipo;
 	private String immagine;
 
-	public Piatto(int id, String n, BigDecimal c, String descrizione, String tipo,String im) {
+	public Piatto(int id, String n, float c, String descrizione, String tipo,String im) {
 		this.id_piatto = id;
 		this.nome_piatto = n;
 		this.costo = c;
@@ -38,11 +36,11 @@ public class Piatto {
 		this.nome_piatto = nome_piatto;
 	}
 
-	public BigDecimal getCosto() {
+	public float getCosto() {
 		return costo;
 	}
 
-	public void setCosto(BigDecimal costo) {
+	public void setCosto(float costo) {
 		this.costo = costo;
 	}
 

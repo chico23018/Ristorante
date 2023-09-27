@@ -1,7 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="model.Cliente"%>
 <%@page import="java.util.Map"%>
-<%@page import="java.math.BigDecimal"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -20,7 +19,7 @@
 	Cliente cliente = (Cliente) request.getAttribute("cliente");
 	int n_tavolo = (int) request.getAttribute("n_tavolo");
 	List<Map<String, String>> resultList = (List<Map<String, String>>) request.getAttribute("resultList");
-	BigDecimal costo_totale = (BigDecimal) request.getAttribute("totale");
+	float costo_totale = (float) request.getAttribute("totale");
 	String id_pagamento = (String) request.getAttribute("id_pagamento");
 	String cognome = (String) request.getAttribute("cognome");
 	String id_cameriere = (String) request.getAttribute("idCameriere");

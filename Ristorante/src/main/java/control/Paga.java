@@ -1,7 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,7 +32,8 @@ public class Paga extends HttpServlet {
 			Integer id_pagamento = Integer.parseInt(id);
 			Pagamento toSubstitute = payment.cerca(id_pagamento);
 			toSubstitute.setStato("pagato");
-			toSubstitute.setCosto_totale(new BigDecimal("0.00"));
+			float n=(float) 0.00;
+			toSubstitute.setCosto_totale(n);
 			payment.modifica(toSubstitute);
 		}
 		TavoloDao daoT = new TavoloDao();

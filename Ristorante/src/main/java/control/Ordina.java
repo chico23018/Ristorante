@@ -20,6 +20,7 @@ import java.lang.reflect.Type;
 import metodi.OrdineDao;
 import metodi.PiattoDao;
 import model.Ordine;
+import model.Piatto;
 
 
 @WebServlet("/Ordina")

@@ -20,7 +20,7 @@ public class PagamentoDao {
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setBigDecimal(1, pag.getCosto_totale());
+			pst.setFloat(1, pag.getCosto_totale());
 			pst.setString(2, pag.getStato());
 			pst.setString(3, pag.getData());
 			pst.executeUpdate();
@@ -37,7 +37,7 @@ public class PagamentoDao {
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setBigDecimal(1, pag.getCosto_totale());
+			pst.setFloat(1, pag.getCosto_totale());
 			pst.setString(2, pag.getStato());
 			pst.setString(3, pag.getData());
 			pst.executeUpdate();
@@ -73,7 +73,7 @@ public class PagamentoDao {
 				Pagamento p = new Pagamento();
 				p.setId_pagamento(rst.getInt(1));
 				p.setId_tavolo(rst.getInt(2));
-				p.setCosto_totale(rst.getBigDecimal(3));
+				p.setCosto_totale(rst.getFloat(3));
 				p.setStato(rst.getString(4));
 				p.setData(rst.getString(5));
 				list.add(p);
@@ -98,7 +98,7 @@ public class PagamentoDao {
 			pag = new Pagamento(
 					rs.getInt("id"),
 					rs.getInt("id_tavolo"),
-					rs.getBigDecimal("costo_totale"),
+					rs.getFloat("costo_totale"),
 					rs.getString("stato"),
 					rs.getString("data"));
 
