@@ -109,32 +109,31 @@ button:hover {
 	font-weight: bold;
 	font-size: 16px;
 	margin: 10px;
-	border: 1px solid #33cc33;	
+	border: 1px solid #33cc33;
 }
 
 .freccia {
-    margin-left: 20px; /* Spazio a sinistra */
-    margin-top: 20px; /* Spazio in alto */
+	margin-left: 20px; /* Spazio a sinistra */
+	margin-top: 20px; /* Spazio in alto */
 }
 
 .titolo-tabella {
-	margin-top:60px;
-    font-size: 24px; 
-    font-weight: bold; 
-    text-align: center; 
+	margin-top: 60px;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
 }
 
 .table {
-    margin-left: 20px; 
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    overflow: hidden;
+	margin-left: 20px;
+	border-collapse: collapse;
+	background-color: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	overflow: hidden;
 }
 
-.table th,
-.table td {
+.table th, .table td {
 	padding: 8px;
 	text-align: center;
 }
@@ -153,8 +152,7 @@ button:hover {
 	background-color: #ddd;
 }
 
-.table tr:last-child::after,
-.table tr:first-child::after {
+.table tr:last-child::after, .table tr:first-child::after {
 	display: block;
 	width: 100%;
 	height: 2px;
@@ -162,74 +160,121 @@ button:hover {
 	margin-top: 8px;
 }
 
-@media (max-width: 768px) {
-.table {
-	margin-top: 20px;
-	width: 90%;
-	border-radius: 10px;
-	box-shadow: none;
+@media ( max-width : 768px) {
+	.table {
+		margin-top: 20px;
+		width: 90%;
+		border-radius: 10px;
+		box-shadow: none;
+	}
+	.table th {
+		font-size: 18px;
+	}
+	.table td {
+		padding: 6px;
+	}
+	.table tr:last-child::before, .table tr:last-child::after {
+		display: none;
+	}
 }
-
-.table th {
-	font-size: 18px;
-}
-
-.table td {
-	padding: 6px;
-}
-
-.table tr:last-child::before,
-.table tr:last-child::after {
-	display: none;
-}
-}
-
 
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
 }
+
 .button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 15px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-  
-  }
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 15px;
+	font-size: 14px;
+	border: none;
+	cursor: pointer;
+}
 
 .button:hover {
 	background-color: #0056b3;
 }
 
 /* ! Grid2 */
-
 .grid2 {
-  display: flex;
-  max-width: 1450px;
-  padding: 20px;
-  margin: 0 auto;
-  align-items: center;
-  text-align: center;
+	display: flex;
+	max-width: 1450px;
+	padding: 20px;
+	margin: 0 auto;
+	align-items: flex-start; /* Allinea le colonne in alto */
+	text-align: center;
 }
 
-.grid2 .col {
-  width: 100%;
+.col {
+	width: 100%;
 }
 
-@media (max-width: 768px) {
-  .grid2 {
-    flex-direction: column;
-    justify-content: space-around;
-    row-gap: 3em;
-  }
-
+.col-cibo, .col-bevande {
+	flex: 1; /* Distribuisci lo spazio in modo uniforme tra le colonne */
 }
 
+@media ( max-width : 768px) {
+	.grid2 {
+		flex-direction: column;
+		justify-content: space-around;
+		row-gap: 3em;
+		align-items: center;
+		/* Allinea le colonne centralmente in modalità mobile */
+	}
+}
 
+.table-container {
+	display: flex;
+	justify-content: center; /* Centra orizzontalmente */
+	align-items: center; /* Centra verticalmente */
+}
+
+#ordiniAggiunti {
+	width: 25%;
+	border-collapse: collapse;
+	background-color: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	overflow: hidden;
+	/* Rimuovi margin-top se non è più necessario */
+}
+
+#ordiniAggiunti th, #ordiniAggiunti td {
+	padding: 8px;
+	text-align: center;
+}
+
+#ordiniAggiunti th {
+	font-weight: bold;
+	font-size: 20px;
+	font-family: 'Futura';
+}
+
+#ordiniAggiunti tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#ordiniAggiunti tr:hover {
+	background-color: #ddd;
+}
+
+#ordiniAggiunti tr:last-child::after, #ordiniAggiunti tr:first-child::after
+	{
+	display: block;
+	height: 2px;
+	background-color: #1a3d50;
+	margin-top: 8px;
+}
+
+#inviaOrdiniButton {
+	background-image: linear-gradient(135deg, #70F570 10%, #49C628 100%);
+	width: auto;
+	
+	padding: 10px 20px; 
+}

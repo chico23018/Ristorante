@@ -29,7 +29,7 @@
 	<div id="notifica_err" class="message_err" style="display: none;"></div>
 	
 	<div class="grid2">
-	  <div class="col">
+	  <div class="col col-cibo">
 	    <h2 class="titolo-menu">Menù Cibo</h2>
 	   <table class="table" id="ordine">
 			<tr>
@@ -60,7 +60,7 @@
 		</table>
 	  </div>
 	
-	  <div class="col">
+	  <div class="col col-bevande">
 	    <h2 class="titolo-menu">Menù Bevande</h2>
 		<table class="table" id="ordine">
 			<tr>
@@ -93,14 +93,16 @@
 	</div>
 
 	<h2 class="titolo-tabella">Ordini Aggiunti</h2>
-	<table id="ordiniAggiunti" class="table">
+	<div class="table-container">
+	<table id="ordiniAggiunti" >
 		<!-- Qui verranno visualizzati i dati aggiunti tramite JavaScript -->
 	</table>
-	
+	</div>
+	<div class="table-container">
 	<button id="inviaOrdiniButton" class="button" onclick="inviaOrdini()">
 		Invia Ordini
 	</button>
-
+</div>
 	<script src="js/aggiungiordine.js"></script>
 </body>
 
