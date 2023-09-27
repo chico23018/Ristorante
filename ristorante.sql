@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `ristorante` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `ristorante`;
--- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ristorante
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -59,7 +59,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_tavolo_idx` (`id_tavolo`),
   CONSTRAINT `id_tavolo_cliente` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Alfio','Spoto',2);
+INSERT INTO `cliente` VALUES (2,'Francisco','acosta',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -80,24 +80,24 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `controlla_numero_posti` BEFORE INSERT ON `cliente` FOR EACH ROW BEGIN
-  DECLARE num_posti_tavolo INT;
-  DECLARE num_clienti_tavolo INT;
-
--- vede numero di posti nel tavolo
-  SELECT num_posti INTO num_posti_tavolo
-  FROM tavolo
-  WHERE id = NEW.id_tavolo;
-  
--- vede numero di clienti nel tavolo
-  SELECT COUNT(*) INTO num_clienti_tavolo
-  FROM cliente
-  WHERE id_tavolo = NEW.id_tavolo;
-
-  IF num_clienti_tavolo >= num_posti_tavolo THEN
-    SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = 'Il tavolo ha raggiunto il limite di posti consentiti';
-  END IF;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `controlla_numero_posti` BEFORE INSERT ON `cliente` FOR EACH ROW BEGIN
+  DECLARE num_posti_tavolo INT;
+  DECLARE num_clienti_tavolo INT;
+
+-- vede numero di posti nel tavolo
+  SELECT num_posti INTO num_posti_tavolo
+  FROM tavolo
+  WHERE id = NEW.id_tavolo;
+  
+-- vede numero di clienti nel tavolo
+  SELECT COUNT(*) INTO num_clienti_tavolo
+  FROM cliente
+  WHERE id_tavolo = NEW.id_tavolo;
+
+  IF num_clienti_tavolo >= num_posti_tavolo THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Il tavolo ha raggiunto il limite di posti consentiti';
+  END IF;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -113,10 +113,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tavolo_occupato` AFTER INSERT ON `cliente` FOR EACH ROW BEGIN
-  UPDATE tavolo
-  SET stato = 'occupato'
-  WHERE id = NEW.id_tavolo;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tavolo_occupato` AFTER INSERT ON `cliente` FOR EACH ROW BEGIN
+  UPDATE tavolo
+  SET stato = 'occupato'
+  WHERE id = NEW.id_tavolo;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -141,7 +141,7 @@ CREATE TABLE `ordine` (
   KEY `id_piatto_idx` (`id_piatto`),
   CONSTRAINT `id_piatto` FOREIGN KEY (`id_piatto`) REFERENCES `piatto` (`id`),
   CONSTRAINT `id_tavolo` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +150,7 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
+INSERT INTO `ordine` VALUES (8,1,17,'in preparazione'),(9,1,20,'in preparazione'),(10,1,7,'in preparazione'),(11,1,17,'in preparazione'),(12,1,19,'in preparazione');
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -161,17 +162,17 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `elimina_pagamento` BEFORE INSERT ON `ordine` FOR EACH ROW BEGIN        
-    -- Verifica se esiste già un pagamento 'pagato' per lo stesso tavolo
-    IF EXISTS (
-        SELECT 1
-        FROM pagamento
-        WHERE id_tavolo = NEW.id_tavolo AND stato = 'pagato'
-    ) THEN
-        -- Elimina il pagamento 'pagato' precedente
-        DELETE FROM pagamento
-        WHERE id_tavolo = NEW.id_tavolo AND stato = 'pagato';
-    END IF;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `elimina_pagamento` BEFORE INSERT ON `ordine` FOR EACH ROW BEGIN        
+    -- Verifica se esiste già un pagamento 'pagato' per lo stesso tavolo
+    IF EXISTS (
+        SELECT 1
+        FROM pagamento
+        WHERE id_tavolo = NEW.id_tavolo AND stato = 'pagato'
+    ) THEN
+        -- Elimina il pagamento 'pagato' precedente
+        DELETE FROM pagamento
+        WHERE id_tavolo = NEW.id_tavolo AND stato = 'pagato';
+    END IF;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -187,27 +188,27 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `inserisci_pagamento` AFTER INSERT ON `ordine` FOR EACH ROW BEGIN
-    DECLARE total_cost DECIMAL(10, 2);
-
-    -- Calcola il totale dei costi dei piatti nell'ordine
-    SET total_cost = (
-        SELECT SUM(p.costo)
-        FROM piatto p
-        WHERE p.id = NEW.id_piatto
-    );
-
-    -- Verifica se esiste già un pagamento per lo stesso tavolo
-    IF EXISTS (SELECT 1 FROM pagamento WHERE id_tavolo = NEW.id_tavolo AND stato = 'non pagato') THEN
-        -- Aggiorna il pagamento esistente
-        UPDATE pagamento
-        SET costo_totale = costo_totale + total_cost
-        WHERE id_tavolo = NEW.id_tavolo AND stato = 'non pagato';
-    ELSE
-        -- Inserisci un nuovo record di pagamento
-        INSERT INTO pagamento (id_tavolo, costo_totale, stato, data)
-        VALUES (NEW.id_tavolo, total_cost, 'non pagato', NOW());
-    END IF;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `inserisci_pagamento` AFTER INSERT ON `ordine` FOR EACH ROW BEGIN
+    DECLARE total_cost DECIMAL(10, 2);
+
+    -- Calcola il totale dei costi dei piatti nell'ordine
+    SET total_cost = (
+        SELECT SUM(p.costo)
+        FROM piatto p
+        WHERE p.id = NEW.id_piatto
+    );
+
+    -- Verifica se esiste già un pagamento per lo stesso tavolo
+    IF EXISTS (SELECT 1 FROM pagamento WHERE id_tavolo = NEW.id_tavolo AND stato = 'non pagato') THEN
+        -- Aggiorna il pagamento esistente
+        UPDATE pagamento
+        SET costo_totale = costo_totale + total_cost
+        WHERE id_tavolo = NEW.id_tavolo AND stato = 'non pagato';
+    ELSE
+        -- Inserisci un nuovo record di pagamento
+        INSERT INTO pagamento (id_tavolo, costo_totale, stato, data)
+        VALUES (NEW.id_tavolo, total_cost, 'non pagato', NOW());
+    END IF;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -223,18 +224,18 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `aggiorna_costo_update` AFTER UPDATE ON `ordine` FOR EACH ROW BEGIN
-  IF NEW.id_piatto <> OLD.id_piatto THEN
-    -- Calcola il nuovo costo totale dell'ordine e aggiorna il pagamento
-    UPDATE pagamento
-    SET costo_totale = (
-      SELECT SUM(p.costo)
-      FROM ordine o
-      JOIN piatto p ON o.id_piatto = p.id
-      WHERE o.id_tavolo = NEW.id_tavolo
-    )
-    WHERE id_tavolo = NEW.id_tavolo;
-  END IF;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `aggiorna_costo_update` AFTER UPDATE ON `ordine` FOR EACH ROW BEGIN
+  IF NEW.id_piatto <> OLD.id_piatto THEN
+    -- Calcola il nuovo costo totale dell'ordine e aggiorna il pagamento
+    UPDATE pagamento
+    SET costo_totale = (
+      SELECT SUM(p.costo)
+      FROM ordine o
+      JOIN piatto p ON o.id_piatto = p.id
+      WHERE o.id_tavolo = NEW.id_tavolo
+    )
+    WHERE id_tavolo = NEW.id_tavolo;
+  END IF;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -252,13 +253,13 @@ DROP TABLE IF EXISTS `pagamento`;
 CREATE TABLE `pagamento` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_tavolo` int NOT NULL,
-  `costo_totale` double unsigned NOT NULL,
+  `costo_totale` float unsigned NOT NULL,
   `stato` varchar(10) NOT NULL,
   `data` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_ordine_idx` (`id_tavolo`),
   CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,6 +268,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
+INSERT INTO `pagamento` VALUES (1,2,0,'pagato','2023-09-27'),(2,1,51.17,'non pagato','2023-09-27');
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -278,22 +280,22 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `libera_tavolo_aggiornamento` BEFORE UPDATE ON `pagamento` FOR EACH ROW BEGIN
-  IF NEW.stato = 'pagato' THEN
-    UPDATE tavolo
-    SET tavolo.stato = 'libero'
-    WHERE tavolo.id = NEW.id_tavolo;
-    
-    DELETE FROM cliente
-    WHERE cliente.id_tavolo = NEW.id_tavolo;
-    
-	UPDATE tavolo
-    SET tavolo.id_cameriere = null
-    WHERE tavolo.id = NEW.id_tavolo;
-    
-	DELETE FROM ordine
-    WHERE ordine.id_tavolo = NEW.id_tavolo;
-  END IF;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `libera_tavolo_aggiornamento` BEFORE UPDATE ON `pagamento` FOR EACH ROW BEGIN
+  IF NEW.stato = 'pagato' THEN
+    UPDATE tavolo
+    SET tavolo.stato = 'libero'
+    WHERE tavolo.id = NEW.id_tavolo;
+    
+    DELETE FROM cliente
+    WHERE cliente.id_tavolo = NEW.id_tavolo;
+    
+	UPDATE tavolo
+    SET tavolo.id_cameriere = null
+    WHERE tavolo.id = NEW.id_tavolo;
+    
+	DELETE FROM ordine
+    WHERE ordine.id_tavolo = NEW.id_tavolo;
+  END IF;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -311,7 +313,7 @@ DROP TABLE IF EXISTS `piatto`;
 CREATE TABLE `piatto` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(25) NOT NULL,
-  `costo` double NOT NULL,
+  `costo` float NOT NULL,
   `descrizione` varchar(125) NOT NULL,
   `tipo` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
@@ -353,7 +355,7 @@ CREATE TABLE `tavolo` (
 
 LOCK TABLES `tavolo` WRITE;
 /*!40000 ALTER TABLE `tavolo` DISABLE KEYS */;
-INSERT INTO `tavolo` VALUES (1,NULL,4,'libero'),(2,1,2,'occupato'),(3,NULL,6,'libero'),(4,NULL,4,'libero'),(5,NULL,3,'libero'),(6,NULL,5,'libero'),(7,NULL,7,'libero'),(8,NULL,8,'libero'),(9,NULL,2,'libero'),(10,NULL,4,'libero');
+INSERT INTO `tavolo` VALUES (1,1,4,'occupato'),(2,NULL,2,'libero'),(3,NULL,6,'libero'),(4,NULL,4,'libero'),(5,NULL,3,'libero'),(6,NULL,5,'libero'),(7,NULL,7,'libero'),(8,NULL,8,'libero'),(9,NULL,2,'libero'),(10,NULL,4,'libero');
 /*!40000 ALTER TABLE `tavolo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-27 12:59:29
+-- Dump completed on 2023-09-27 15:40:52
