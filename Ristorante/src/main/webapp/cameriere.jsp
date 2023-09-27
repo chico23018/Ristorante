@@ -40,7 +40,9 @@
 	%>
 	<div class="tavolo">
 		<a href="login?id=<%=ta.getId_tavolo()%>&id_cameriere=<%=id_cameriere%>"> Tavolo <%=ta.getId_tavolo()%>
-        	<div class="stato"><%=ta.getStato()%></div>
+        	<span class="stato">
+        		<%=ta.getStato()%>
+        	</span>
         </a>
 	
 	</div>
