@@ -225,7 +225,7 @@ body {
 		justify-content: space-around;
 		row-gap: 3em;
 		align-items: center;
-		/* Allinea le colonne centralmente in modalità mobile */
+		/* Allinea le colonne centralmente in modalitï¿½ mobile */
 	}
 }
 
@@ -242,7 +242,7 @@ body {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	border-radius: 20px;
 	overflow: hidden;
-	/* Rimuovi margin-top se non è più necessario */
+	/* Rimuovi margin-top se non ï¿½ piï¿½ necessario */
 }
 
 #ordiniAggiunti th, #ordiniAggiunti td {
@@ -275,6 +275,5 @@ body {
 #inviaOrdiniButton {
 	background-image: linear-gradient(135deg, #70F570 10%, #49C628 100%);
 	width: auto;
-	
 	padding: 10px 20px; 
 }
