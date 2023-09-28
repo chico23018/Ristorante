@@ -35,7 +35,7 @@ function inviaOrdini() {
 			div.style.textAlign = 'center';
 			div.innerHTML = 'Ordini inviati con successo';
 			ordiniAggiunti.length = 0;
-			aggiornaTabellaOrdini(); // Aggiorna la tabella degli ordini locali
+			aggiornaTabellaOrdini(); 
 		} else {
 			const div = document.getElementById('notifica_err');
 			div.innerHTML = 'Errore durante l\'invio degli ordini.';
@@ -61,7 +61,7 @@ function aggiornaTabellaOrdini() {
 
 		cellIdPiatto.innerHTML = ordine.id_piatto;
 		cellNome.innerHTML = ordine.nome_piatto;
-		cellCosto.innerHTML = '&euro;' + ordine.costo.toFixed(2);
+		cellCosto.innerHTML = '&euro;' + ordine.costo;
 
 		const rimuoviButton = document.createElement('button');
 		rimuoviButton.textContent = 'Rimuovi';
