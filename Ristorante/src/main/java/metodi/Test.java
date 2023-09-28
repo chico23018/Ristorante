@@ -1,5 +1,6 @@
 package metodi;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,21 +20,18 @@ public class Test {
 		
 		if(id_tavolo!=null) {
 			
-			ResultSet rs_2 = query.getResult("SELECT costo_totale\n"
-					+ "FROM pagamento\n"
-					+ "WHERE id_tavolo ='"+id_tavolo+"'\n");
+			ResultSet rs3=query.getResult("select sum(costo) from piatto inner join ordine on piatto.id = id_piatto where id_tavolo='1'");
 			
 			try {
 				
-				if (rs_2.next()) 
-					totale = rs_2.getString("costo_totale");
-				
+				if(rs3.next()) {
+				BigDecimal di = rs3.getBigDecimal(1);
+					System.out.println(di + " 74");}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
-			Double costo_totale = Double.parseDouble(totale);
-			System.out.println("Value: " + costo_totale);
+			
 	   }
 
 	}
