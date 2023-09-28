@@ -32,7 +32,7 @@ public class Ordina extends HttpServlet {
 		PiattoDao pd = new PiattoDao();
 		RequestDispatcher rd = null;
 		if(id!=null) {
-		request.setAttribute("id_tavolo", id);	
+			request.setAttribute("id_tavolo", id);	
 		}
 		request.getSession().setAttribute("lista_piatti", pd.lista());
 		if(tipo!=null) {

@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `ristorante` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `ristorante`;
--- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
 -- Host: localhost    Database: ristorante
 -- ------------------------------------------------------
--- Server version	8.0.26
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,32 +45,6 @@ INSERT INTO `cameriere` VALUES (1,'Mario','Rossi','m.rossi','m.rossi'),(2,'Luca'
 UNLOCK TABLES;
 
 --
--- Table structure for table `cibo`
---
-
-DROP TABLE IF EXISTS `cibo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cibo` (
-  `id` int DEFAULT NULL,
-  `nome` text,
-  `costo` double DEFAULT NULL,
-  `descrizione` text,
-  `tipo` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cibo`
---
-
-LOCK TABLES `cibo` WRITE;
-/*!40000 ALTER TABLE `cibo` DISABLE KEYS */;
-INSERT INTO `cibo` VALUES (1,'Margherita',7.5,'Descrizione della margherita','cibo'),(2,'Amatriciana',12,'Descrizione della Amatriciana','cibo'),(3,'Patatine',2.5,'Descrizione delle Patatine','cibo'),(4,'Involtini',8.5,'Descrizione della Margherita','cibo'),(5,'Insalata',10,'Descrizione dell\'Insalata','cibo'),(6,'PokÃ¨',15,'Descrizione del PokÃ¨','cibo'),(7,'Polpette al sugo',13.7,'Descrizione delle Polpette al sugo','cibo'),(8,'Lasagne',14,'Descrizione delle Lasagne','cibo'),(9,'Pasta al pomodoro',8,'Descrizione della Pasta al pomodoro','cibo'),(10,'Carbonara',12.5,'Descrizione della Carbonara','cibo'),(11,'Parmigiana',12,'Descrizione della Parmigiana','cibo'),(12,'Insalata Caesar',7.99,'Descrizione dell\' Insalata Caesar','cibo'),(13,'Penne all\'Arrabbiata',8.49,'Descrizione delle Penne all\'Arrabbiata','cibo'),(14,'Acqua',1.5,'Descrizione dell\'acqua','bevanda'),(15,'Birra',4.5,'Descrizione della Birra','bevanda'),(16,'Torta al Cioccolato',6.75,'Descrizione della Torta al Cioccolato','cibo'),(17,'Risotto al Limone',11.99,'Descrizione del Risotto al Limone','cibo'),(18,'Coca-Cola',2.25,'Descrizione della Coca-Cola','bevanda'),(19,'Tortellini alla Panna',10.5,'Descrizione dei Tortellini alla Panna','cibo'),(20,'Fanta',2.99,'Descrizione della Fanta','bevanda'),(21,'Vino rosso',7.5,'Descrizione del Vino rosso','bevanda'),(22,'Vino bianco',7.5,'Descrizione del Vino bianco','bevanda'),(23,'CaffÃ¨ Americano',1.99,'Descrizione del CaffÃ¨ Americano','bevanda');
-/*!40000 ALTER TABLE `cibo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `cliente`
 --
 
@@ -85,7 +59,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `id_tavolo_idx` (`id_tavolo`),
   CONSTRAINT `id_tavolo_cliente` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +68,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (3,'amanda','mazur',1);
+INSERT INTO `cliente` VALUES (4,'Alfio','Spoto',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -233,7 +207,7 @@ CREATE TABLE `ordine` (
   KEY `id_piatto_idx` (`id_piatto`),
   CONSTRAINT `id_piatto` FOREIGN KEY (`id_piatto`) REFERENCES `piatto` (`id`),
   CONSTRAINT `id_tavolo` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +216,7 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
-INSERT INTO `ordine` VALUES (1,1,14,'in preparazione'),(2,1,18,'in preparazione'),(3,1,21,'in preparazione');
+INSERT INTO `ordine` VALUES (12,1,17,'in preparazione'),(13,1,17,'in preparazione'),(14,1,19,'in preparazione'),(15,1,1,'in preparazione'),(16,1,5,'in preparazione'),(17,1,16,'in preparazione');
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -483,7 +457,7 @@ CREATE TABLE `pagamento` (
   PRIMARY KEY (`id`),
   KEY `id_ordine_idx` (`id_tavolo`),
   CONSTRAINT `id_ordine` FOREIGN KEY (`id_tavolo`) REFERENCES `tavolo` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -492,7 +466,7 @@ CREATE TABLE `pagamento` (
 
 LOCK TABLES `pagamento` WRITE;
 /*!40000 ALTER TABLE `pagamento` DISABLE KEYS */;
-INSERT INTO `pagamento` VALUES (1,1,11.25,'non pagato','2023-09-27');
+INSERT INTO `pagamento` VALUES (2,1,58.73,'non pagato','2023-09-28');
 /*!40000 ALTER TABLE `pagamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -600,7 +574,7 @@ CREATE TABLE `piatto` (
 
 LOCK TABLES `piatto` WRITE;
 /*!40000 ALTER TABLE `piatto` DISABLE KEYS */;
-INSERT INTO `piatto` VALUES (1,'Margherita',7.50,'Descrizione della margherita','cibo','margherita'),(2,'Amatriciana',12.00,'Descrizione della Amatriciana','cibo','amatriciana'),(3,'Patatine',2.50,'Descrizione delle Patatine','cibo','patatine'),(4,'Involtini',8.50,'Descrizione della Margherita','cibo','involtini'),(5,'Insalata',10.00,'Descrizione dell\'Insalata','cibo','insalata'),(6,'Pokè',15.00,'Descrizione del Pokè','cibo','poke'),(7,'Polpette al sugo',13.70,'Descrizione delle Polpette al sugo','cibo','polpette_al_sugo'),(8,'Lasagne',14.00,'Descrizione delle Lasagne','cibo','lasagne'),(9,'Pasta al pomodoro',8.00,'Descrizione della Pasta al pomodoro','cibo','pasta_al_pomodoro'),(10,'Carbonara',12.50,'Descrizione della Carbonara','cibo','carbonara'),(11,'Parmigiana',12.00,'Descrizione della Parmigiana','cibo','parmigiana'),(12,'Insalata di mare',14.80,'Descrizione dell\' Insalata di marer','cibo','insalata_mare'),(13,'Penne all\'Arrabbiata',8.49,'Descrizione delle Penne all\'Arrabbiata','cibo','penne_all_arrabbiata'),(14,'Acqua',1.50,'Descrizione dell\'acqua','bevanda','acqua'),(15,'Birra',4.50,'Descrizione della Birra','bevanda','birra'),(16,'Torta al Cioccolato',6.75,'Descrizione della Torta al Cioccolato','cibo','torta_cioccolato'),(17,'Risotto al Limone',11.99,'Descrizione del Risotto al Limone','cibo','risotto_limone'),(18,'Coca-Cola',2.25,'Descrizione della Coca-Cola','bevanda','coca_cola'),(19,'Tortellini alla Panna',10.50,'Descrizione dei Tortellini alla Panna','cibo','tortellini_panna'),(20,'Fanta',2.99,'Descrizione della Fanta','bevanda','fanta'),(21,'Vino rosso',7.50,'Descrizione del Vino rosso','bevanda','vino_rosso'),(22,'Vino bianco',7.50,'Descrizione del Vino bianco','bevanda','vino_bianco'),(23,'Caffè espresso',1.20,'Descrizione del Caffè espresso','bevanda','caffe');
+INSERT INTO `piatto` VALUES (1,'Margherita',7.50,'Descrizione della margherita','cibo','margherita'),(2,'Amatriciana',12.00,'Descrizione della Amatriciana','cibo','amatriciana'),(3,'Patatine',2.50,'Descrizione delle Patatine','cibo','patatine'),(4,'Involtini',8.50,'Descrizione della Margherita','cibo','involtini'),(5,'Insalata',10.00,'Descrizione dell\'Insalata','cibo','insalata'),(6,'Pokè',15.00,'Descrizione del Pokè','cibo','poke'),(7,'Polpette al sugo',13.70,'Descrizione delle Polpette al sugo','cibo','polpette_al_sugo'),(8,'Lasagne',14.00,'Descrizione delle Lasagne','cibo','lasagne'),(9,'Pasta al pomodoro',8.00,'Descrizione della Pasta al pomodoro','cibo','pasta_al_pomodoro'),(10,'Carbonara',12.50,'Descrizione della Carbonara','cibo','carbonara'),(11,'Parmigiana',12.00,'Descrizione della Parmigiana','cibo','parmigiana'),(12,'Insalata di mare',14.80,'Descrizione dell\' Insalata di marer','cibo','insalata_mare'),(13,'Linguine allo scoglio',13.70,'Descrizione delle linguine allo scoglio','cibo','linguine_scoglio'),(14,'Acqua',1.50,'Descrizione dell\'acqua','bevanda','acqua'),(15,'Birra',4.50,'Descrizione della Birra','bevanda','birra'),(16,'Torta al Cioccolato',6.75,'Descrizione della Torta al Cioccolato','cibo','torta_cioccolato'),(17,'Risotto al Limone',11.99,'Descrizione del Risotto al Limone','cibo','risotto_limone'),(18,'Coca-Cola',2.25,'Descrizione della Coca-Cola','bevanda','coca_cola'),(19,'Tortellini alla Panna',10.50,'Descrizione dei Tortellini alla Panna','cibo','tortellini_panna'),(20,'Fanta',2.99,'Descrizione della Fanta','bevanda','fanta'),(21,'Vino rosso',7.50,'Descrizione del Vino rosso','bevanda','vino_rosso'),(22,'Vino bianco',7.50,'Descrizione del Vino bianco','bevanda','vino_bianco'),(23,'Caffè espresso',1.20,'Descrizione del Caffè espresso','bevanda','caffe');
 /*!40000 ALTER TABLE `piatto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -649,4 +623,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-28  9:23:52
+-- Dump completed on 2023-09-28 10:36:42
