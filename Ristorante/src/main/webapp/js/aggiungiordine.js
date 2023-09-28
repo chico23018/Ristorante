@@ -76,5 +76,22 @@ function rimuoviPiatto(index) {
 	if (index >= 0 && index < ordiniAggiunti.length) {
 		ordiniAggiunti.splice(index, 1);
 		aggiornaTabellaOrdini();
+        
+        // Aggiungi qui il codice per rimuovere la riga dalla tabella HTML
+        const tabella = document.getElementById('tabella-ordine');
+        tabella.deleteRow(index + 2); // Aggiungi 2 per compensare le righe dell'header
+        
+        // Aggiungi qui il codice per aggiornare il totale
+        const costo_totale = calcolaTotale();
+        document.getElementById('totale').textContent = `Totale: €${costo_totale.toFixed(2)}`;
 	}
 }
+
+function calcolaTotale() {
+	let totale = 0;
+	ordiniAggiunti.forEach(ordine => {
+		totale += ordine.costo;
+	});
+	return totale;
+}
+
