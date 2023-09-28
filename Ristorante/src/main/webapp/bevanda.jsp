@@ -43,12 +43,10 @@
 					class="menu-item-img" />
 				<div class="menu-item-text">
 					<h3 class="menu-item-heading">
-						<span class="menu-item-name"><%=p.getNome_piatto()%></span> <span
-							class="menu-item-price">&euro;<%=p.getCosto()%></span>
+						<span class="menu-item-name"><%=p.getNome_piatto()%></span> 
+						<span class="menu-item-price">&euro;<%=p.getCosto()%></span>
 					</h3>
-					<p class="menu-item-desc">
-						<%=p.getDescrizione()%>
-					</p>
+					<p class="menu-item-desc"><%=p.getDescrizione()%></p>
 				</div>
 				<input type="button" value="Aggiungi" class="button"
 					onclick="aggiungiPiatto('<%=p.getId_piatto()%>', '<%=p.getNome_piatto()%>','<%=id_tavolo%>', <%=p.getCosto()%>)" />
