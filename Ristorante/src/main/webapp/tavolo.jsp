@@ -10,6 +10,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Tavolo</title>
+<link rel="shortcut icon" href="sources/ristorante.ico" type="image/x-icon">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/menu.css" rel="stylesheet">
 <link href="css/tavolo.css" rel="stylesheet">
@@ -88,7 +89,7 @@
 		<br>
 		<input type="hidden" name="id" value="<%=id_pagamento%>"> 
 		<%if(!resultList.isEmpty()){%>
-		<button type="submit" class="button">Paga ora</button>
+		<button type="submit" class="button" id="paga1" style="display: inline-block;">Paga ora</button>
 		<%}%>
 	</form>
 	
@@ -96,7 +97,7 @@
 	<div>
 		<table class="table-ordine" id="tabella-ordine" style="display: none;">
 			<tr >
-				<td colspan="5" style="text-align: right;">
+				<td colspan="6" style="text-align: right;">
 					
 					<a href="#" id="chiudi-ordine">&times;</a>
 					

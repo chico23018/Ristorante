@@ -6,6 +6,7 @@
 
 <head>
 <meta charset="ISO-8859-1">
+<link rel="shortcut icon" href="sources/ristorante.ico" type="image/x-icon">
 <link href="css/index.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/prenotazione.css" rel="stylesheet">

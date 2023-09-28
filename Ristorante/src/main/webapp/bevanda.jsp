@@ -7,7 +7,9 @@
 
 <head>
 <meta charset="ISO-8859-1">
+
 <title>Ordine</title>
+<link rel="shortcut icon" href="sources/ristorante.ico" type="image/x-icon">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/menu.css" rel="stylesheet">
 <link href="css/ordine.css" rel="stylesheet">

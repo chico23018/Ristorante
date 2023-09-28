@@ -8,6 +8,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Area Cameriere</title>
+<link rel="shortcut icon" href="sources/ristorante.ico" type="image/x-icon">
 <link href="css/tavolo.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link href="css/menu.css" rel="stylesheet">
