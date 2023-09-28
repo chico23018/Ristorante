@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import metodi.LoginDao;
 import metodi.Query;
 import metodi.TavoloDao;
 import model.Cameriere;
-import model.Tavolo;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
@@ -70,7 +70,7 @@ public class Login extends HttpServlet {
 					map.put("descrizione", rs.getString(2));
 					map.put("stato", rs.getString(3));
 					map.put("quantita", rs.getString(4));
-					map.put("costo", String.valueOf(rs.getFloat(5)));
+					map.put("costo", String.valueOf(rs.getBigDecimal(5)));
 					resultList.add(map);
 				}
 				
@@ -86,8 +86,7 @@ public class Login extends HttpServlet {
 			else {
 				cognome = waiter.cerca(cam).getCognome();
 			}
-			float n = (float) 0.0;
-			float costo_totale =  ((totale.equals("")) ? n : Float.parseFloat(totale));
+			BigDecimal costo_totale =  ((totale.equals("")) ? new BigDecimal("0.00") : new BigDecimal(totale));
 			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.setAttribute("n_tavolo", n_tavolo);
 			request.setAttribute("resultList", resultList);
