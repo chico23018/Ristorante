@@ -20,7 +20,7 @@ function inviaOrdini() {
 	const datiDaInviare = JSON.stringify(ordiniAggiunti);
 
 	// Effettua la richiesta HTTP POST
-	fetch('http://localhost:8080/Ristorante/Ordina', {
+	fetch('http://localhost:9090/Ristorante/Ordina', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ function aggiornaTabellaOrdini() {
 
 		cellIdPiatto.innerHTML = ordine.id_piatto;
 		cellNome.innerHTML = ordine.nome_piatto;
-		cellCosto.innerHTML = '&euro;' + ordine.costo;
+		cellCosto.innerHTML = '&euro;' + ordine.costo.toFixed(2);
 
 		const rimuoviButton = document.createElement('button');
 		rimuoviButton.textContent = 'Rimuovi';
