@@ -93,38 +93,38 @@
 	</form>
 	
 	<!--  tabella ordini  -->
-		
-	<table class="table" id="tabella-ordine" style="display: none;">
-		<tr >
-			<td colspan="5" style="text-align: right;">
-				
-				<a href="#" id="chiudi-ordine">&times;</a>
-				
-			</td>
-		</tr>
-		<tr>
-			<th>Nome piatto</th>
-			<th>Descrizione</th>
-			<th>Stato ordine</th>
-			<th>Quantit&agrave;</th>
-			<th>Prezzo</th>
-		</tr>
-		<%
-		for (Map<String, String> row : resultList){
-		%>
-		<tr>
-			<td><%=row.get("nome")%></td>
-			<td><%=row.get("descrizione")%></td>
-			<td><%=row.get("stato")%></td>
-			<td><%=row.get("quantita")%></td>
-			<td>&euro;<%=row.get("costo")%></td>
-		</tr>
-		<%
-		}
-		%>
-		
-	</table>
-
+	<div>
+		<table class="table-ordine" id="tabella-ordine" style="display: none;">
+			<tr >
+				<td colspan="5" style="text-align: right;">
+					
+					<a href="#" id="chiudi-ordine">&times;</a>
+					
+				</td>
+			</tr>
+			<tr>
+				<th>Nome piatto</th>
+				<th>Descrizione</th>
+				<th>Stato ordine</th>
+				<th>Quantit&agrave;</th>
+				<th>Prezzo</th>
+			</tr>
+			<%
+			for (Map<String, String> row : resultList){
+			%>
+			<tr>
+				<td><%=row.get("nome")%></td>
+				<td><%=row.get("descrizione")%></td>
+				<td><%=row.get("stato")%></td>
+				<td><%=row.get("quantita")%></td>
+				<td>&euro;<%=row.get("costo")%></td>
+			</tr>
+			<%
+			}
+			%>
+			
+		</table>
+	</div>
 
 	<script src="js/menu.js"></script>
 	<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
