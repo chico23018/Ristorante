@@ -121,7 +121,7 @@
 				<td><%=row.get("quantita")%></td>
 				<td>&euro;<%=row.get("costo")%></td>
 				<td>
-					<form action="Pagamento?ordine=ordine" method="Post")>
+					<form action="Pagamento?ordine=ordine" method="Post">
 					<input type="hidden" value="<%=n_tavolo%>" name="n_tavolo"/>
 						<input type="hidden" value="<%=row.get("id_ordine")%>" name="id_ordine"/>
 						<input type="submit" value="Paga" />

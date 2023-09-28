@@ -59,66 +59,55 @@ public class Paga extends HttpServlet {
 			String id_ord = request.getParameter("id_ordine");
 			String n_t = request.getParameter("n_tavolo");
 			String id_tavolo = request.getParameter("n_tavolo");
-			
+			String idPag = null;
 
-		if (id_ord != null) {
+			ResultSet rs = query.getResult(
+					"SELECT p.nome, p.descrizione, ordine.stato,  COUNT(*) as amount, p.costo*COUNT(*) as totale, ordine.id\n"
+							+ "FROM tavolo\n" + "INNER JOIN ordine ON tavolo.id = ordine.id_tavolo\n"
+							+ "INNER JOIN piatto p ON ordine.id_piatto = p.id\n" + "WHERE tavolo.id ='" + id_tavolo
+							+ "'\n" + "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato, ordine.id;");
+			ResultSet rs_2 = query.getResult("SELECT costo_totale, id\n"
+					+ "FROM pagamento\n"
+					+ "WHERE id_tavolo ='"+id_tavolo+"'\n");
 			
+			try {
+
+				if (rs_2.next()) 
+				{
+					totale = rs_2.getString("costo_totale");
+					idPag = rs_2.getString("id");
+				}
+
+				while (rs.next()) {
+					Map<String, String> map = new HashMap<>();
+					map.put("nome", rs.getString(1));
+					map.put("descrizione", rs.getString(2));
+					map.put("stato", rs.getString(3));
+					map.put("quantita", rs.getString(4));
+					map.put("costo", String.valueOf(rs.getBigDecimal(5)));
+					map.put("id_ordine", rs.getString(6));
+					resultList.add(map);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			BigDecimal costo_totale =  ((totale.isEmpty()) ? new BigDecimal("0.00") : new BigDecimal(totale));
+			if (id_ord != null) {
 				int id_ordine = Integer.parseInt(id_ord);
 				int n_tavolo = Integer.parseInt(n_t);
-				
 				order.elimina(id_ordine);
-				ResultSet rs3=query.getResult("select sum(costo) from piatto inner join ordine on piatto.id = id_piatto where id_tavolo='"+n_tavolo+"'");
-				BigDecimal di=null;
-				try {
-					if(rs3.next()) {
-					di = rs3.getBigDecimal(1);
-					
-					}
-				} catch (Exception e) {
-					// TODO: handle exception
-					System.out.println(e);
-				}
-				for(Pagamento toSubstitute:payment.lista()) {
-					if(toSubstitute.getId_tavolo()==n_tavolo) {
-						toSubstitute.setCosto_totale(di);
-						payment.modifica(toSubstitute);
-						
-					}
-				}
-				ResultSet rs = query.getResult(
-						"SELECT p.nome, p.descrizione, ordine.stato,  COUNT(*) as amount, p.costo*COUNT(*) as totale, ordine.id\n"
-								+ "FROM tavolo\n" + "INNER JOIN ordine ON tavolo.id = ordine.id_tavolo\n"
-								+ "INNER JOIN piatto p ON ordine.id_piatto = p.id\n" + "WHERE tavolo.id ='" + id_tavolo
-								+ "'\n" + "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato, ordine.id;");
-				
-				ResultSet rs_2 = query.getResult("SELECT costo_totale, id\n"
-						+ "FROM pagamento\n"
-						+ "WHERE id_tavolo ='"+id_tavolo+"'\n");
-				
-				try {
-
-					if (rs_2.next()) 
-					{
-						totale = rs_2.getString("costo_totale");
-					}
-
-					while (rs.next()) {
-						Map<String, String> map = new HashMap<>();
-						map.put("nome", rs.getString(1));
-						map.put("descrizione", rs.getString(2));
-						map.put("stato", rs.getString(3));
-						map.put("quantita", rs.getString(4));
-						map.put("costo", String.valueOf(rs.getBigDecimal(5)));
-						map.put("id_ordine", rs.getString(6));
-						resultList.add(map);
-					}
-
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				BigDecimal costo_totale =  ((totale.equals("")) ? new BigDecimal("0.00") : new BigDecimal(totale));
-				
-				
+				query.executeUpdate("UPDATE pagamento\n"
+						+ "    SET costo_totale = COALESCE((\n"
+						+ "						  SELECT SUM(p.costo)\n"
+						+ "						  FROM ordine o\n"
+						+ "						  JOIN piatto p ON o.id_piatto = p.id\n"
+						+ "						  WHERE o.id_tavolo = '"+n_tavolo+"'\n"
+						+ "						), 0)\n"
+						+ "    WHERE id_tavolo = '"+n_tavolo+"';");
+				Pagamento newPag = payment.cerca(Integer.parseInt(idPag));
+				newPag.setStato(newPag.getCosto_totale().compareTo(BigDecimal.ZERO) == 0 ? "pagato" : newPag.getStato());
+				payment.modifica(newPag);
 				request.getSession().setAttribute("resultList", resultList);
 				request.getSession().setAttribute("totale", costo_totale);
 				rd = request.getRequestDispatcher("tavolo.jsp");

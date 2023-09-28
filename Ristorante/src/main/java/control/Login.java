@@ -120,7 +120,7 @@ public class Login extends HttpServlet {
 			else {
 				cognome = waiter.cerca(cam).getCognome();
 			}
-			BigDecimal costo_totale =  ((totale.equals("")) ? new BigDecimal("0.00") : new BigDecimal(totale));
+			BigDecimal costo_totale =  ((totale.isEmpty()) ? new BigDecimal("0.00") : new BigDecimal(totale));
 			request.getSession().setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
 			request.getSession().setAttribute("n_tavolo", n_tavolo);
 			request.getSession().setAttribute("resultList", resultList);

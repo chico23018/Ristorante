@@ -22,5 +22,15 @@ public class Query {
         }
 		return result;
 	}
+	
+	public void executeUpdate(String query) {
+        try {
+            con = Connessione.getInstance().getConnection();
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+	}
 
 }
