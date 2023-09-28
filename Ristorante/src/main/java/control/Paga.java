@@ -59,6 +59,7 @@ public class Paga extends HttpServlet {
 			String id_ord = request.getParameter("id_ordine");
 			String n_t = request.getParameter("n_tavolo");
 			String id_tavolo = request.getParameter("n_tavolo");
+			String idPag = null;
 
 			ResultSet rs = query.getResult(
 					"SELECT p.nome, p.descrizione, ordine.stato,  COUNT(*) as amount, p.costo*COUNT(*) as totale, ordine.id\n"
@@ -74,6 +75,7 @@ public class Paga extends HttpServlet {
 				if (rs_2.next()) 
 				{
 					totale = rs_2.getString("costo_totale");
+					idPag = rs_2.getString("id");
 				}
 
 				while (rs.next()) {
@@ -90,12 +92,22 @@ public class Paga extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			BigDecimal costo_totale =  ((totale.equals("")) ? new BigDecimal("0.00") : new BigDecimal(totale));
+			BigDecimal costo_totale =  ((totale.isEmpty()) ? new BigDecimal("0.00") : new BigDecimal(totale));
 			if (id_ord != null) {
 				int id_ordine = Integer.parseInt(id_ord);
 				int n_tavolo = Integer.parseInt(n_t);
 				order.elimina(id_ordine);
-				System.out.println("Ordine eliminato");
+				query.executeUpdate("UPDATE pagamento\n"
+						+ "    SET costo_totale = COALESCE((\n"
+						+ "						  SELECT SUM(p.costo)\n"
+						+ "						  FROM ordine o\n"
+						+ "						  JOIN piatto p ON o.id_piatto = p.id\n"
+						+ "						  WHERE o.id_tavolo = '"+n_tavolo+"'\n"
+						+ "						), 0)\n"
+						+ "    WHERE id_tavolo = '"+n_tavolo+"';");
+				Pagamento newPag = payment.cerca(Integer.parseInt(idPag));
+				newPag.setStato(newPag.getCosto_totale().compareTo(BigDecimal.ZERO) == 0 ? "pagato" : newPag.getStato());
+				payment.modifica(newPag);
 				request.getSession().setAttribute("resultList", resultList);
 				request.getSession().setAttribute("totale", costo_totale);
 				rd = request.getRequestDispatcher("tavolo.jsp");
