@@ -1,3 +1,6 @@
 1) Far scomparire il "paga ora" quando c'è un solo ordine
 2) Far pagare un numero arbitratio di piatti alla volta
 3) Modificare la X nella tabella ordini (spostare a destra)
+
+nell'head 
+<link rel="shortcut icon" href="sources/favicon.ico" type="image/x-icon">
