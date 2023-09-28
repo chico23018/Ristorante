@@ -20,7 +20,7 @@ function inviaOrdini() {
 	const datiDaInviare = JSON.stringify(ordiniAggiunti);
 
 	// Effettua la richiesta HTTP POST
-	fetch('http://localhost:9090/Ristorante/Ordina', {
+	fetch('Ordina', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
