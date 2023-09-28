@@ -76,12 +76,12 @@ public class Login extends HttpServlet {
 		if(id_tavolo!=null) {
 			
 			// Lista ordine
-			ResultSet rs = query.getResult("SELECT p.nome, p.descrizione, ordine.stato, COUNT(*) as amount, p.costo*COUNT(*) as totale\n"
+			ResultSet rs = query.getResult("SELECT p.nome, p.descrizione, ordine.stato,  COUNT(*) as amount, p.costo*COUNT(*) as totale, ordine.id\n"
 					+ "FROM tavolo\n"
 					+ "INNER JOIN ordine ON tavolo.id = ordine.id_tavolo\n"
 					+ "INNER JOIN piatto p ON ordine.id_piatto = p.id\n"
 					+ "WHERE tavolo.id ='"+id_tavolo+"'\n"
-					+ "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato;");
+					+ "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato, ordine.id;");
 			
 			// Costo totale e id pagamento
 			ResultSet rs_2 = query.getResult("SELECT costo_totale, id\n"
@@ -103,6 +103,7 @@ public class Login extends HttpServlet {
 					map.put("stato", rs.getString(3));
 					map.put("quantita", rs.getString(4));
 					map.put("costo", String.valueOf(rs.getBigDecimal(5)));
+					map.put("id_ordine", rs.getString(6));
 					resultList.add(map);
 				}
 				

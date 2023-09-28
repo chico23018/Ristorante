@@ -1,5 +1,3 @@
 1) Far scomparire il "paga ora" quando c'è un solo ordine
-2) Far pagare un piatto alla volta
-
-
-PAUSA 12:20 / 12:35
+2) Far pagare un numero arbitratio di piatti alla volta
+3) Modificare la X nella tabella ordini (spostare a destra)

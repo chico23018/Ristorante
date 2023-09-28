@@ -108,6 +108,7 @@
 				<th>Stato ordine</th>
 				<th>Quantit&agrave;</th>
 				<th>Prezzo</th>
+				<th></th>
 			</tr>
 			<%
 			for (Map<String, String> row : resultList){
@@ -118,6 +119,12 @@
 				<td><%=row.get("stato")%></td>
 				<td><%=row.get("quantita")%></td>
 				<td>&euro;<%=row.get("costo")%></td>
+				<td>
+					<form action="Pagamento?ordine=ordine" method="Post")>
+						<input type="hidden" value="<%=row.get("id_ordine")%>" name="id_ordine"/>
+						<input type="button" value="Paga"/>
+					</form>
+				</td>
 			</tr>
 			<%
 			}
