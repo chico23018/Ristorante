@@ -17,13 +17,13 @@
 
 <body>
 	<%
-	Cliente cliente = (Cliente) request.getAttribute("cliente");
-	int n_tavolo = (int) request.getAttribute("n_tavolo");
-	List<Map<String, String>> resultList = (List<Map<String, String>>) request.getAttribute("resultList");
-	BigDecimal costo_totale = (BigDecimal) request.getAttribute("totale");
-	String id_pagamento = (String) request.getAttribute("id_pagamento");
-	String cognome = (String) request.getAttribute("cognome");
-	String id_cameriere = (String) request.getAttribute("idCameriere");
+	Cliente cliente = (Cliente) session.getAttribute("cliente");
+	int n_tavolo = (int) session.getAttribute("n_tavolo");
+	List<Map<String, String>> resultList = (List<Map<String, String>>) session.getAttribute("resultList");
+	BigDecimal costo_totale = (BigDecimal) session.getAttribute("totale");
+	String id_pagamento = (String) session.getAttribute("id_pagamento");
+	String cognome = (String) session.getAttribute("cognome");
+	String id_cameriere = (String) session.getAttribute("idCameriere");
 	%>
 
 	<!--  navbar  -->
@@ -121,8 +121,9 @@
 				<td>&euro;<%=row.get("costo")%></td>
 				<td>
 					<form action="Pagamento?ordine=ordine" method="Post")>
+					<input type="hidden" value="<%=n_tavolo%>" name="n_tavolo"/>
 						<input type="hidden" value="<%=row.get("id_ordine")%>" name="id_ordine"/>
-						<input type="button" value="Paga"/>
+						<input type="submit" value="Paga" />
 					</form>
 				</td>
 			</tr>
@@ -132,7 +133,9 @@
 			
 		</table>
 	</div>
+<script src="js/menu.js">
 
+</script>
 	<script src="js/menu.js"></script>
 	<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 	<script src="js/obbligo_accesso.js"></script>

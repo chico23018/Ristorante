@@ -67,6 +67,7 @@ public class Login extends HttpServlet {
 		TavoloDao table = new TavoloDao();
 		CameriereDao waiter = new CameriereDao();
 		List<Map<String, String>> resultList = new ArrayList<>();
+		
 		String totale = "", id_pagamento ="", cognome ="";
 		String id_tavolo = request.getParameter("id");
 		String id_cameriere = request.getParameter("id_cameriere");
@@ -120,13 +121,13 @@ public class Login extends HttpServlet {
 				cognome = waiter.cerca(cam).getCognome();
 			}
 			BigDecimal costo_totale =  ((totale.equals("")) ? new BigDecimal("0.00") : new BigDecimal(totale));
-			request.setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
-			request.setAttribute("n_tavolo", n_tavolo);
-			request.setAttribute("resultList", resultList);
-			request.setAttribute("id_pagamento", id_pagamento);
-			request.setAttribute("totale", costo_totale);
-			request.setAttribute("cognome", cognome);
-			request.setAttribute("idCameriere", id_cameriere);
+			request.getSession().setAttribute("cliente", cli.cerca_tavolo(n_tavolo));
+			request.getSession().setAttribute("n_tavolo", n_tavolo);
+			request.getSession().setAttribute("resultList", resultList);
+			request.getSession().setAttribute("id_pagamento", id_pagamento);
+			request.getSession().setAttribute("totale", costo_totale);
+			request.getSession().setAttribute("cognome", cognome);
+			request.getSession().setAttribute("idCameriere", id_cameriere);
 			
 			rd = request.getRequestDispatcher("tavolo.jsp");
 			rd.forward(request, response);
