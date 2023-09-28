@@ -81,7 +81,7 @@
 					<%}else{%>
 					<td>Nessun ordine</td>
 					<%}%>
-					<td>&euro;<%=costo_totale%></td>
+					<td>&euro; <%=costo_totale%></td>
 				</tr>
 			</table>
 		</div>

@@ -74,8 +74,8 @@ public class OrdineDao {
 				Ordine ord = new Ordine(
 						rs.getInt("id"),
 						rs.getInt("id_tavolo"),
-						rs.getInt("id_piatto"),
-						rs.getString("stato"));
+						rs.getInt("id_piatto"));
+				ord.setStato(rs.getString("stato"));
 
 				result.add(ord);
 			}
@@ -98,8 +98,29 @@ public class OrdineDao {
 			ord = new Ordine(
 					rs.getInt("id"),
 					rs.getInt("id_tavolo"),
-					rs.getInt("id_piatto"),
-					rs.getString("stato"));
+					rs.getInt("id_piatto"));
+			ord.setStato(rs.getString("stato"));
+
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return ord;
+	}
+	
+	public Ordine cerca_tavolo(int id_tav) {
+		String query = "SELECT * FROM ordine where id_tavolo ='" + id_tav + "'";
+		Ordine ord = null;
+		try {
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+
+			ord = new Ordine(
+					rs.getInt("id"),
+					rs.getInt("id_tavolo"),
+					rs.getInt("id_piatto"));
+			ord.setStato(rs.getString("stato"));
 
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());

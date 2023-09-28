@@ -1,16 +1,18 @@
 package model;
 
+import java.util.Random;
+
 public class Ordine {
 	private int id_ordini;
 	private int id_tavolo;
 	private int id_piatto;
 	private String stato;
 
-	public Ordine(int id, int t, int p, String u) {
+	public Ordine(int id, int t, int p) {
 		this.id_ordini = id;
 		this.id_tavolo = t;
 		this.id_piatto = p;
-		this.stato = u;
+		this.stato = "in preparazione";
 	}
 
 	public Ordine() {

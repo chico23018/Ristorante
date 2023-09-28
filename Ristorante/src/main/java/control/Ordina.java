@@ -68,12 +68,11 @@ public class Ordina extends HttpServlet {
 	        for (Map<String, String> ordine : ordini) {
 	        	int id_tavolo = Integer.parseInt(ordine.get("id_tavolo"));
 	        	int id_piatto = Integer.parseInt(ordine.get("id_piatto"));
-	        	Ordine o = new Ordine(0, id_tavolo, id_piatto, "in preparazione");
+	        	Ordine o = new Ordine(0, id_tavolo, id_piatto);
 	        	order.inserire(o);
-			}
+	        }
         }
         response.setStatus(HttpServletResponse.SC_OK);
-        
     }
 
 }

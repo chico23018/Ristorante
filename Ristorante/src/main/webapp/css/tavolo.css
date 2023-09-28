@@ -82,7 +82,7 @@
     position: fixed;
     top: 80px; /* Imposta il margine superiore a 80px */
     left: 50%; /* Allinea la tabella al centro orizzontalmente */
-    transform: translateX(-50%); /* Sposta la tabella a sinistra del 50% della sua larghezza */
+    transform:translateX(-50%); /* Sposta la tabella a sinistra del 50% della sua larghezza */
 }
   
   #chiudi-ordine{
