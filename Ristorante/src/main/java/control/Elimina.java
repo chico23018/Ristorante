@@ -42,7 +42,7 @@ public class Elimina extends HttpServlet {
 		// Leggi i dati JSON dalla richiesta
 		OrdineDao order = new OrdineDao();
 		Query query = new Query();
-		RequestDispatcher rd = null;
+		
 		boolean vero = false;
 		PagamentoDao payment = new PagamentoDao();
 		BigDecimal totale = null;
@@ -135,15 +135,8 @@ public class Elimina extends HttpServlet {
 
 		request.getSession().setAttribute("resultList", resultList);
 		request.getSession().setAttribute("totale", costo_totale);
-		// response.setStatus(HttpServletResponse.SC_OK);
-		if (vero) {
-			System.out.println("vero");
-			TavoloDao daoT = new TavoloDao();
-			request.getSession().setAttribute("list", daoT.lista());
-			response.sendRedirect("cameriere.jsp");
-
-		}
-
+		 response.setStatus(HttpServletResponse.SC_OK);
+		
 		doGet(request, response);
 	}
 

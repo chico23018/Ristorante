@@ -124,8 +124,10 @@
 					
 					<!-- <input type="hidden" value="<%=n_tavolo%>" name="n_tavolo"/>
 						<input type="hidden" value="<%=row.get("id_ordine")%>" name="id_ordine"/>-->
+						<%int n=resultList.size();
+						if (n!=1 ){ %>
 						<input type="submit" value="Paga" class="button2" id="button2" onclick="elimina('<%=row.get("id_ordine")%>','<%=n_tavolo%>')"/>
-					
+					<%} %>
 				</td>
 			</tr>
 			<%
