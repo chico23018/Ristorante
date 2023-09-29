@@ -70,5 +70,11 @@ function aggiornaTabellaOrdini() {
 		cellRimuovi.appendChild(rimuoviButton);
 	});
 }
-
+// Funzione per rimuovere un piatto dall'array
+function rimuoviPiatto(index) {
+    if (index >= 0 && index < ordiniAggiunti.length) {
+        ordiniAggiunti.splice(index, 1);
+        aggiornaTabellaOrdini();
+    }
+}
 

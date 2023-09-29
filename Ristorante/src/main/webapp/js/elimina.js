@@ -42,7 +42,7 @@ function inviaOrdini() {
 			}
 		})
 		.catch(error => {
-			//location.reload();
+			location.reload();
 			console.error('Errore durante la richiesta:', error);
 			/*alert('Errore durante l\'invio degli ordini.');*/
 		});
