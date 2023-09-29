@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import metodi.OrdineDao;
 import metodi.PagamentoDao;
 import metodi.Query;
+import metodi.TavoloDao;
 import model.Pagamento;
 
 @WebServlet("/elimina")
@@ -40,14 +42,15 @@ public class Elimina extends HttpServlet {
 		// Leggi i dati JSON dalla richiesta
 		OrdineDao order = new OrdineDao();
 		Query query = new Query();
+		RequestDispatcher rd = null;
+		boolean vero = false;
 		PagamentoDao payment = new PagamentoDao();
 		BigDecimal totale = null;
 		List<Map<String, String>> resultList = new ArrayList<>();
 		BufferedReader reader = request.getReader();
 		StringBuilder requestBody = new StringBuilder();
 		String line;
-		
-		
+
 		while ((line = reader.readLine()) != null) {
 			requestBody.append(line);
 		}
@@ -56,7 +59,7 @@ public class Elimina extends HttpServlet {
 		Gson gson = new Gson();
 		Type tipoLista = new TypeToken<List<Map<String, String>>>() {
 		}.getType();
-		
+
 		int id_ordine = 0;
 		int n_tavolo = 0;
 		List<Map<String, String>> elimina = gson.fromJson(requestBody.toString(), tipoLista);
@@ -66,9 +69,9 @@ public class Elimina extends HttpServlet {
 		}
 
 		order.elimina(id_ordine);
-		
-		ResultSet rs3 = query
-				.getResult("select IFNULL(sum(costo), 0) from piatto inner join ordine on piatto.id = id_piatto where id_tavolo='"
+
+		ResultSet rs3 = query.getResult(
+				"select IFNULL(sum(costo), 0) from piatto inner join ordine on piatto.id = id_piatto where id_tavolo='"
 						+ n_tavolo + "'");
 		BigDecimal di = null;
 		try {
@@ -84,8 +87,18 @@ public class Elimina extends HttpServlet {
 		for (Pagamento toSubstitute : payment.lista()) {
 			if (toSubstitute.getId_tavolo() == n_tavolo) {
 				toSubstitute.setCosto_totale(di);
-				toSubstitute.setStato(toSubstitute.getCosto_totale().compareTo(BigDecimal.ZERO) == 0 ? "pagato" : toSubstitute.getStato());
-				payment.modifica(toSubstitute);
+
+				if (toSubstitute.getCosto_totale().compareTo(BigDecimal.ZERO) == 0) {
+					toSubstitute.setStato("pagato");
+					payment.modifica(toSubstitute);
+					vero = true;
+				} else {
+
+					payment.modifica(toSubstitute);
+				}
+				// toSubstitute.setStato(toSubstitute.getCosto_totale().compareTo(BigDecimal.ZERO)
+				// == 0 ? "pagato" : toSubstitute.getStato());
+				// payment.modifica(toSubstitute);
 
 			}
 		}
@@ -95,15 +108,15 @@ public class Elimina extends HttpServlet {
 						+ "INNER JOIN piatto p ON ordine.id_piatto = p.id\n" + "WHERE tavolo.id ='" + n_tavolo + "'\n"
 						+ "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato, ordine.id;");
 
-		ResultSet rs_2 = query
-				.getResult("SELECT IFNULL(costo_totale, 0), id\n" + "FROM pagamento\n" + "WHERE id_tavolo ='" + n_tavolo + "'\n");
+		ResultSet rs_2 = query.getResult(
+				"SELECT IFNULL(costo_totale, 0), id\n" + "FROM pagamento\n" + "WHERE id_tavolo ='" + n_tavolo + "'\n");
 
 		try {
 
 			if (rs_2.next()) {
+
 				totale = rs_2.getBigDecimal(1);
 			}
-
 			while (rs.next()) {
 				Map<String, String> map = new HashMap<>();
 				map.put("nome", rs.getString(1));
@@ -119,13 +132,19 @@ public class Elimina extends HttpServlet {
 			e.printStackTrace();
 		}
 		BigDecimal costo_totale = ((totale.equals(null)) ? new BigDecimal("0.00") : totale);
-		
+
 		request.getSession().setAttribute("resultList", resultList);
 		request.getSession().setAttribute("totale", costo_totale);
-		response.setStatus(HttpServletResponse.SC_OK);
-		
+		// response.setStatus(HttpServletResponse.SC_OK);
+		if (vero) {
+			System.out.println("vero");
+			TavoloDao daoT = new TavoloDao();
+			request.getSession().setAttribute("list", daoT.lista());
+			response.sendRedirect("cameriere.jsp");
 
-		
+		}
+
+		doGet(request, response);
 	}
 
 }
