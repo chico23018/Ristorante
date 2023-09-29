@@ -41,7 +41,7 @@ public class Elimina extends HttpServlet {
 		OrdineDao order = new OrdineDao();
 		Query query = new Query();
 		PagamentoDao payment = new PagamentoDao();
-		String totale = "";
+		BigDecimal totale = null;
 		List<Map<String, String>> resultList = new ArrayList<>();
 		BufferedReader reader = request.getReader();
 		StringBuilder requestBody = new StringBuilder();
@@ -68,7 +68,7 @@ public class Elimina extends HttpServlet {
 		order.elimina(id_ordine);
 		
 		ResultSet rs3 = query
-				.getResult("select sum(costo) from piatto inner join ordine on piatto.id = id_piatto where id_tavolo='"
+				.getResult("select IFNULL(sum(costo), 0) from piatto inner join ordine on piatto.id = id_piatto where id_tavolo='"
 						+ n_tavolo + "'");
 		BigDecimal di = null;
 		try {
@@ -84,6 +84,7 @@ public class Elimina extends HttpServlet {
 		for (Pagamento toSubstitute : payment.lista()) {
 			if (toSubstitute.getId_tavolo() == n_tavolo) {
 				toSubstitute.setCosto_totale(di);
+				toSubstitute.setStato(toSubstitute.getCosto_totale().compareTo(BigDecimal.ZERO) == 0 ? "pagato" : toSubstitute.getStato());
 				payment.modifica(toSubstitute);
 
 			}
@@ -95,12 +96,12 @@ public class Elimina extends HttpServlet {
 						+ "GROUP BY p.nome, p.descrizione, p.costo, ordine.stato, ordine.id;");
 
 		ResultSet rs_2 = query
-				.getResult("SELECT costo_totale, id\n" + "FROM pagamento\n" + "WHERE id_tavolo ='" + n_tavolo + "'\n");
+				.getResult("SELECT IFNULL(costo_totale, 0), id\n" + "FROM pagamento\n" + "WHERE id_tavolo ='" + n_tavolo + "'\n");
 
 		try {
 
 			if (rs_2.next()) {
-				totale = rs_2.getString("costo_totale");
+				totale = rs_2.getBigDecimal(1);
 			}
 
 			while (rs.next()) {
@@ -117,7 +118,7 @@ public class Elimina extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		BigDecimal costo_totale = ((totale.equals("")) ? new BigDecimal("0.00") : new BigDecimal(totale));
+		BigDecimal costo_totale = ((totale.equals(null)) ? new BigDecimal("0.00") : totale);
 		
 		request.getSession().setAttribute("resultList", resultList);
 		request.getSession().setAttribute("totale", costo_totale);

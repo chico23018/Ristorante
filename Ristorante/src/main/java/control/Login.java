@@ -126,7 +126,7 @@ public class Login extends HttpServlet {
 			request.getSession().setAttribute("resultList", resultList);
 			request.getSession().setAttribute("id_pagamento", id_pagamento);
 			request.getSession().setAttribute("totale", costo_totale);
-			request.getSession().setAttribute("cognome", cognome);
+			request.getSession().setAttribute("cognome2", cognome);
 			request.getSession().setAttribute("idCameriere", id_cameriere);
 			
 			rd = request.getRequestDispatcher("tavolo.jsp");

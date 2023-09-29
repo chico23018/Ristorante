@@ -23,7 +23,7 @@
 	List<Map<String, String>> resultList = (List<Map<String, String>>) session.getAttribute("resultList");
 	BigDecimal costo_totale = (BigDecimal) session.getAttribute("totale");
 	String id_pagamento = (String) session.getAttribute("id_pagamento");
-	String cognome = (String) session.getAttribute("cognome");
+	String cognome = (String) session.getAttribute("cognome2");
 	String id_cameriere = (String) session.getAttribute("idCameriere");
 	%>
 
