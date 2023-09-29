@@ -41,7 +41,7 @@ public class Prenota extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher rd = null;
+		
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
 		Integer id_tavolo = Integer.parseInt(request.getParameter("id_tavolo"));

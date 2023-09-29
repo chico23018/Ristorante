@@ -139,6 +139,24 @@
     background-color: #1a3d50;
     margin-top: 8px;
   }
+ .table-ordine  #button2 {
+	
+	border-radius: 35px;
+	
+	padding: 8px;
+	margin: 12px 0;
+	border: none;
+	background-color: #007bff;
+	color: #fff;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+	
+}
+
+.table-ordine #button2:hover {
+	background-color: #0056b3;
+}
   
   @media (max-width: 768px) {
 	.table-ordine,
@@ -166,4 +184,6 @@
       display: none;
     }
   }
+ 
+
   

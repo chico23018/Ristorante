@@ -121,11 +121,11 @@
 				<td><%=row.get("quantita")%></td>
 				<td>&euro;<%=row.get("costo")%></td>
 				<td>
-					<form action="Pagamento?ordine=ordine" method="Post">
-					<input type="hidden" value="<%=n_tavolo%>" name="n_tavolo"/>
-						<input type="hidden" value="<%=row.get("id_ordine")%>" name="id_ordine"/>
-						<input type="submit" value="Paga" />
-					</form>
+					
+					<!-- <input type="hidden" value="<%=n_tavolo%>" name="n_tavolo"/>
+						<input type="hidden" value="<%=row.get("id_ordine")%>" name="id_ordine"/>-->
+						<input type="submit" value="Paga" class="button2" id="button2" onclick="elimina('<%=row.get("id_ordine")%>','<%=n_tavolo%>')"/>
+					
 				</td>
 			</tr>
 			<%
@@ -138,6 +138,7 @@
 
 </script>
 	<script src="js/menu.js"></script>
+		<script src="js/elimina.js"></script>
 	<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 	<script src="js/obbligo_accesso.js"></script>
 	<script src="js/visualizza_ordine.js"></script>
