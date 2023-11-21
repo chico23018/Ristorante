@@ -88,6 +88,7 @@ public class Elimina extends HttpServlet {
 			if (toSubstitute.getId_tavolo() == n_tavolo) {
 				toSubstitute.setCosto_totale(di);
 
+
 				payment.modifica(toSubstitute);
 
 			}
