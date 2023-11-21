@@ -1,5 +1,5 @@
 package model;
-
+import java.lang.Record;
 public class Cameriere {
 	private int id_cameriere;
 	private String nome;
